@@ -5,14 +5,7 @@
             <p>{{ course.name }}</p>
             <viewer :initialValue="course.intro" :options="editorOptions" />
             <!-- <div id="viewer"></div> -->
-            <p>课程目录</p>
-            <nuxt-link
-                :to="{ name: 'lesson-id', params: { id: lesson.id } }"
-                v-for="lesson in lessons"
-                :key="lesson.id"
-            >
-                {{ lesson.title }}
-            </nuxt-link>
+            <nuxt-link v-for="lesson in lessons" :key="lesson.id"> </nuxt-link>
         </div>
     </div>
 </template>
