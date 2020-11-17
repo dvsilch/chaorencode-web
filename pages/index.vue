@@ -1,35 +1,44 @@
 <template>
-    <div>
-        <!-- <div>
-      <Logo />
-      <h1 class="title">chaorencode-web</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
+    <div class="container">
+        <!-- <el-image src="/building.jpg" fit="cover"></el-image> -->
+        <nuxt-link
+            :to="{ name: 'course-id', params: { id: course.id } }"
+            v-for="course in courses"
+            :key="course.id"
+            class="course"
         >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div> -->
-        <el-image src="/building.jpg" fit="cover"></el-image>
+            <p>{{ course.name }}</p>
+            <el-image class="image" :src="course.image_url" fit="cover" />
+        </nuxt-link>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+    async asyncData({ app }) {
+        let coursesResult = app.$guy.get('/courses')
+
+        coursesResult = await coursesResult
+        let courses = []
+        if (coursesResult.status === 200) {
+            courses = coursesResult.data.result
+        }
+
+        return {
+            courses,
+        }
+    },
+})
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.container
+    max-width 1024px
+    margin 0 auto
+    .course
+        .image
+            width 200px
+            height 100px
+</style>
