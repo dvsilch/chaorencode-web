@@ -16,7 +16,19 @@ export default {
                 content: '学编程来超人，超人编程是质量最高的编程学习网站。',
             },
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        link: [
+            {
+                rel: 'shortcut icon',
+                type: 'image/x-icon',
+                href: '/favicon.ico'
+            },
+            {
+                rel: 'stylesheet',
+                href:
+                    'https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,200,300,400,500,700,800,900'
+            },
+        ],
+        // link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
 
     // Global CSS (https://go.nuxtjs.dev/config-css)

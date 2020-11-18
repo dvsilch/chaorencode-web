@@ -3,13 +3,13 @@
         <!-- <el-image src="/building.jpg" fit="cover"></el-image> -->
         <div class="course">
             <p>{{ course.name }}</p>
-            <viewer :initialValue="course.intro" :options="editorOptions" />
+            <viewer :initial-value="course.intro" :options="editorOptions" />
             <!-- <div id="viewer"></div> -->
             <p>课程目录</p>
             <nuxt-link
-                :to="{ name: 'lesson-id', params: { id: lesson.id } }"
                 v-for="lesson in lessons"
                 :key="lesson.id"
+                :to="{ name: 'lesson-id', params: { id: lesson.id } }"
             >
                 {{ lesson.title }}
             </nuxt-link>

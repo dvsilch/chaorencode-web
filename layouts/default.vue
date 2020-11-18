@@ -1,15 +1,60 @@
 <template>
-    <div>
-        <Nuxt />
-        <footer class="footer">京ICP备20010819号-5</footer>
+    <div class="main">
+        <div>
+            <nav class="nav">
+                <nuxt-link to="/">
+                    <el-row type="flex" align="middle">
+                        <el-image
+                            class="logo right10"
+                            src="/logo-mini.png"
+                            fit="cover"
+                        />
+                        <p>超人编程</p>
+                    </el-row>
+                </nuxt-link>
+                <el-row>
+                    <p>话语</p>
+                </el-row>
+            </nav>
+            <Nuxt />
+        </div>
+        <footer class="footer">
+            <a
+                href="http://beian.miit.gov.cn"
+                target="_blank"
+                rel="nofollow noopener noreferrer"
+                class="beian"
+                >京ICP备20010819号-5</a
+            >
+        </footer>
     </div>
 </template>
 
 <style lang="stylus" scoped>
+.main
+    min-height 100%
+    display flex
+    flex-direction column
+    justify-content space-between
+    .nav
+        display flex
+        justify-content space-between
+        align-items center
+        max-width 1024px
+        margin 0 auto
+        padding 0 20px
+        box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
+        height 60px
+        .logo
+            height 40px
 .footer
     display flex
     flex-direction column
     justify-content center
     width fit-content
     margin 0 auto
+    min-height 200px
+    .beian
+        font-size 14px
+        color $prompt-color
 </style>
