@@ -96,9 +96,10 @@ export default Vue.extend({
                 width 80px
                 margin-bottom 20px
             .title
-                font-size 24px
+                font-size 20px
+                font-weight 700
+                margin-bottom 10px
             .detail
                 font-size 14px
-                font-weight 300
-                color #999
+                color rgba(0, 0, 0, 0.55)
 </style>

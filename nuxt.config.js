@@ -20,12 +20,12 @@ export default {
             {
                 rel: 'shortcut icon',
                 type: 'image/x-icon',
-                href: '/favicon.ico'
+                href: '/favicon.ico',
             },
             {
                 rel: 'stylesheet',
                 href:
-                    'https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,200,300,400,500,700,800,900'
+                    'https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,200,300,400,500,700,800,900',
             },
         ],
         // link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -43,7 +43,6 @@ export default {
             src: '@/plugins/viewer',
             mode: 'client',
         },
-        
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)

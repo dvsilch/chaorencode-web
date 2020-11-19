@@ -2,6 +2,7 @@
     <div class="container">
         <el-row :gutter="34" type="flex">
             <el-col class="lesson" :span="18">
+                <video-player :options="videoOptions" />
                 <p class="title">{{ lesson.title }}</p>
                 <el-collapse value="content" accordion>
                     <el-collapse-item name="content">
@@ -81,6 +82,7 @@ export default Vue.extend({
         let lesson = {}
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
+            // console.log(lesson.video_url)
         }
 
         let lessonsResult = app.$guy.get(`/courses/${lesson.course_id}/lessons`)
@@ -98,6 +100,19 @@ export default Vue.extend({
     data() {
         return {
             editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
+            videoOptions: {},
+        }
+    },
+    mounted() {
+        this.videoOptions = {
+            autoplay: true,
+            controls: true,
+            sources: [
+                {
+                    src: this.lesson.video_url,
+                    type: 'application/x-mpegURL',
+                },
+            ],
         }
     },
 })

@@ -46,6 +46,7 @@
         box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
         height 60px
         margin-bottom 30px
+        font-weight 500
         .logo
             height 40px
         .botton
