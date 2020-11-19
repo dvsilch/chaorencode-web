@@ -77,10 +77,20 @@ export default Vue.extend({
         lessonResult = await lessonResult
 
         let lesson = {}
+        let tabs = []
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
             // console.log(lesson.video_url)
+            if (lesson.video_url !== null) {
+                tabs.push({ id: 'video', name: '视频' })
+            }
         }
+
+        tabs = tabs.concat([
+            { id: 'content', name: '内容' },
+            { id: 'exercise', name: '练习' },
+            { id: 'explain', name: '答案' },
+        ])
 
         let lessonsResult = app.$guy.get(`/courses/${lesson.course_id}/lessons`)
         lessonsResult = await lessonsResult
@@ -92,18 +102,13 @@ export default Vue.extend({
         return {
             lesson,
             lessons,
+            tabs,
         }
     },
     data() {
         return {
             editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
             videoOptions: null,
-            tabs: [
-                { id: 'video', name: '视频' },
-                { id: 'content', name: '内容' },
-                { id: 'exercise', name: '练习' },
-                { id: 'explain', name: '答案' },
-            ],
         }
     },
     mounted() {
