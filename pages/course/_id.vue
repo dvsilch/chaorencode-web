@@ -1,19 +1,28 @@
 <template>
     <div class="container">
         <!-- <el-image src="/building.jpg" fit="cover"></el-image> -->
-        <div class="course">
-            <p>{{ course.name }}</p>
-            <viewer :initial-value="course.intro" :options="editorOptions" />
-            <!-- <div id="viewer"></div> -->
-            <p>课程目录</p>
-            <nuxt-link
-                v-for="lesson in lessons"
-                :key="lesson.id"
-                :to="{ name: 'lesson-id', params: { id: lesson.id } }"
-            >
-                {{ lesson.title }}
-            </nuxt-link>
-        </div>
+        <el-row :gutter="34" type="flex">
+            <el-col class="course" :span="18">
+                <el-image class="image" :src="course.image_url" fit="cover" />
+                <p class="label">{{ course.name }}</p>
+                <viewer
+                    :initial-value="course.intro"
+                    :options="editorOptions"
+                />
+                <!-- <div id="viewer"></div> -->
+            </el-col>
+            <el-col class="lessons" :span="6">
+                <p class="label">课程目录</p>
+                <nuxt-link
+                    v-for="lesson in lessons"
+                    :key="lesson.id"
+                    class="title"
+                    :to="{ name: 'lesson-id', params: { id: lesson.id } }"
+                >
+                    {{ lesson.title }}
+                </nuxt-link>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -62,7 +71,17 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .course
+    .label
+        font-size 30px
     .image
-        width 200px
-        height 100px
+        height 300px
+        width 100%
+.lessons
+    .label
+        margin-bottom 10px
+    .title
+        display block
+        margin 5px 0
+// .lessons:hover
+//     color $first-color
 </style>

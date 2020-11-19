@@ -74,8 +74,6 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .container
-    max-width 1024px
-    margin 0 auto
     .item
         text-align center
         .icon
