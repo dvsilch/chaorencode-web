@@ -7,14 +7,15 @@ html, body, #__nuxt, #__layout
     margin 0
     padding 0
     background #fffefc
+    color #333
 
 a
+    display block
     color inherit
     text-decoration none
     outline 0 none !important
 
-p
-    color rgb(17, 17, 17)
+p, span
     margin 0
 
 .container
@@ -31,6 +32,23 @@ p
 .right5
     margin-right 5px
 
-.tui-editor-contents
-    font-size 15px
-    font-family 'Noto Sans SC', 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕', 'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif
+.el-collapse-item__header
+    background-color inherit
+
+.el-collapse-item__wrap
+    background-color inherit
+
+    .tui-editor-contents
+        font-size 15px
+        font-family 'Noto Sans SC', 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕', 'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif
+
+        .lang-output
+            color $second-color
+
+.hover
+    cursor pointer
+    transition background 40ms ease-in 0s
+    border-radius 4px
+
+.hover:hover
+    background-color $hover-color

@@ -13,7 +13,7 @@
                     </el-row>
                 </nuxt-link>
                 <el-row>
-                    <p>话语</p>
+                    <p class="botton hover">话语</p>
                 </el-row>
             </nav>
             <Nuxt />
@@ -48,6 +48,8 @@
         margin-bottom 30px
         .logo
             height 40px
+        .botton
+            padding 4px 10px
 .footer
     display flex
     flex-direction column

@@ -4,19 +4,28 @@
             <el-col class="lesson" :span="18">
                 <p class="title">{{ lesson.title }}</p>
                 <el-collapse value="content" accordion>
-                    <el-collapse-item title="正文" name="content">
+                    <el-collapse-item name="content">
+                        <template slot="title">
+                            <p class="label">正文</p>
+                        </template>
                         <viewer
                             :initial-value="lesson.content"
                             :options="editorOptions"
                         />
                     </el-collapse-item>
-                    <el-collapse-item title="练习" name="exercise">
+                    <el-collapse-item name="exercise">
+                        <template slot="title">
+                            <p class="label">练习</p>
+                        </template>
                         <viewer
                             :initial-value="lesson.exercise"
                             :options="editorOptions"
                         />
                     </el-collapse-item>
-                    <el-collapse-item title="解答" name="explain">
+                    <el-collapse-item name="explain">
+                        <template slot="title">
+                            <p class="label">解答</p>
+                        </template>
                         <viewer
                             :initial-value="lesson.explain"
                             :options="editorOptions"
@@ -41,7 +50,7 @@
                 <nuxt-link
                     v-for="lesson in lessons"
                     :key="lesson.id"
-                    class="title"
+                    class="hover title"
                     :to="{ name: 'lesson-id', params: { id: lesson.id } }"
                 >
                     {{ lesson.title }}
@@ -98,14 +107,28 @@ export default Vue.extend({
 .lesson
     .title
         font-size 26px
-        margin 30px 0
-    .image
-        width 200px
-        height 100px
+        margin-bottom 30px
+    .label
+        position relative
+        font-size 22px
+        line-height 1.4
+    .label::before
+        transition all 400ms ease
+        content ''
+        position absolute
+        height 3px
+        width 0
+        background $first-color
+        bottom -2px
+        left 0
+    .is-active
+        .label::before
+            width 80%
 .lessons
     .image
         height 120px
         width 100%
+        border-radius 4px
     .image:hover
         cursor pointer
     .label
@@ -113,4 +136,5 @@ export default Vue.extend({
     .title
         display block
         margin 5px 0
+        padding 4px 10px
 </style>
