@@ -73,6 +73,9 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
+.my-nav
+    position sticky
+    top 0
 .container
     .carousels
         margin-bottom 100px

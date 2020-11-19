@@ -1,40 +1,37 @@
 <template>
     <div class="container">
-        <el-row :gutter="34" type="flex">
-            <el-col class="lesson" :span="18">
-                <video-player :options="videoOptions" />
-                <p class="title">{{ lesson.title }}</p>
-                <el-collapse value="content" accordion>
-                    <el-collapse-item name="content">
-                        <template slot="title">
-                            <p class="label">正文</p>
-                        </template>
-                        <viewer
-                            :initial-value="lesson.content"
-                            :options="editorOptions"
-                        />
-                    </el-collapse-item>
-                    <el-collapse-item name="exercise">
-                        <template slot="title">
-                            <p class="label">练习</p>
-                        </template>
-                        <viewer
-                            :initial-value="lesson.exercise"
-                            :options="editorOptions"
-                        />
-                    </el-collapse-item>
-                    <el-collapse-item name="explain">
-                        <template slot="title">
-                            <p class="label">解答</p>
-                        </template>
-                        <viewer
-                            :initial-value="lesson.explain"
-                            :options="editorOptions"
-                        />
-                    </el-collapse-item>
-                </el-collapse>
+        <header class="header">
+            <p class="title">{{ lesson.title }}</p>
+        </header>
+        <Tabscroll :options="tabs" />
+        <el-row :gutter="34">
+            <el-col class="lesson" :md="18" :span="24">
+                <VideoPlayer id="video" class="video" :options="videoOptions" />
+                <Viewer
+                    id="content"
+                    class="content"
+                    style="margin-bottom: 300px"
+                    :initial-value="lesson.content"
+                    :options="editorOptions"
+                />
+
+                <Viewer
+                    id="exercise"
+                    class="exercise"
+                    style="margin-bottom: 300px"
+                    :initial-value="lesson.exercise"
+                    :options="editorOptions"
+                />
+
+                <Viewer
+                    id="explain"
+                    class="explain"
+                    style="margin-bottom: 300px"
+                    :initial-value="lesson.explain"
+                    :options="editorOptions"
+                />
             </el-col>
-            <el-col class="lessons" :span="6">
+            <el-col id="lessons" class="lessons" :md="6" :span="24">
                 <nuxt-link
                     :to="{
                         name: 'course-id',
@@ -100,7 +97,13 @@ export default Vue.extend({
     data() {
         return {
             editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
-            videoOptions: {},
+            videoOptions: null,
+            tabs: [
+                { id: 'video', name: '视频' },
+                { id: 'content', name: '内容' },
+                { id: 'exercise', name: '练习' },
+                { id: 'explain', name: '答案' },
+            ],
         }
     },
     mounted() {
@@ -119,26 +122,36 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
+.header
+    height 300px
+    .title
+        font-size 28px
+        font-weight 600
 .lesson
     .title
         font-size 26px
         margin-bottom 30px
-    .label
-        position relative
-        font-size 22px
-        line-height 1.4
-    .label::before
-        transition all 400ms ease
-        content ''
-        position absolute
-        height 3px
-        width 0
-        background $first-color
-        bottom -2px
-        left 0
-    .is-active
-        .label::before
-            width 80%
+
+    // .nav-tab
+    //     position sticky
+    //     top 0
+    //     background $background
+    //     .tab-item
+    //         position relative
+    //         font-size 22px
+    //         line-height 1.4
+    //     .tab-item::before
+    //         transition all 400ms ease
+    //         content ''
+    //         position absolute
+    //         height 3px
+    //         width 0
+    //         background $first-color
+    //         bottom -2px
+    //         left 0
+    //     .is-active.tab-item::before
+    //             width 80%
+
 .lessons
     .image
         height 120px

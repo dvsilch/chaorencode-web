@@ -1,26 +1,20 @@
 <template>
-    <!-- <client-only> -->
-    <div>
-        <video
-            ref="videoPlayer"
-            class="video-js vjs-16-9 vjs-big-play-centered"
-            controls
-            preload="auto"
-            playsinline
-            webkit-playsinline
-        >
-            <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider
-                upgrading to a web browser that
-                <a
-                    href="https://videojs.com/html5-video-support/"
-                    target="_blank"
-                    >supports HTML5 video</a
-                >
-            </p>
-        </video>
-    </div>
-    <!-- </client-only> -->
+    <video
+        ref="videoPlayer"
+        class="video-js vjs-16-9 vjs-big-play-centered"
+        controls
+        preload="auto"
+        playsinline
+        webkit-playsinline
+    >
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading
+            to a web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank"
+                >supports HTML5 video</a
+            >
+        </p>
+    </video>
 </template>
 
 <script>
@@ -43,17 +37,24 @@ export default {
         }
     },
     watch: {
-        options(_) {
-            if (this.player) {
-                this.player.dispose()
-            }
-            this.player = videojs(
-                this.$refs.videoPlayer,
-                this.options,
-                function onPlayerReady() {
-                    console.log('onPlayerReady', this)
-                },
-            )
+        options: {
+            handler(val) {
+                if (this.player) {
+                    this.player.dispose()
+                }
+
+                if (val != null) {
+                    console.log(val)
+                    this.player = videojs(
+                        this.$refs.videoPlayer,
+                        this.options,
+                        function onPlayerReady() {
+                            console.log('onPlayerReady', this)
+                        },
+                    )
+                }
+            },
+            immediate: true,
         },
     },
     beforeDestroy() {

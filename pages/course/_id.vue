@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <!-- <el-image src="/building.jpg" fit="cover"></el-image> -->
-        <el-row :gutter="34" type="flex">
-            <el-col class="course" :span="18">
+        <el-row :gutter="34">
+            <el-col class="course" :span="18" :xs="24">
                 <el-image class="image" :src="course.image_url" fit="cover" />
                 <p class="label">{{ course.name }}</p>
                 <viewer
@@ -11,7 +11,7 @@
                 />
                 <!-- <div id="viewer"></div> -->
             </el-col>
-            <el-col class="lessons" :span="6">
+            <el-col class="lessons" :span="6" :xs="24">
                 <p class="label">课程目录</p>
                 <nuxt-link
                     v-for="lesson in lessons"
