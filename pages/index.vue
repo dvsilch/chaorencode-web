@@ -104,6 +104,7 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .container
+    // padding-top 20px
     h2
         margin-bottom 80px
 

@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <header class="header">
-            <p class="title">{{ lesson.title }}</p>
+            <h1 class="title">{{ lesson.title }}</h1>
         </header>
-        <Tabscroll :options="tabs" />
+        <Tabscroll :anchors="anchors" />
         <el-row :gutter="34">
             <el-col class="lesson" :md="18" :span="24">
                 <VideoPlayer id="video" class="video" :options="videoOptions" />
@@ -77,16 +77,16 @@ export default Vue.extend({
         lessonResult = await lessonResult
 
         let lesson = {}
-        let tabs = []
+        let anchors = []
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
             // console.log(lesson.video_url)
             if (lesson.video_url !== null) {
-                tabs.push({ id: 'video', name: '视频' })
+                anchors.push({ id: 'video', name: '视频' })
             }
         }
 
-        tabs = tabs.concat([
+        anchors = anchors.concat([
             { id: 'content', name: '内容' },
             { id: 'exercise', name: '练习' },
             { id: 'explain', name: '答案' },
@@ -102,7 +102,7 @@ export default Vue.extend({
         return {
             lesson,
             lessons,
-            tabs,
+            anchors,
         }
     },
     data() {
@@ -127,11 +127,11 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-.header
-    height 300px
-    .title
-        font-size 28px
-        font-weight 600
+// .header
+    // height 300px
+    // .title
+    //     font-size 28px
+    //     font-weight 600
 .lesson
     .title
         font-size 26px

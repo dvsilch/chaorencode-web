@@ -7,7 +7,7 @@
                         <el-image
                             class="logo right10"
                             src="/logo-mini.png"
-                            fit="cover"
+                            fit="contain"
                         />
                         <p>超人编程</p>
                     </el-row>
@@ -45,10 +45,11 @@
         padding 0 20px
         box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
         height 60px
-        margin-bottom 30px
+        // margin-bottom 20px
         font-weight 500
         .logo
             height 40px
+            width 40px
         .botton
             padding 4px 10px
 .footer

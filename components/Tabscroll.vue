@@ -1,11 +1,11 @@
 <template>
-    <scrollactive class="nav-tab">
+    <scrollactive :offset="60" class="nav-tab">
         <a
-            v-for="option in options"
-            :key="option.id"
-            :href="'#' + option.id"
+            v-for="anchor in anchors"
+            :key="anchor.id"
+            :href="'#' + anchor.id"
             class="scrollactive-item tab-item"
-            >{{ option.name }}</a
+            >{{ anchor.name }}</a
         >
     </scrollactive>
 </template>
@@ -17,17 +17,12 @@ export default {
     name: 'TabScroll',
     components: { scrollactive },
     props: {
-        options: {
+        anchors: {
             type: Array,
             default() {
                 return []
             },
         },
-    },
-    data() {
-        return {
-            player: null,
-        }
     },
 }
 </script>

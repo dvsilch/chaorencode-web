@@ -1,28 +1,46 @@
 <template>
     <div class="container">
-        <!-- <el-image src="/building.jpg" fit="cover"></el-image> -->
-        <el-row :gutter="34">
-            <el-col class="course" :span="18" :xs="24">
-                <el-image class="image" :src="course.image_url" fit="cover" />
-                <p class="label">{{ course.name }}</p>
-                <viewer
-                    :initial-value="course.intro"
-                    :options="editorOptions"
-                />
-                <!-- <div id="viewer"></div> -->
-            </el-col>
-            <el-col class="lessons" :span="6" :xs="24">
-                <p class="label">课程目录</p>
-                <nuxt-link
-                    v-for="lesson in lessons"
-                    :key="lesson.id"
-                    class="hover title"
-                    :to="{ name: 'lesson-id', params: { id: lesson.id } }"
-                >
-                    {{ lesson.title }}
-                </nuxt-link>
-            </el-col>
-        </el-row>
+        <header class="header">
+            <el-row class="hidden-sm-and-down">
+                <el-col :span="14">
+                    <h1>{{ course.name }}</h1>
+                </el-col>
+                <el-col :span="10">
+                    <el-image class="image" :src="course.image_url" fit="cover"
+                /></el-col>
+            </el-row>
+            <el-row class="hidden-md-and-up">
+                <el-col>
+                    <el-image class="image" :src="course.image_url" fit="cover"
+                /></el-col>
+                <el-col>
+                    <h1>{{ course.name }}</h1>
+                </el-col>
+            </el-row>
+        </header>
+        <Divider />
+        <section class="section">
+            <el-row :gutter="34">
+                <el-col class="course" :span="18" :xs="24">
+                    <viewer
+                        :initial-value="course.intro"
+                        :options="editorOptions"
+                    />
+                    <!-- <div id="viewer"></div> -->
+                </el-col>
+                <el-col class="lessons" :span="6" :xs="24">
+                    <h3 class="label">课程目录</h3>
+                    <nuxt-link
+                        v-for="lesson in lessons"
+                        :key="lesson.id"
+                        class="hover title"
+                        :to="{ name: 'lesson-id', params: { id: lesson.id } }"
+                    >
+                        {{ lesson.title }}
+                    </nuxt-link>
+                </el-col>
+            </el-row>
+        </section>
     </div>
 </template>
 
@@ -70,6 +88,10 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
+.header
+    padding 20px 15px 140px 15px
+.section
+    padding 20px 15px 10px 15px
 .course
     .label
         font-size 30px
