@@ -4,11 +4,16 @@
             class="carousels"
             height="600px"
             :interval="5000"
-            arrow="hover"
-            indicator-position="none"
+            arrow="never"
         >
-            <el-carousel-item v-for="item in 4" :key="item">
-                <el-image class="carousel" src="/building.jpg" fit="cover" />
+            <el-carousel-item v-for="carousel in carousels" :key="carousel.id">
+                <a :href="carousel.jump_url" target="_blank">
+                    <el-image
+                        class="carousel"
+                        :src="carousel.carousel_url"
+                        fit="cover"
+                    />
+                </a>
             </el-carousel-item>
         </el-carousel>
         <div class="intros">
@@ -73,9 +78,17 @@ import Vue from 'vue'
 
 export default Vue.extend({
     async asyncData({ app }) {
+        let carouselsResult = app.$guy.get('/carousels')
         let coursesResult = app.$guy.get('/courses')
 
+        carouselsResult = await carouselsResult
         coursesResult = await coursesResult
+
+        let carousels = []
+        if (carouselsResult.status === 200) {
+            carousels = carouselsResult.data.result
+        }
+
         let courses = []
         if (coursesResult.status === 200) {
             courses = coursesResult.data.result
@@ -83,6 +96,7 @@ export default Vue.extend({
 
         return {
             courses,
+            carousels,
         }
     },
 })
@@ -90,9 +104,15 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .container
+    h2
+        margin-bottom 80px
+
     .carousels, .intros, .courses
         margin-bottom 200px
     // .carousels
+    .carousel
+        height 100%
+        width 100%
     .courses
         text-align center
         .course
