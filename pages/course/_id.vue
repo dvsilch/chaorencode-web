@@ -16,7 +16,7 @@
                 <nuxt-link
                     v-for="lesson in lessons"
                     :key="lesson.id"
-                    class="title"
+                    class="hover title"
                     :to="{ name: 'lesson-id', params: { id: lesson.id } }"
                 >
                     {{ lesson.title }}
@@ -82,6 +82,7 @@ export default Vue.extend({
     .title
         display block
         margin 5px 0
+        padding 4px 10px
 // .lessons:hover
 //     color $first-color
 </style>

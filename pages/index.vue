@@ -1,54 +1,70 @@
 <template>
     <div class="container">
-        <el-carousel class="carousels" :interval="5000" arrow="always">
+        <el-carousel
+            class="carousels"
+            height="600px"
+            :interval="5000"
+            arrow="hover"
+            indicator-position="none"
+        >
             <el-carousel-item v-for="item in 4" :key="item">
-                <h3>{{ item }}</h3>
+                <el-image class="carousel" src="/building.jpg" fit="cover" />
             </el-carousel-item>
         </el-carousel>
-        <el-row class="courses">
-            <el-col
-                v-for="course in courses"
-                :key="course.id"
-                class="course"
-                :span="12"
-            >
-                <nuxt-link
-                    :to="{ name: 'course-id', params: { id: course.id } }"
+        <div class="intros">
+            <h2>学编程，从这里开始</h2>
+            <el-row type="flex" justify="space-around">
+                <el-col :span="4" class="intro">
+                    <el-image class="icon" src="/icon/book.svg" fit="contain" />
+                    <p class="title">教科书式的教程</p>
+                    <p class="detail">
+                        教科书式书写的课文，保证了全面又循序渐进有学必有练，有练必有答。
+                    </p>
+                </el-col>
+                <el-col :span="4" class="intro">
+                    <el-image
+                        class="icon"
+                        src="/icon/video.svg"
+                        fit="contain"
+                    />
+                    <p class="title">视频讲解</p>
+                    <p class="detail">
+                        有学必有练，有练必有答。有学必有练，有练必有答。有学必有练，有练必有答。
+                    </p>
+                </el-col>
+                <el-col :span="4" class="intro">
+                    <el-image class="icon" src="/icon/test.svg" fit="contain" />
+                    <p class="title">练习与解答</p>
+                    <p class="detail">
+                        有学必有练，有练必有答。有学必有练，有练必有答。
+                    </p>
+                </el-col>
+            </el-row>
+        </div>
+        <div class="courses">
+            <h2>开启你的编程学习之旅</h2>
+            <el-row>
+                <el-col
+                    v-for="course in courses"
+                    :key="course.id"
+                    class="course"
+                    :span="12"
                 >
-                    <el-row type="flex">
-                        <el-image
-                            class="image"
-                            :src="course.image_url"
-                            fit="cover"
-                        />
-                        <p class="title">{{ course.name }}</p>
-                    </el-row>
-                </nuxt-link>
-            </el-col>
-        </el-row>
-        <el-row class="intros" type="flex" justify="space-around">
-            <el-col :span="4" class="intro">
-                <img class="icon" src="/icon/book.svg" fit="cover" />
-                <p class="title">教科书式的教程</p>
-                <p class="detail">
-                    教科书式书写的课文，保证了全面又循序渐进有学必有练，有练必有答。
-                </p>
-            </el-col>
-            <el-col :span="4" class="intro">
-                <img class="icon" src="/icon/video.svg" fit="cover" />
-                <p class="title">视频讲解</p>
-                <p class="detail">
-                    有学必有练，有练必有答。有学必有练，有练必有答。有学必有练，有练必有答。
-                </p>
-            </el-col>
-            <el-col :span="4" class="intro">
-                <img class="icon" src="/icon/test.svg" fit="cover" />
-                <p class="title">练习与解答</p>
-                <p class="detail">
-                    有学必有练，有练必有答。有学必有练，有练必有答。
-                </p>
-            </el-col>
-        </el-row>
+                    <nuxt-link
+                        :to="{ name: 'course-id', params: { id: course.id } }"
+                    >
+                        <el-row type="flex">
+                            <el-image
+                                class="image"
+                                :src="course.image_url"
+                                fit="cover"
+                            />
+                            <p class="title">{{ course.name }}</p>
+                        </el-row>
+                    </nuxt-link>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </template>
 
@@ -73,31 +89,36 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-.my-nav
-    position sticky
-    top 0
 .container
-    .carousels
-        margin-bottom 100px
+    .carousels, .intros, .courses
+        margin-bottom 200px
+    // .carousels
     .courses
-        margin-bottom 100px
-    .course
-        border-radius 4px
-        padding 10px
-        .image
-            width 200px
-            height 100px
-            margin-right 30px
-        .title
-            font-size 24px
+        text-align center
+        .course
+            border-radius 4px
+            padding 10px
+            .image
+                width 200px
+                height 100px
+                margin-right 30px
+            .title
+                font-size 24px
     .course:hover
         background $hover-color
     .intros
         text-align center
         .intro
             .icon
-                width 80px
                 margin-bottom 20px
+                width 80px
+                height 80px
+            // .icon1
+            //     width 80px
+            // .icon2
+            //     width 90px
+            // .icon3
+            //     width 70px
             .title
                 font-size 20px
                 font-weight 700
