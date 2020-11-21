@@ -1,60 +1,69 @@
 <template>
-    <div class="container">
+    <div class="container maxwidth">
         <header class="header">
             <h1 class="title">{{ lesson.title }}</h1>
         </header>
-        <Tabscroll :anchors="anchors" />
-        <el-row :gutter="34">
-            <el-col class="lesson" :md="18" :span="24">
-                <VideoPlayer id="video" class="video" :options="videoOptions" />
-                <Viewer
-                    id="content"
-                    class="content"
-                    style="margin-bottom: 300px"
-                    :initial-value="lesson.content"
-                    :options="editorOptions"
-                />
+        <Tabscroll class="tab hidden-sm-and-down" :anchors="anchors" />
+        <Tabscroll class="tab hidden-md-and-up" :anchors="anchorsWithLessons" />
+        <section class="section">
+            <el-row :gutter="34">
+                <el-col class="lesson" :md="18" :span="24">
+                    <VideoPlayer
+                        id="video"
+                        class="video"
+                        :options="videoOptions"
+                    />
+                    <Divider id="content" :gap="60" />
+                    <Viewer
+                        class="content"
+                        :initial-value="lesson.content"
+                        :options="editorOptions"
+                    />
+                    <Divider id="exercise" :gap="60" />
 
-                <Viewer
-                    id="exercise"
-                    class="exercise"
-                    style="margin-bottom: 300px"
-                    :initial-value="lesson.exercise"
-                    :options="editorOptions"
-                />
+                    <Viewer
+                        class="exercise"
+                        :initial-value="lesson.exercise"
+                        :options="editorOptions"
+                    />
 
-                <Viewer
-                    id="explain"
-                    class="explain"
-                    style="margin-bottom: 300px"
-                    :initial-value="lesson.explain"
-                    :options="editorOptions"
-                />
-            </el-col>
-            <el-col id="lessons" class="lessons" :md="6" :span="24">
-                <nuxt-link
-                    :to="{
-                        name: 'course-id',
-                        params: { id: lesson.course_id },
-                    }"
-                >
-                    <el-image
-                        class="image"
-                        :src="lesson.course_image_url"
-                        fit="cover"
-                    ></el-image>
-                </nuxt-link>
-                <p class="label">课程目录</p>
-                <nuxt-link
-                    v-for="lesson in lessons"
-                    :key="lesson.id"
-                    class="hover title"
-                    :to="{ name: 'lesson-id', params: { id: lesson.id } }"
-                >
-                    {{ lesson.title }}
-                </nuxt-link>
-            </el-col>
-        </el-row>
+                    <Divider id="explain" :gap="60" />
+                    <Viewer
+                        class="explain"
+                        :initial-value="lesson.explain"
+                        :options="editorOptions"
+                    />
+                    <Divider
+                        id="lessons"
+                        class="image hidden-md-and-up"
+                        :gap="60"
+                    />
+                </el-col>
+                <el-col class="lessons" :md="6" :span="24">
+                    <nuxt-link
+                        :to="{
+                            name: 'course-id',
+                            params: { id: lesson.course_id },
+                        }"
+                    >
+                        <el-image
+                            class="image hidden-sm-and-down"
+                            :src="lesson.course_image_url"
+                            fit="cover"
+                        ></el-image>
+                    </nuxt-link>
+                    <p class="label">课程目录</p>
+                    <nuxt-link
+                        v-for="lesson in lessons"
+                        :key="lesson.id"
+                        class="hover title"
+                        :to="{ name: 'lesson-id', params: { id: lesson.id } }"
+                    >
+                        {{ lesson.title }}
+                    </nuxt-link>
+                </el-col>
+            </el-row>
+        </section>
     </div>
 </template>
 
@@ -99,10 +108,15 @@ export default Vue.extend({
         if (lessonsResult.status === 200) {
             lessons = lessonsResult.data.result
         }
+
+        const anchorsWithLessons = anchors.concat([
+            { id: 'lessons', name: '目录' },
+        ])
         return {
             lesson,
             lessons,
             anchors,
+            anchorsWithLessons,
         }
     },
     data() {
@@ -127,11 +141,16 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-// .header
-    // height 300px
-    // .title
-    //     font-size 28px
-    //     font-weight 600
+.container
+    padding-top 20px
+    .header
+        .title
+            margin-bottom 30px
+    .tab
+        box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
+    .section
+        padding-top 20px
+
 .lesson
     .title
         font-size 26px

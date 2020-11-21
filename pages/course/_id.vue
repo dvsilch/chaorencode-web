@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container maxwidth">
         <header class="header">
             <el-row class="hidden-sm-and-down">
                 <el-col :span="14">
@@ -20,7 +20,7 @@
         </header>
         <Divider />
         <section class="section">
-            <el-row :gutter="34">
+            <el-row>
                 <el-col class="course" :span="18" :xs="24">
                     <viewer
                         :initial-value="course.intro"
@@ -28,16 +28,21 @@
                     />
                     <!-- <div id="viewer"></div> -->
                 </el-col>
-                <el-col class="lessons" :span="6" :xs="24">
-                    <h3 class="label">课程目录</h3>
-                    <nuxt-link
-                        v-for="lesson in lessons"
-                        :key="lesson.id"
-                        class="hover title"
-                        :to="{ name: 'lesson-id', params: { id: lesson.id } }"
-                    >
-                        {{ lesson.title }}
-                    </nuxt-link>
+                <el-col class="right" :span="6" :xs="24">
+                    <div class="lessons">
+                        <h3 class="label">课程目录</h3>
+                        <nuxt-link
+                            v-for="lesson in lessons"
+                            :key="lesson.id"
+                            class="hover title"
+                            :to="{
+                                name: 'lesson-id',
+                                params: { id: lesson.id },
+                            }"
+                        >
+                            {{ lesson.title }}
+                        </nuxt-link>
+                    </div>
                 </el-col>
             </el-row>
         </section>
@@ -89,22 +94,27 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .header
-    padding 20px 15px 140px 15px
+    padding 20px 0 100px 0
+    .hidden-md-and-up
+        .image
+            margin-bottom 20px
 .section
-    padding 20px 15px 10px 15px
+    padding-top 20px
 .course
     .label
         font-size 30px
     .image
         height 300px
         width 100%
-.lessons
-    .label
-        margin-bottom 10px
-    .title
-        display block
-        margin 5px 0
-        padding 4px 10px
+.right
+    padding-left 10px
+    .lessons
+        .label
+            margin-bottom 10px
+        .title
+            display block
+            padding 4px 10px
+            margin 0 -10px
 // .lessons:hover
 //     color $first-color
 </style>

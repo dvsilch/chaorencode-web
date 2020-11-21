@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container maxwidth">
         <el-carousel
             class="carousels"
             height="600px"
@@ -16,6 +16,7 @@
                 </a>
             </el-carousel-item>
         </el-carousel>
+        <Divider />
         <div class="intros">
             <h2>学编程，从这里开始</h2>
             <el-row type="flex" justify="space-around">
@@ -46,6 +47,7 @@
                 </el-col>
             </el-row>
         </div>
+        <Divider />
         <div class="courses">
             <h2>开启你的编程学习之旅</h2>
             <el-row>
@@ -104,12 +106,12 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .container
-    // padding-top 20px
+    padding-top 20px
     h2
         margin-bottom 80px
 
-    .carousels, .intros, .courses
-        margin-bottom 200px
+    .intros, .courses
+        padding 60px 0
     // .carousels
     .carousel
         height 100%

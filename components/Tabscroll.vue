@@ -1,5 +1,5 @@
 <template>
-    <scrollactive :offset="60" class="nav-tab">
+    <scrollactive :offset="50" class="nav-tab">
         <a
             v-for="anchor in anchors"
             :key="anchor.id"
