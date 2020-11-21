@@ -16,18 +16,18 @@
                 </a>
             </el-carousel-item>
         </el-carousel>
-        <Divider />
-        <div class="intros">
+        <Divider :gap="80" />
+        <div class="block">
             <h2>学编程，从这里开始</h2>
-            <el-row type="flex" justify="space-around">
-                <el-col :span="4" class="intro">
+            <el-row class="intros" type="flex" justify="space-around">
+                <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/book.svg" fit="contain" />
                     <p class="title">教科书式的教程</p>
                     <p class="detail">
                         教科书式书写的课文，保证了全面又循序渐进有学必有练，有练必有答。
                     </p>
                 </el-col>
-                <el-col :span="4" class="intro">
+                <el-col :md="4" :span="24" class="intro">
                     <el-image
                         class="icon"
                         src="/icon/video.svg"
@@ -38,7 +38,7 @@
                         有学必有练，有练必有答。有学必有练，有练必有答。有学必有练，有练必有答。
                     </p>
                 </el-col>
-                <el-col :span="4" class="intro">
+                <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/test.svg" fit="contain" />
                     <p class="title">练习与解答</p>
                     <p class="detail">
@@ -47,10 +47,10 @@
                 </el-col>
             </el-row>
         </div>
-        <Divider />
-        <div class="courses">
+        <Divider :gap="60" />
+        <div class="block">
             <h2>开启你的编程学习之旅</h2>
-            <el-row>
+            <el-row class="courses">
                 <el-col
                     v-for="course in courses"
                     :key="course.id"
@@ -106,18 +106,15 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .container
-    padding-top 20px
+    padding-top 40px
     h2
-        margin-bottom 80px
+        margin-bottom 40px
 
-    .intros, .courses
-        padding 60px 0
-    // .carousels
     .carousel
         height 100%
         width 100%
+        border-radius 6px
     .courses
-        text-align center
         .course
             border-radius 4px
             padding 10px
@@ -130,8 +127,12 @@ export default Vue.extend({
     .course:hover
         background $hover-color
     .intros
-        text-align center
+        flex-wrap wrap
+        background rgb(249, 245, 241)
+        padding 100px 15px
+        border-radius 6px
         .intro
+            text-align center
             .icon
                 margin-bottom 20px
                 width 80px
@@ -149,4 +150,7 @@ export default Vue.extend({
             .detail
                 font-size 14px
                 color rgba(0, 0, 0, 0.55)
+        @media only screen and (max-width: 991px)
+            .intro:not(:last-child)
+                margin-bottom 40px
 </style>

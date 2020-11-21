@@ -142,7 +142,7 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .container
-    padding-top 20px
+    padding-top 40px
     .header
         .title
             margin-bottom 30px

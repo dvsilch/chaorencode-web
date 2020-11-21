@@ -93,28 +93,30 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-.header
-    padding 20px 0 100px 0
-    .hidden-md-and-up
-        .image
-            margin-bottom 20px
-.section
-    padding-top 20px
-.course
-    .label
-        font-size 30px
-    .image
-        height 300px
-        width 100%
-.right
-    padding-left 10px
-    .lessons
+.container
+    padding-top 40px
+    .header
+        padding 20px 0 100px 0
+        .hidden-md-and-up
+            .image
+                margin-bottom 20px
+    .section
+        padding-top 20px
+    .course
         .label
-            margin-bottom 10px
-        .title
-            display block
-            padding 4px 10px
-            margin 0 -10px
+            font-size 30px
+        .image
+            height 300px
+            width 100%
+    .right
+        padding-left 10px
+        .lessons
+            .label
+                margin-bottom 10px
+            .title
+                display block
+                padding 4px 10px
+                margin 0 -10px
 // .lessons:hover
 //     color $first-color
 </style>
