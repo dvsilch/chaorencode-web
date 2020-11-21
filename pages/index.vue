@@ -1,6 +1,6 @@
 <template>
     <div class="container maxwidth">
-        <div class="aspect">
+        <div class="aspect-carousels">
             <el-carousel
                 class="carousels"
                 height="100%"
@@ -11,7 +11,11 @@
                     v-for="carousel in carousels"
                     :key="carousel.id"
                 >
-                    <a :href="carousel.jump_url" target="_blank">
+                    <a
+                        :href="carousel.jump_url"
+                        target="_blank"
+                        style="height: 100%"
+                    >
                         <el-image
                             class="carousel"
                             :src="carousel.carousel_url"
@@ -45,7 +49,7 @@
                 </el-col>
                 <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/test.svg" fit="contain" />
-                    <p class="title">练习与解答</p>
+                    <h3 class="title">练习与解答</h3>
                     <p class="detail">
                         有学必有练，有练必有答。有学必有练，有练必有答。
                     </p>
@@ -59,20 +63,26 @@
                 <el-col
                     v-for="course in courses"
                     :key="course.id"
-                    class="course"
+                    class="col"
                     :span="12"
+                    :sm="8"
+                    :md="6"
                 >
                     <nuxt-link
+                        class="aspect"
                         :to="{ name: 'course-id', params: { id: course.id } }"
                     >
-                        <el-row type="flex">
+                        <div class="course">
                             <el-image
                                 class="image"
                                 :src="course.image_url"
                                 fit="cover"
                             />
-                            <p class="title">{{ course.name }}</p>
-                        </el-row>
+                            <div class="info">
+                                <h3 class="title">{{ course.name }}</h3>
+                                <p class="lang">python</p>
+                            </div>
+                        </div>
                     </nuxt-link>
                 </el-col>
             </el-row>
@@ -115,7 +125,7 @@ export default Vue.extend({
     h2
         margin-bottom 40px
 
-    .aspect
+    .aspect-carousels
         position relative
         width 100%
         padding-bottom 56.2%
@@ -128,17 +138,65 @@ export default Vue.extend({
                 width 100%
                 border-radius 6px
     .courses
-        .course
+        margin -24px
+        .col:hover
+            background $hover-color
             border-radius 4px
-            padding 10px
-            .image
-                width 200px
-                height 100px
-                margin-right 30px
-            .title
-                font-size 24px
+        .col
+            padding 24px
+        @media only screen and (max-width: 991px)
+            margin -12px
+            .col
+                padding 12px
+        @media only screen and (max-width: 767px)
+            margin -6px
+            .col
+                padding 6px
+        .aspect
+            position relative
+            padding-bottom 100%
+
+            .course
+                position absolute
+                height 100%
+                width 100%
+                left 0
+                top 0
+                border-radius 4px
+                background rgb(249, 245, 241)
+                .image
+                    width 100%
+                    height 40%
+                    border-top-left-radius 4px
+                    border-top-right-radius 4px
+                .info
+                    padding 12px
+                    .title
+                        font-size 24px
+                    @media only screen and (max-width: 991px)
+                        padding 8px
+                        font-size 20px
+                    @media only screen and (max-width: 767px)
+                        padding 6px
+                        font-size 16px
+                .lang
+                    left 12px
+                    bottom 12px
+                    position absolute
+                    display block
+                    color $weak-color
+                    font-size 16px
+                    @media only screen and (max-width: 991px)
+                        font-size 14px
+                        left 8px
+                        bottom 8px
+                    @media only screen and (max-width: 767px)
+                        font-size 12px
+                        left 6px
+                        bottom 6px
     .course:hover
         background $hover-color
+
     .intros
         flex-wrap wrap
         background rgb(249, 245, 241)
