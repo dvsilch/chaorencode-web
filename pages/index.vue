@@ -1,21 +1,26 @@
 <template>
     <div class="container maxwidth">
-        <el-carousel
-            class="carousels"
-            height="600px"
-            :interval="5000"
-            arrow="never"
-        >
-            <el-carousel-item v-for="carousel in carousels" :key="carousel.id">
-                <a :href="carousel.jump_url" target="_blank">
-                    <el-image
-                        class="carousel"
-                        :src="carousel.carousel_url"
-                        fit="cover"
-                    />
-                </a>
-            </el-carousel-item>
-        </el-carousel>
+        <div class="aspect">
+            <el-carousel
+                class="carousels"
+                height="100%"
+                :interval="5000"
+                arrow="never"
+            >
+                <el-carousel-item
+                    v-for="carousel in carousels"
+                    :key="carousel.id"
+                >
+                    <a :href="carousel.jump_url" target="_blank">
+                        <el-image
+                            class="carousel"
+                            :src="carousel.carousel_url"
+                            fit="cover"
+                        />
+                    </a>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
         <Divider :gap="80" />
         <div class="block">
             <h2>学编程，从这里开始</h2>
@@ -110,10 +115,18 @@ export default Vue.extend({
     h2
         margin-bottom 40px
 
-    .carousel
-        height 100%
+    .aspect
+        position relative
         width 100%
-        border-radius 6px
+        padding-bottom 56.2%
+        .carousels
+            position absolute
+            width 100%
+            height 100%
+            .carousel
+                height 100%
+                width 100%
+                border-radius 6px
     .courses
         .course
             border-radius 4px

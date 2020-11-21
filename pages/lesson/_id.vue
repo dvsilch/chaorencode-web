@@ -53,7 +53,7 @@
                             fit="cover"
                         ></el-image>
                     </nuxt-link>
-                    <p class="label">课程目录</p>
+                    <h3 class="label">课程目录</h3>
                     <nuxt-link
                         v-for="lesson in lessons"
                         :key="lesson.id"
@@ -201,6 +201,6 @@ export default Vue.extend({
         margin-bottom 10px
     .title
         display block
-        margin 5px 0
         padding 4px 10px
+        margin 0 -10px
 </style>
