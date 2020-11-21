@@ -47,7 +47,7 @@ export default {
                     console.log(val)
                     this.player = videojs(
                         this.$refs.videoPlayer,
-                        this.options,
+                        val,
                         function onPlayerReady() {
                             console.log('onPlayerReady', this)
                         },
@@ -56,6 +56,11 @@ export default {
             },
             immediate: true,
         },
+    },
+    methods: {
+        // change(event) {
+        //     this.$emit('change', event)
+        // },
     },
     beforeDestroy() {
         if (this.player) {

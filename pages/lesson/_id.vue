@@ -7,6 +7,7 @@
         <Tabscroll class="tab hidden-md-and-up" :anchors="anchorsWithLessons" />
         <section class="section">
             <el-row :gutter="34">
+                <!-- :class="videoState === 'play' ? 'video-play' : ''" -->
                 <el-col class="lesson" :md="18" :span="24">
                     <VideoPlayer
                         id="video"
@@ -117,6 +118,7 @@ export default Vue.extend({
             lessons,
             anchors,
             anchorsWithLessons,
+            videoState: 'pause',
         }
     },
     data() {
@@ -127,7 +129,7 @@ export default Vue.extend({
     },
     mounted() {
         this.videoOptions = {
-            autoplay: true,
+            autoplay: false,
             controls: true,
             sources: [
                 {
@@ -136,6 +138,12 @@ export default Vue.extend({
                 },
             ],
         }
+    },
+    methods: {
+        // videoChange(event) {
+        //     this.videoState = event.type
+        //     console.log(this.videoState)
+        // },
     },
 })
 </script>
@@ -150,6 +158,12 @@ export default Vue.extend({
         box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
     .section
         padding-top 20px
+
+    @media only screen and (max-width: 991px)
+        .vjs-playing
+            position sticky
+            top 50px
+            z-index 999
 
 .lesson
     .title
