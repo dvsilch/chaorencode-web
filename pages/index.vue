@@ -91,9 +91,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+export default {
     async asyncData({ app }) {
         let carouselsResult = app.$guy.get('/carousels')
         let coursesResult = app.$guy.get('/courses')
@@ -116,7 +114,7 @@ export default Vue.extend({
             carousels,
         }
     },
-})
+}
 </script>
 
 <style lang="stylus" scoped>
