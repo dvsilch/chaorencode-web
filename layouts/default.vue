@@ -13,7 +13,9 @@
                     </el-row>
                 </nuxt-link>
                 <el-row>
-                    <p class="botton hover">话语</p>
+                    <nuxt-link :to="{ name: 'talking-id', params: { id: 1 } }">
+                        <p class="botton hover">话语</p>
+                    </nuxt-link>
                 </el-row>
             </nav>
             <Nuxt />
