@@ -1,10 +1,10 @@
 <template>
     <div class="container maxwidth">
-        <el-row>
-            <el-col :span="14">
+        <el-row type="flex">
+            <div class="carousels">
                 <div class="aspect-carousels">
                     <el-carousel
-                        class="carousels"
+                        class="block"
                         height="100%"
                         :interval="5000"
                         arrow="never"
@@ -27,8 +27,8 @@
                         </el-carousel-item>
                     </el-carousel>
                 </div>
-            </el-col>
-            <el-col class="talkings" :span="10">
+            </div>
+            <div class="talkings">
                 <nuxt-link
                     v-for="item in talkings"
                     :key="item.id"
@@ -40,7 +40,7 @@
                         <p class="shortcut">{{ item.shortcut }}</p>
                     </div>
                 </nuxt-link>
-            </el-col>
+            </div>
         </el-row>
         <Divider :gap="80" />
         <div class="block">
@@ -150,19 +150,22 @@ export default {
     h2
         margin-bottom 40px
 
-    .aspect-carousels
-        position relative
-        padding-bottom 56.2%
-        .carousels
-            position absolute
-            width 100%
-            height 100%
-            .carousel
-                height 100%
+    .carousels
+        width 680px
+        .aspect-carousels
+            position relative
+            padding-bottom 56.2%
+            .block
+                position absolute
                 width 100%
-                border-radius 6px
+                height 100%
+                .carousel
+                    height 100%
+                    width 100%
+                    border-radius 6px
     .talkings
         padding-left 26px
+        flex 1
         .item
             padding 15px
             .detail
