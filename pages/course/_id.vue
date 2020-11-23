@@ -56,10 +56,10 @@ import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css'
 
-import python from 'highlight.js/lib/languages/python'
+// import python from 'highlight.js/lib/languages/python'
 
 // Step 3. Register languages
-hljs.registerLanguage('python', python)
+// hljs.registerLanguage('python', python)
 
 export default Vue.extend({
     async asyncData({ app, route }) {

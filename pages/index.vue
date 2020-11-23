@@ -1,30 +1,47 @@
 <template>
     <div class="container maxwidth">
-        <div class="aspect-carousels">
-            <el-carousel
-                class="carousels"
-                height="100%"
-                :interval="5000"
-                arrow="never"
-            >
-                <el-carousel-item
-                    v-for="carousel in carousels"
-                    :key="carousel.id"
-                >
-                    <a
-                        :href="carousel.jump_url"
-                        target="_blank"
-                        style="height: 100%"
+        <el-row>
+            <el-col :span="14">
+                <div class="aspect-carousels">
+                    <el-carousel
+                        class="carousels"
+                        height="100%"
+                        :interval="5000"
+                        arrow="never"
                     >
-                        <el-image
-                            class="carousel"
-                            :src="carousel.carousel_url"
-                            fit="cover"
-                        />
-                    </a>
-                </el-carousel-item>
-            </el-carousel>
-        </div>
+                        <el-carousel-item
+                            v-for="carousel in carousels"
+                            :key="carousel.id"
+                        >
+                            <a
+                                :href="carousel.jump_url"
+                                target="_blank"
+                                style="height: 100%"
+                            >
+                                <el-image
+                                    class="carousel"
+                                    :src="carousel.carousel_url"
+                                    fit="cover"
+                                />
+                            </a>
+                        </el-carousel-item>
+                    </el-carousel>
+                </div>
+            </el-col>
+            <el-col class="talkings" :span="10">
+                <nuxt-link
+                    v-for="item in talkings"
+                    :key="item.id"
+                    class="item hover"
+                    :to="{ name: 'talking-id', params: { id: item.id } }"
+                >
+                    <div class="detail">
+                        <h2 class="title">{{ item.title }}</h2>
+                        <p class="shortcut">{{ item.shortcut }}</p>
+                    </div>
+                </nuxt-link>
+            </el-col>
+        </el-row>
         <Divider :gap="80" />
         <div class="block">
             <h2>学编程，从这里开始</h2>
@@ -63,7 +80,7 @@
                 <el-col
                     v-for="course in courses"
                     :key="course.id"
-                    class="col"
+                    class="col hover"
                     :span="12"
                     :sm="8"
                     :md="6"
@@ -93,11 +110,20 @@
 <script lang="ts">
 export default {
     async asyncData({ app }) {
+        const page = 1
+        const limit = 10
+        let talkingResult = app.$guy.get('/talkings', { data: { page, limit } })
         let carouselsResult = app.$guy.get('/carousels')
         let coursesResult = app.$guy.get('/courses')
 
         carouselsResult = await carouselsResult
         coursesResult = await coursesResult
+        talkingResult = await talkingResult
+
+        let talkings = []
+        if (talkingResult.status === 200) {
+            talkings = talkingResult.data.result
+        }
 
         let carousels = []
         if (carouselsResult.status === 200) {
@@ -112,6 +138,7 @@ export default {
         return {
             courses,
             carousels,
+            talkings,
         }
     },
 }
@@ -125,7 +152,6 @@ export default {
 
     .aspect-carousels
         position relative
-        width 100%
         padding-bottom 56.2%
         .carousels
             position absolute
@@ -135,11 +161,36 @@ export default {
                 height 100%
                 width 100%
                 border-radius 6px
+    .talkings
+        padding-left 26px
+        .item
+            padding 15px
+            .detail
+                flex 1
+                .title
+                    line-height 1.4
+                    margin-bottom 6px
+                    overflow hidden
+                    text-overflow ellipsis
+                    display -webkit-box
+                    -webkit-line-clamp 1
+                    -webkit-box-orient vertical
+                    @media only screen and (max-width: 767px)
+                        font-size 18px
+                        margin-bottom 4px
+                .shortcut
+                    overflow hidden
+                    text-overflow ellipsis
+                    display -webkit-box
+                    -webkit-line-clamp 3
+                    -webkit-box-orient vertical
+                    @media only screen and (max-width: 767px)
+                        -webkit-line-clamp 2
     .courses
         margin -24px
-        .col:hover
-            background $hover-color
-            border-radius 4px
+        // .col:hover
+        //     background $hover-color
+        //     border-radius 4px
         .col
             padding 24px
         @media only screen and (max-width: 991px)

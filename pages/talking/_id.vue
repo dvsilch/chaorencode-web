@@ -1,161 +1,38 @@
 <template>
     <div class="container">
-        <el-row v-for="item in tests" :key="item.id" class="item" type="flex">
-            <el-image class="thumbnail" :src="item.thumbnail_url" />
-            <div class="detail">
-                <h2 class="title">{{ item.title }}</h2>
-                <p>{{ item.shortcut }}</p>
-            </div>
-        </el-row>
+        <h1 class="title">{{ talking.title }}</h1>
+        <viewer
+            class="content"
+            :initial-value="talking.content"
+            :options="editorOptions"
+        />
     </div>
 </template>
 
 <script lang="ts">
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github.css'
+
 export default {
-    async asyncData({ app }) {
-        let carouselsResult = app.$guy.get('/carousels')
-        let coursesResult = app.$guy.get('/courses')
+    async asyncData({ app, route }) {
+        let talkingResult = app.$guy.get(`/talkings/${route.params.id}`)
 
-        carouselsResult = await carouselsResult
-        coursesResult = await coursesResult
+        talkingResult = await talkingResult
 
-        let carousels = []
-        if (carouselsResult.status === 200) {
-            carousels = carouselsResult.data.result
-        }
-
-        let courses = []
-        if (coursesResult.status === 200) {
-            courses = coursesResult.data.result
+        let talking = {}
+        if (talkingResult.status === 200) {
+            talking = talkingResult.data
         }
 
         return {
-            courses,
-            carousels,
-            tests: [
-                {
-                    id: 0,
-                    title: 'python与vscode的安装与调试。',
-                    time: 0,
-                    shortcut:
-                        '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                    thumbnail_url: '23123123123',
-                },
-                {
-                    id: -1,
-                    title: 'python与vscode的安装与调试。',
-                    time: 0,
-                    shortcut:
-                        '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                    thumbnail_url: '23123123123',
-                },
-                {
-                    id: 1,
-                    title: 'python与vscode的安装与调试。',
-                    time: 0,
-                    shortcut:
-                        '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                    thumbnail_url: '23123123123',
-                },
-                {
-                    id: 2,
-                    title: 'python与vscode的安装与调试。',
-                    time: 0,
-                    shortcut:
-                        '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                    thumbnail_url: '23123123123',
-                },
-                {
-                    id: 3,
-                    title: 'python与vscode的安装与调试。',
-                    time: 0,
-                    shortcut:
-                        '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                    thumbnail_url: '23123123123',
-                },
-                {
-                    id: 4,
-                    title: 'python与vscode的安装与调试。',
-                    time: 0,
-                    shortcut:
-                        '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                    thumbnail_url: '23123123123',
-                },
-                // {
-                //     id: 5,
-                //     title: 'python与vscode的安装与调试。',
-                //     time: 0,
-                //     shortcut:
-                //         '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                //     thumbnail_url: '23123123123',
-                // },
-                // {
-                //     id: 6,
-                //     title: 'python与vscode的安装与调试。',
-                //     time: 0,
-                //     shortcut:
-                //         '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                //     thumbnail_url: '23123123123',
-                // },
-                // {
-                //     id: 7,
-                //     title: 'python与vscode的安装与调试。',
-                //     time: 0,
-                //     shortcut:
-                //         '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                //     thumbnail_url: '23123123123',
-                // },
-                // {
-                //     id: 8,
-                //     title: 'python与vscode的安装与调试。',
-                //     time: 0,
-                //     shortcut:
-                //         '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                //     thumbnail_url: '23123123123',
-                // },
-                // {
-                //     id: 9,
-                //     title: 'python与vscode的安装与调试。',
-                //     time: 0,
-                //     shortcut:
-                //         '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                //     thumbnail_url: '23123123123',
-                // },
-                // {
-                //     id: 10,
-                //     title: 'python与vscode的安装与调试。',
-                //     time: 0,
-                //     shortcut:
-                //         '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                //     thumbnail_url: '23123123123',
-                // },
-            ],
+            talking,
         }
     },
-    mounted() {
-        window.onmousewheel = function () {
-            console.log('onmousewheel')
-            const scrollT =
-                document.body.scrollTop || document.documentElement.scrollTop // 兼容处理
-            const currtTop = document.documentElement.clientHeight + scrollT
-            console.log(document.body.scrollHeight)
-            console.log(document.documentElement.clientHeight)
-            if (currtTop >= document.body.scrollHeight) {
-                console.log('End')
-            }
+    data() {
+        return {
+            editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
         }
-    },
-    methods: {
-        load() {
-            this.tests.push({
-                id: 0,
-                title: 'python与vscode的安装与调试。',
-                time: 0,
-                shortcut:
-                    '你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的你说太阳圆不圆我说是的',
-                thumbnail_url: '23123123123',
-            })
-        },
     },
 }
 </script>
@@ -164,19 +41,12 @@ export default {
 .container
     max-width 960px
     margin 0 auto
-    padding 0 15px
+    padding 0 25px
     padding-top 100px
-    .infinite-list-wrapper
-        height 100vh
-    .item
-        margin-bottom 60px
-        .thumbnail
-            width 300px
-            height 160px
-            margin-right 20px
-            border-radius 4px
-        .detail
-            flex 1
-            .title
-                margin-bottom 10px
+    .title
+        margin-bottom 10px
+        overflow hidden
+        text-overflow ellipsis
+        @media only screen and (max-width: 991px)
+            font-size 18px
 </style>
