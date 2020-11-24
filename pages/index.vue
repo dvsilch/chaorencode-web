@@ -53,7 +53,7 @@
                     <el-image class="icon" src="/icon/book.svg" fit="contain" />
                     <p class="title">教科书式的教程</p>
                     <p class="detail">
-                        教科书式书写的课文，保证了全面又循序渐进有学必有练，有练必有答。
+                        参考教科书的结构书写的教程，保证了全面又循序渐进。
                     </p>
                 </el-col>
                 <el-col :md="4" :span="24" class="intro">
@@ -64,14 +64,14 @@
                     />
                     <p class="title">视频讲解</p>
                     <p class="detail">
-                        有学必有练，有练必有答。有学必有练，有练必有答。有学必有练，有练必有答。
+                        回归课堂之上，让老师帮我们提炼重点，讲解疑难点。
                     </p>
                 </el-col>
                 <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/test.svg" fit="contain" />
                     <h3 class="title">练习与解答</h3>
                     <p class="detail">
-                        有学必有练，有练必有答。有学必有练，有练必有答。
+                        有学必有练，有练必有答。通过课后的练习巩固我们的知识点，用实战代替记忆。
                     </p>
                 </el-col>
             </el-row>
