@@ -22,7 +22,7 @@
         </a>
       </div>
     </div> -->
-        <el-image src="/building.jpg" fit="cover"></el-image>
+        <!-- <el-image src="/building.jpg" fit="cover"></el-image> -->
     </div>
 </template>
 
