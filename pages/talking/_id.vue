@@ -45,8 +45,6 @@ export default {
     padding-top 100px
     .title
         margin-bottom 10px
-        overflow hidden
-        text-overflow ellipsis
         @media only screen and (max-width: 991px)
             font-size 18px
 </style>

@@ -28,7 +28,8 @@
                     </el-carousel>
                 </div>
             </div>
-            <div class="talkings">
+            <div class="talkings hidden-xs-only">
+                <h4 class="label">推荐阅读</h4>
                 <nuxt-link
                     v-for="item in talkings"
                     :key="item.id"
@@ -37,7 +38,9 @@
                 >
                     <div class="detail">
                         <h2 class="title">{{ item.title }}</h2>
-                        <p class="shortcut">{{ item.shortcut }}</p>
+                        <p class="shortcut hidden-sm-and-down">
+                            {{ item.shortcut }}
+                        </p>
                     </div>
                 </nuxt-link>
             </div>
@@ -104,6 +107,23 @@
                 </el-col>
             </el-row>
         </div>
+        <Divider class="hidden-sm-and-up" :gap="60" />
+        <div class="talkings hidden-sm-and-up">
+            <h2>推荐阅读</h2>
+            <nuxt-link
+                v-for="item in talkings"
+                :key="item.id"
+                class="item hover"
+                :to="{ name: 'talking-id', params: { id: item.id } }"
+            >
+                <div class="detail">
+                    <h2 class="title">{{ item.title }}</h2>
+                    <p class="shortcut">
+                        {{ item.shortcut }}
+                    </p>
+                </div>
+            </nuxt-link>
+        </div>
     </div>
 </template>
 
@@ -149,9 +169,16 @@ export default {
     padding-top 40px
     h2
         margin-bottom 40px
-
+        @media only screen and (max-width: 991px)
+            margin-bottom 30px
+        @media only screen and (max-width: 767px)
+            margin-bottom 20px
     .carousels
         width 680px
+        @media only screen and (max-width: 991px)
+            width 440px
+        @media only screen and (max-width: 767px)
+            width 100%
         .aspect-carousels
             position relative
             padding-bottom 56.2%
@@ -164,31 +191,35 @@ export default {
                     width 100%
                     border-radius 6px
     .talkings
-        padding-left 26px
         flex 1
+        word-break break-all
+        @media only screen and (min-width: 768px)
+            padding-left 26px
         .item
             padding 15px
+            margin 0 -15px
+            @media only screen and (max-width: 991px)
+                padding 12px
+                margin 0 -12px
             .detail
                 flex 1
                 .title
                     line-height 1.4
-                    margin-bottom 6px
+                    margin-bottom 2px
                     overflow hidden
                     text-overflow ellipsis
                     display -webkit-box
                     -webkit-line-clamp 1
                     -webkit-box-orient vertical
-                    @media only screen and (max-width: 767px)
-                        font-size 18px
-                        margin-bottom 4px
+                    @media only screen and (max-width: 991px)
+                        font-size 22px
+                        margin-bottom 0
                 .shortcut
                     overflow hidden
                     text-overflow ellipsis
                     display -webkit-box
-                    -webkit-line-clamp 3
+                    -webkit-line-clamp 1
                     -webkit-box-orient vertical
-                    @media only screen and (max-width: 767px)
-                        -webkit-line-clamp 2
     .courses
         margin -24px
         // .col:hover
