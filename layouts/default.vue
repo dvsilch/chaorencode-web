@@ -5,8 +5,8 @@
                 <nuxt-link to="/">
                     <el-row type="flex" align="middle">
                         <el-image
-                            class="logo right10"
-                            src="/logo-mini.png"
+                            class="logo right5"
+                            src="/favicon.ico"
                             fit="contain"
                         />
                         <p>超人编程</p>
