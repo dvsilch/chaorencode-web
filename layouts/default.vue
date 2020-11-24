@@ -20,6 +20,7 @@
             </nav>
             <Nuxt />
         </div>
+
         <footer class="footer">
             <a
                 href="http://beian.miit.gov.cn"
