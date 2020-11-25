@@ -39,6 +39,7 @@ export default {
         '@/plugins/element-ui',
         // '@/plugins/scrollactive',
         '@/plugins/guy',
+        '@/plugins/common',
         '@/plugins/local-storage',
         {
             src: '@/plugins/viewer',

@@ -1,6 +1,18 @@
 <template>
     <div class="container">
-        <h1 class="title">{{ talking.title }}</h1>
+        <el-image
+            v-if="talking.thumbnail_url"
+            class="image"
+            fit="cover"
+            :src="
+                $common.formatImgUrl({
+                    url: talking.thumbnail_url,
+                    width: 690,
+                    height: 390,
+                })
+            "
+        />
+        <h2 class="title">{{ talking.title }}</h2>
         <viewer
             class="content"
             :initial-value="talking.content"
@@ -39,12 +51,17 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-    max-width 960px
+    max-width 690px
     margin 0 auto
     padding 0 25px
-    padding-top 100px
+    padding-top 20px
+    .image
+        width 100%
+        height 388px
+        margin-bottom 20px
+        @media only screen and (max-width: 767px)
+            height 338px
     .title
+        font-weight 700
         margin-bottom 10px
-        @media only screen and (max-width: 991px)
-            font-size 18px
 </style>

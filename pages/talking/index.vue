@@ -10,11 +10,28 @@
                 <el-image
                     v-if="item.thumbnail_url"
                     class="thumbnail"
-                    :src="item.thumbnail_url"
+                    fit="cover"
+                    :src="
+                        $common.formatImgUrl({
+                            url: item.thumbnail_url,
+                            width: 400,
+                            height: 200,
+                        })
+                    "
                 />
                 <div class="detail">
-                    <h2 class="title">{{ item.title }}</h2>
-                    <p class="shortcut">{{ item.shortcut }}</p>
+                    <div>
+                        <h2 class="title">{{ item.title }}</h2>
+                        <p class="shortcut">{{ item.shortcut }}</p>
+                    </div>
+                    <div class="info">
+                        <span>{{
+                            $common.beautifulTime(item.publish_time_timestamp)
+                        }}</span>
+                        <span>
+                            阅读{{ Math.floor(item.length / 300) }}分钟
+                        </span>
+                    </div>
                 </div>
             </el-row>
         </nuxt-link>
@@ -115,6 +132,7 @@ export default {
     .item
         // margin-bottom 30px
         padding 15px
+        margin 0 -15px
         .thumbnail
             width 300px
             height 168.75px
@@ -126,13 +144,21 @@ export default {
                 margin-right 14px
         .detail
             flex 1
+            display flex
+            flex-direction column
+            justify-content space-between
+            .info
+                text-align right
+                font-size 14px
+                color $prompt-color
             .title
+                font-weight 700
                 line-height 1.4
                 margin-bottom 6px
                 overflow hidden
                 text-overflow ellipsis
                 display -webkit-box
-                -webkit-line-clamp 1
+                -webkit-line-clamp 2
                 -webkit-box-orient vertical
                 @media only screen and (max-width: 767px)
                     font-size 18px
@@ -141,7 +167,7 @@ export default {
                 overflow hidden
                 text-overflow ellipsis
                 display -webkit-box
-                -webkit-line-clamp 3
+                -webkit-line-clamp 2
                 -webkit-box-orient vertical
                 @media only screen and (max-width: 767px)
                     -webkit-line-clamp 2
