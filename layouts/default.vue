@@ -14,7 +14,7 @@
                 </nuxt-link>
                 <el-row>
                     <nuxt-link :to="{ name: 'talking' }">
-                        <p class="botton hover">话语</p>
+                        <p class="botton hover">言语</p>
                     </nuxt-link>
                 </el-row>
             </nav>
