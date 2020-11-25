@@ -20,7 +20,13 @@
                             >
                                 <el-image
                                     class="carousel"
-                                    :src="carousel.carousel_url"
+                                    :src="
+                                        $common.formatImgUrl({
+                                            url: carousel.carousel_url,
+                                            width: 680,
+                                            height: 385,
+                                        })
+                                    "
                                     fit="cover"
                                 />
                             </a>
@@ -249,19 +255,21 @@ export default {
                 background rgb(249, 245, 241)
                 .image
                     width 100%
-                    height 40%
+                    height 56.25%
                     border-top-left-radius 4px
                     border-top-right-radius 4px
+
                 .info
                     padding 12px
+                    padding-top 0
                     .title
-                        font-size 24px
-                    @media only screen and (max-width: 991px)
-                        padding 8px
                         font-size 20px
-                    @media only screen and (max-width: 767px)
-                        padding 6px
-                        font-size 16px
+                        overflow hidden
+                        text-overflow ellipsis
+                        display -webkit-box
+                        -webkit-line-clamp 2
+                        -webkit-box-orient vertical
+
                 .lang
                     left 12px
                     bottom 12px

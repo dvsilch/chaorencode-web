@@ -89,6 +89,11 @@ export default Vue.extend({
             editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
         }
     },
+    head() {
+        return {
+            title: this.course.name + ' - 超人编程',
+        }
+    },
 })
 </script>
 

@@ -46,6 +46,11 @@ export default {
             editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
         }
     },
+    head() {
+        return {
+            title: this.talking.title + ' - 超人编程',
+        }
+    },
 }
 </script>
 

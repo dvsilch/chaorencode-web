@@ -25,7 +25,7 @@
                         <p class="shortcut">{{ item.shortcut }}</p>
                     </div>
                     <div class="info">
-                        <span>{{
+                        <span class="right15">{{
                             $common.beautifulTime(item.publish_time_timestamp)
                         }}</span>
                         <span>

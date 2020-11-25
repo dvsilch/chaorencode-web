@@ -1,5 +1,14 @@
 <template>
-    <div class="divider" :style="`margin: ${gap}px auto`"></div>
+    <div>
+        <div
+            class="divider hidden-sm-and-down"
+            :style="`margin: ${gap}px auto`"
+        ></div>
+        <div
+            class="divider hidden-md-and-up"
+            :style="`margin: ${gap / 2}px auto`"
+        ></div>
+    </div>
 </template>
 <script>
 export default {

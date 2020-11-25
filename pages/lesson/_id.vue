@@ -127,6 +127,11 @@ export default Vue.extend({
             videoOptions: null,
         }
     },
+    head() {
+        return {
+            title: this.lesson.title + ' - 超人编程',
+        }
+    },
     mounted() {
         this.videoOptions = {
             autoplay: false,
