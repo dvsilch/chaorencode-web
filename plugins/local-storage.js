@@ -14,7 +14,7 @@ export default ({ store, app }) => {
                 // app.$cookiz.set(key, value, { expires: 3, secure: false })
             },
             // removeItem: key => Cookies.remove(key)
-            removeItem: (key) => app.$cookiz.remove(key)
-        }
+            removeItem: (key) => app.$cookiz.remove(key),
+        },
     })(store)
 }

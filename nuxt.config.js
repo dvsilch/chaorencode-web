@@ -40,6 +40,7 @@ export default {
         // '@/plugins/scrollactive',
         '@/plugins/guy',
         '@/plugins/common',
+        '@/plugins/manager',
         '@/plugins/local-storage',
         {
             src: '@/plugins/viewer',

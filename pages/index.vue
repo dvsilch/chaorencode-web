@@ -101,7 +101,13 @@
                         <div class="course">
                             <el-image
                                 class="image"
-                                :src="course.image_url"
+                                :src="
+                                    $common.formatImgUrl({
+                                        url: course.image_url,
+                                        width: 278,
+                                        height: 156,
+                                    })
+                                "
                                 fit="cover"
                             />
                             <div class="info">
