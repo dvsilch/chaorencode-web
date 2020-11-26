@@ -39,7 +39,12 @@
         <Divider />
         <section class="section">
             <el-row>
-                <el-col class="course" :span="18" :xs="24">
+                <el-col
+                    class="course"
+                    :span="18"
+                    :xs="24"
+                    style="min-height: 1px"
+                >
                     <!-- <viewer
                         :initial-value="course.intro"
                         :options="editorOptions"
@@ -69,17 +74,6 @@
 </template>
 
 <script lang="ts">
-// import Vue from 'vue'
-
-// import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
-// import hljs from 'highlight.js'
-// import 'highlight.js/styles/github.css'
-
-// import python from 'highlight.js/lib/languages/python'
-
-// Step 3. Register languages
-// hljs.registerLanguage('python', python)
-
 export default {
     async asyncData({ app, route }) {
         let courseResult = app.$guy.get(`/courses/${route.params.id}`)

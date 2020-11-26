@@ -10,10 +10,17 @@
 
 <script>
 import Vue from 'vue'
-import '@toast-ui/editor/dist/toastui-editor-viewer.css'
+
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
 import hljs from 'highlight.js'
+
+import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 import 'highlight.js/styles/github.css'
+
+// import python from 'highlight.js/lib/languages/python'
+
+// Step 3. Register languages
+// hljs.registerLanguage('python', python)
 
 export default {
     name: 'XViwer',

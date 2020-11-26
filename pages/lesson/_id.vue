@@ -10,6 +10,7 @@
                 <!-- :class="videoState === 'play' ? 'video-play' : ''" -->
                 <el-col class="lesson" :md="18" :span="24">
                     <VideoPlayer
+                        v-if="lesson.video_url"
                         id="video"
                         class="video"
                         :options="videoOptions"
@@ -21,8 +22,9 @@
                         :options="editorOptions"
                     /> -->
                     <XViwer
+                        v-if="lesson.content"
                         class="content"
-                        :initial-value="$common.formatContent(lesson.content)"
+                        :initial-value="lesson.content"
                     />
                     <Divider id="exercise" :gap="60" />
 
@@ -32,8 +34,9 @@
                         :options="editorOptions"
                     /> -->
                     <XViwer
+                        v-if="lesson.exercise"
                         class="content"
-                        :initial-value="$common.formatContent(lesson.exercise)"
+                        :initial-value="lesson.exercise"
                     />
                     <Divider id="explain" :gap="60" />
                     <!-- <Viewer
@@ -41,10 +44,18 @@
                         :initial-value="lesson.explain"
                         :options="editorOptions"
                     /> -->
-                    <XViwer
-                        class="content"
-                        :initial-value="$common.formatContent(lesson.explain)"
-                    />
+                    <div v-if="lesson.explain" class="block">
+                        <XViwer
+                            class="content"
+                            :class="{ blur: blur }"
+                            :initial-value="lesson.explain"
+                        />
+                        <div v-if="blur" class="box">
+                            <div class="button" @click="blur = false">
+                                点击查看
+                            </div>
+                        </div>
+                    </div>
                     <Divider
                         id="lessons"
                         class="image hidden-md-and-up"
@@ -85,39 +96,31 @@
     </div>
 </template>
 
-<script>
-import Vue from 'vue'
-
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
-import hljs from 'highlight.js'
-import 'highlight.js/styles/github.css'
-
-import python from 'highlight.js/lib/languages/python'
-
-// Step 3. Register languages
-hljs.registerLanguage('python', python)
-
-export default Vue.extend({
+<script lang="ts">
+export default {
     async asyncData({ app, route }) {
         let lessonResult = app.$guy.get(`/course/lessons/${route.params.id}`)
 
         lessonResult = await lessonResult
 
-        let lesson = {}
-        let anchors = []
+        let lesson
+        const anchors = []
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
             // console.log(lesson.video_url)
-            if (lesson.video_url !== null) {
+            if (lesson.video_url) {
                 anchors.push({ id: 'video', name: '视频' })
             }
+            if (lesson.content) {
+                anchors.push({ id: 'content', name: '内容' })
+            }
+            if (lesson.exercise) {
+                anchors.push({ id: 'exercise', name: '练习' })
+            }
+            if (lesson.explain) {
+                anchors.push({ id: 'explain', name: '答案' })
+            }
         }
-
-        anchors = anchors.concat([
-            { id: 'content', name: '内容' },
-            { id: 'exercise', name: '练习' },
-            { id: 'explain', name: '答案' },
-        ])
 
         let lessonsResult = app.$guy.get(`/courses/${lesson.course_id}/lessons`)
         lessonsResult = await lessonsResult
@@ -140,8 +143,8 @@ export default Vue.extend({
     },
     data() {
         return {
-            editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
             videoOptions: null,
+            blur: true,
         }
     },
     head() {
@@ -167,7 +170,7 @@ export default Vue.extend({
         //     console.log(this.videoState)
         // },
     },
-})
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -186,7 +189,23 @@ export default Vue.extend({
             position sticky
             top 50px
             z-index 999
-
+    .block
+        position relative
+        .blur
+            filter blur(10px)
+        .box
+            position absolute
+            top 40%
+            left 0
+            right 0
+            text-align center
+            .button
+                display inline-block
+                cursor pointer
+                background $first-color
+                color white
+                border-radius 3px
+                padding 5px 10px
 .lesson
     .title
         font-size 26px
