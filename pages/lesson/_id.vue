@@ -15,24 +15,35 @@
                         :options="videoOptions"
                     />
                     <Divider id="content" :gap="60" />
-                    <Viewer
+                    <!-- <Viewer
                         class="content"
                         :initial-value="lesson.content"
                         :options="editorOptions"
+                    /> -->
+                    <XViwer
+                        class="content"
+                        :initial-value="$common.formatContent(lesson.content)"
                     />
                     <Divider id="exercise" :gap="60" />
 
-                    <Viewer
+                    <!-- <Viewer
                         class="exercise"
                         :initial-value="lesson.exercise"
                         :options="editorOptions"
+                    /> -->
+                    <XViwer
+                        class="content"
+                        :initial-value="$common.formatContent(lesson.exercise)"
                     />
-
                     <Divider id="explain" :gap="60" />
-                    <Viewer
+                    <!-- <Viewer
                         class="explain"
                         :initial-value="lesson.explain"
                         :options="editorOptions"
+                    /> -->
+                    <XViwer
+                        class="content"
+                        :initial-value="$common.formatContent(lesson.explain)"
                     />
                     <Divider
                         id="lessons"
@@ -49,7 +60,13 @@
                     >
                         <el-image
                             class="image hidden-sm-and-down"
-                            :src="lesson.course_image_url"
+                            :src="
+                                $common.formatImgUrl({
+                                    url: lesson.course_image_url,
+                                    width: 290,
+                                    height: 160,
+                                })
+                            "
                             fit="cover"
                         ></el-image>
                     </nuxt-link>
@@ -197,7 +214,7 @@ export default Vue.extend({
 
 .lessons
     .image
-        height 120px
+        height 160px
         width 100%
         border-radius 4px
     .image:hover

@@ -13,19 +13,14 @@
             "
         />
         <h2 class="title">{{ talking.title }}</h2>
-        <viewer
+        <XViwer
             class="content"
-            :initial-value="talking.content"
-            :options="editorOptions"
+            :initial-value="$common.formatContent(talking.content)"
         />
     </div>
 </template>
 
 <script lang="ts">
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
-import hljs from 'highlight.js'
-import 'highlight.js/styles/github.css'
-
 export default {
     async asyncData({ app, route }) {
         let talkingResult = app.$guy.get(`/talkings/${route.params.id}`)
@@ -35,16 +30,13 @@ export default {
         let talking
         if (talkingResult.status === 200) {
             talking = talkingResult.data
-            talking.content = app.$common.formatContent(talking.content)
         }
         return {
             talking,
         }
     },
     data() {
-        return {
-            editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
-        }
+        return {}
     },
     head() {
         return {

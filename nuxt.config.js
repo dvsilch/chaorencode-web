@@ -42,10 +42,10 @@ export default {
         '@/plugins/common',
         '@/plugins/manager',
         '@/plugins/local-storage',
-        {
-            src: '@/plugins/viewer',
-            mode: 'client',
-        },
+        // {
+        //     src: '@/plugins/viewer',
+        //     mode: 'client',
+        // },
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)

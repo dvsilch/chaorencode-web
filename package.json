@@ -24,7 +24,6 @@
     "element-ui": "^2.14.1",
     "js-md5": "^0.7.3",
     "nuxt": "^2.14.7",
-    "supports-webp": "^2.0.1",
     "v-aspect-ratio": "^2.0.1",
     "vue-aspect-ratio": "^0.1.1",
     "vue-scrollactive": "^0.9.3",

@@ -40,10 +40,11 @@
         <section class="section">
             <el-row>
                 <el-col class="course" :span="18" :xs="24">
-                    <viewer
+                    <!-- <viewer
                         :initial-value="course.intro"
                         :options="editorOptions"
-                    />
+                    /> -->
+                    <XViwer class="content" :initial-value="course.intro" />
                     <!-- <div id="viewer"></div> -->
                 </el-col>
                 <el-col class="right" :span="6" :xs="24">
@@ -67,19 +68,19 @@
     </div>
 </template>
 
-<script>
-import Vue from 'vue'
+<script lang="ts">
+// import Vue from 'vue'
 
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
-import hljs from 'highlight.js'
-import 'highlight.js/styles/github.css'
+// import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
+// import hljs from 'highlight.js'
+// import 'highlight.js/styles/github.css'
 
 // import python from 'highlight.js/lib/languages/python'
 
 // Step 3. Register languages
 // hljs.registerLanguage('python', python)
 
-export default Vue.extend({
+export default {
     async asyncData({ app, route }) {
         let courseResult = app.$guy.get(`/courses/${route.params.id}`)
         let lessonsResult = app.$guy.get(`/courses/${route.params.id}/lessons`)
@@ -103,23 +104,21 @@ export default Vue.extend({
         }
     },
     data() {
-        return {
-            editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
-        }
+        return {}
     },
     head() {
         return {
             title: this.course.name + ' - 超人编程',
         }
     },
-})
+}
 </script>
 
 <style lang="stylus" scoped>
 .container
     padding-top 40px
     .header
-        padding 20px 0 100px 0
+        padding-bottom 100px
         .hidden-md-and-up
             .image
                 margin-bottom 20px
