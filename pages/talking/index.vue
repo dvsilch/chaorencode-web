@@ -119,6 +119,7 @@ export default {
     margin 0 auto
     padding 0 25px
     padding-top 100px
+    margin -15px
     @media only screen and (max-width: 767px)
         padding-top 40px
     .loading, .nomore
@@ -134,7 +135,6 @@ export default {
     .item
         // margin-bottom 30px
         padding 15px
-        margin 0 -15px
         .thumbnail
             width 300px
             height 168.75px

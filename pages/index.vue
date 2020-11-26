@@ -147,47 +147,49 @@
             </el-row>
         </div>
         <Divider class="hidden-sm-and-up" :gap="60" />
-        <div class="talkings-bottom hidden-sm-and-up">
+        <div class="hidden-sm-and-up">
             <h2>推荐阅读</h2>
-            <nuxt-link
-                v-for="item in talkings"
-                :key="item.id"
-                class="item hover"
-                :to="{ name: 'talking-id', params: { id: item.id } }"
-            >
-                <el-row type="flex">
-                    <div class="detail">
-                        <div>
-                            <h2 class="title">{{ item.title }}</h2>
-                            <p class="shortcut">{{ item.shortcut }}</p>
+            <div class="talkings-bottom">
+                <nuxt-link
+                    v-for="item in talkings"
+                    :key="item.id"
+                    class="item hover"
+                    :to="{ name: 'talking-id', params: { id: item.id } }"
+                >
+                    <el-row type="flex">
+                        <div class="detail">
+                            <div>
+                                <h2 class="title">{{ item.title }}</h2>
+                                <p class="shortcut">{{ item.shortcut }}</p>
+                            </div>
+                            <div class="info">
+                                <span class="right5">发布于</span>
+                                <span class="right15">{{
+                                    $common.beautifulTime(
+                                        item.publish_time_timestamp,
+                                    )
+                                }}</span>
+                                <span class="right5">阅读需</span>
+                                <span>
+                                    {{ Math.floor(item.length / 300) }}分钟
+                                </span>
+                            </div>
                         </div>
-                        <div class="info">
-                            <span class="right5">发布于</span>
-                            <span class="right15">{{
-                                $common.beautifulTime(
-                                    item.publish_time_timestamp,
-                                )
-                            }}</span>
-                            <span class="right5">阅读需</span>
-                            <span>
-                                {{ Math.floor(item.length / 300) }}分钟
-                            </span>
-                        </div>
-                    </div>
-                    <el-image
-                        v-if="item.thumbnail_url"
-                        class="thumbnail"
-                        fit="cover"
-                        :src="
-                            $common.formatImgUrl({
-                                url: item.thumbnail_url,
-                                width: 400,
-                                height: 200,
-                            })
-                        "
-                    />
-                </el-row>
-            </nuxt-link>
+                        <el-image
+                            v-if="item.thumbnail_url"
+                            class="thumbnail"
+                            fit="cover"
+                            :src="
+                                $common.formatImgUrl({
+                                    url: item.thumbnail_url,
+                                    width: 400,
+                                    height: 200,
+                                })
+                            "
+                        />
+                    </el-row>
+                </nuxt-link>
+            </div>
         </div>
     </div>
 </template>
@@ -238,8 +240,10 @@ export default {
     h2
         margin-bottom 40px
         @media only screen and (max-width: 991px)
+            font-size 20px
             margin-bottom 30px
         @media only screen and (max-width: 767px)
+            font-size 18px
             margin-bottom 20px
     .carousels
         width 680px
@@ -306,10 +310,10 @@ export default {
                 //     -webkit-box-orient vertical
 
     .talkings-bottom
+        margin -15px
         .item
             // margin-bottom 30px
             padding 15px
-            margin 0 -15px
             .thumbnail
                 width 300px
                 height 168.75px
