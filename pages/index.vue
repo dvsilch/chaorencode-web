@@ -348,7 +348,7 @@ export default {
                     -webkit-line-clamp 2
                     -webkit-box-orient vertical
                     @media only screen and (max-width: 767px)
-                        -webkit-line-clamp 2
+                        -webkit-line-clamp 1
                         font-size 14px
 
     .courses
