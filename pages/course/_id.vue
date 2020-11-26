@@ -6,12 +6,30 @@
                     <h1>{{ course.name }}</h1>
                 </el-col>
                 <el-col :span="10">
-                    <el-image class="image" :src="course.image_url" fit="cover"
+                    <el-image
+                        class="image"
+                        :src="
+                            $common.formatImgUrl({
+                                url: course.image_url,
+                                width: 520,
+                                height: 310,
+                            })
+                        "
+                        fit="cover"
                 /></el-col>
             </el-row>
             <el-row class="hidden-md-and-up">
                 <el-col>
-                    <el-image class="image" :src="course.image_url" fit="cover"
+                    <el-image
+                        class="image"
+                        :src="
+                            $common.formatImgUrl({
+                                url: course.image_url,
+                                width: 925,
+                                height: 450,
+                            })
+                        "
+                        fit="cover"
                 /></el-col>
                 <el-col>
                     <h1>{{ course.name }}</h1>

@@ -23,8 +23,8 @@
                                     :src="
                                         $common.formatImgUrl({
                                             url: carousel.carousel_url,
-                                            width: 680,
-                                            height: 385,
+                                            width: 700,
+                                            height: 400,
                                         })
                                     "
                                     fit="cover"

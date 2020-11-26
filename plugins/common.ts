@@ -47,6 +47,23 @@ class Common {
         }
         return result
     }
+
+    formatContent(content) {
+        return content.replace(
+            /\((https:\/\/qiniu\.chaorencode.com\/.*?)\)/g,
+            (_, url) => {
+                return (
+                    '(' +
+                    this.formatImgUrl({
+                        url,
+                        width: 1024,
+                        height: 1024,
+                    }) +
+                    ')'
+                )
+            },
+        )
+    }
 }
 export default (context, inject) => {
     const common = new Common(context)

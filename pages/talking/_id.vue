@@ -32,11 +32,11 @@ export default {
 
         talkingResult = await talkingResult
 
-        let talking = {}
+        let talking
         if (talkingResult.status === 200) {
             talking = talkingResult.data
+            talking.content = app.$common.formatContent(talking.content)
         }
-
         return {
             talking,
         }
