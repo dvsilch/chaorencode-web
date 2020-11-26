@@ -7,18 +7,6 @@
             :to="{ name: 'talking-id', params: { id: item.id } }"
         >
             <el-row type="flex">
-                <el-image
-                    v-if="item.thumbnail_url"
-                    class="thumbnail"
-                    fit="cover"
-                    :src="
-                        $common.formatImgUrl({
-                            url: item.thumbnail_url,
-                            width: 400,
-                            height: 200,
-                        })
-                    "
-                />
                 <div class="detail">
                     <div>
                         <h2 class="title">{{ item.title }}</h2>
@@ -33,6 +21,18 @@
                         <span> {{ Math.floor(item.length / 300) }}分钟 </span>
                     </div>
                 </div>
+                <el-image
+                    v-if="item.thumbnail_url"
+                    class="thumbnail"
+                    fit="cover"
+                    :src="
+                        $common.formatImgUrl({
+                            url: item.thumbnail_url,
+                            width: 400,
+                            height: 200,
+                        })
+                    "
+                />
             </el-row>
         </nuxt-link>
         <i v-if="loding" class="el-icon-loading loading"></i>
@@ -119,6 +119,8 @@ export default {
     margin 0 auto
     padding 0 25px
     padding-top 100px
+    @media only screen and (max-width: 767px)
+        padding-top 40px
     .loading, .nomore
         display block
         font-size 36px
@@ -136,7 +138,7 @@ export default {
         .thumbnail
             width 300px
             height 168.75px
-            margin-right 20px
+            margin-left 20px
             border-radius 4px
             @media only screen and (max-width: 767px)
                 width 180px
@@ -148,9 +150,10 @@ export default {
             flex-direction column
             justify-content space-between
             .info
-                text-align right
                 font-size 14px
                 color $prompt-color
+                @media only screen and (max-width: 767px)
+                    font-size 12px
             .title
                 font-weight 700
                 line-height 1.4
@@ -161,7 +164,7 @@ export default {
                 -webkit-line-clamp 2
                 -webkit-box-orient vertical
                 @media only screen and (max-width: 767px)
-                    font-size 18px
+                    font-size 16px
                     margin-bottom 4px
             .shortcut
                 overflow hidden
@@ -170,5 +173,6 @@ export default {
                 -webkit-line-clamp 2
                 -webkit-box-orient vertical
                 @media only screen and (max-width: 767px)
-                    -webkit-line-clamp 2
+                    font-size 14px
+                    -webkit-line-clamp 1
 </style>

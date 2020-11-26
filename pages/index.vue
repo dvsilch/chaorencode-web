@@ -37,17 +37,44 @@
             <div class="talkings hidden-xs-only">
                 <h4 class="label">推荐阅读</h4>
                 <nuxt-link
-                    v-for="item in talkings"
+                    v-for="(item, index) in talkings"
                     :key="item.id"
                     class="item hover"
+                    :class="{ 'hidden-sm-and-down': index >= 2 }"
                     :to="{ name: 'talking-id', params: { id: item.id } }"
                 >
-                    <div class="detail">
-                        <h2 class="title">{{ item.title }}</h2>
-                        <p class="shortcut hidden-sm-and-down">
+                    <el-row type="flex">
+                        <div class="detail">
+                            <h2 class="title">{{ item.title }}</h2>
+                            <!-- <p class="shortcut hidden-sm-and-down">
                             {{ item.shortcut }}
-                        </p>
-                    </div>
+                        </p> -->
+                            <div class="info">
+                                <span class="right5">发布于</span>
+                                <span class="right15">{{
+                                    $common.beautifulTime(
+                                        item.publish_time_timestamp,
+                                    )
+                                }}</span>
+                                <span class="right5">阅读需</span>
+                                <span>
+                                    {{ Math.floor(item.length / 300) }}分钟
+                                </span>
+                            </div>
+                        </div>
+                        <el-image
+                            v-if="item.thumbnail_url"
+                            class="thumbnail"
+                            fit="cover"
+                            :src="
+                                $common.formatImgUrl({
+                                    url: item.thumbnail_url,
+                                    width: 400,
+                                    height: 200,
+                                })
+                            "
+                        />
+                    </el-row>
                 </nuxt-link>
             </div>
         </el-row>
@@ -120,7 +147,7 @@
             </el-row>
         </div>
         <Divider class="hidden-sm-and-up" :gap="60" />
-        <div class="talkings hidden-sm-and-up">
+        <div class="talkings-bottom hidden-sm-and-up">
             <h2>推荐阅读</h2>
             <nuxt-link
                 v-for="item in talkings"
@@ -128,12 +155,38 @@
                 class="item hover"
                 :to="{ name: 'talking-id', params: { id: item.id } }"
             >
-                <div class="detail">
-                    <h2 class="title">{{ item.title }}</h2>
-                    <p class="shortcut">
-                        {{ item.shortcut }}
-                    </p>
-                </div>
+                <el-row type="flex">
+                    <div class="detail">
+                        <div>
+                            <h2 class="title">{{ item.title }}</h2>
+                            <p class="shortcut">{{ item.shortcut }}</p>
+                        </div>
+                        <div class="info">
+                            <span class="right5">发布于</span>
+                            <span class="right15">{{
+                                $common.beautifulTime(
+                                    item.publish_time_timestamp,
+                                )
+                            }}</span>
+                            <span class="right5">阅读需</span>
+                            <span>
+                                {{ Math.floor(item.length / 300) }}分钟
+                            </span>
+                        </div>
+                    </div>
+                    <el-image
+                        v-if="item.thumbnail_url"
+                        class="thumbnail"
+                        fit="cover"
+                        :src="
+                            $common.formatImgUrl({
+                                url: item.thumbnail_url,
+                                width: 400,
+                                height: 200,
+                            })
+                        "
+                    />
+                </el-row>
             </nuxt-link>
         </div>
     </div>
@@ -155,6 +208,9 @@ export default {
         let talkings = []
         if (talkingResult.status === 200) {
             talkings = talkingResult.data.result
+            talkings = talkings.concat(talkings)
+            talkings = talkings.concat(talkings)
+            talkings = talkings.slice(0, 3)
         }
 
         let carousels = []
@@ -188,7 +244,7 @@ export default {
     .carousels
         width 680px
         @media only screen and (max-width: 991px)
-            width 440px
+            width 452px
         @media only screen and (max-width: 767px)
             width 100%
         .aspect-carousels
@@ -208,30 +264,93 @@ export default {
         @media only screen and (min-width: 768px)
             padding-left 26px
         .item
-            padding 15px
-            margin 0 -15px
+            padding 14px
+            margin 0 -14px
             @media only screen and (max-width: 991px)
                 padding 12px
                 margin 0 -12px
+            .thumbnail
+                width 150px
+                height 90px
+                margin-left 20px
+                border-radius 4px
+                @media only screen and (max-width: 1145px)
+                    display none
             .detail
+                height 92px
                 flex 1
+                display flex
+                flex-direction column
+                justify-content space-between
+                .info
+                    font-size 14px
+                    color $prompt-color
                 .title
                     line-height 1.4
                     margin-bottom 2px
                     overflow hidden
                     text-overflow ellipsis
                     display -webkit-box
-                    -webkit-line-clamp 1
+                    -webkit-line-clamp 2
                     -webkit-box-orient vertical
-                    @media only screen and (max-width: 991px)
-                        font-size 22px
-                        margin-bottom 0
+                    font-size 18px
+                    font-weight 700
+                    // @media only screen and (max-width: 991px)
+                    //     font-size 22px
+                    //     margin-bottom 0
+                // .shortcut
+                //     overflow hidden
+                //     text-overflow ellipsis
+                //     display -webkit-box
+                //     -webkit-line-clamp 2
+                //     -webkit-box-orient vertical
+
+    .talkings-bottom
+        .item
+            // margin-bottom 30px
+            padding 15px
+            margin 0 -15px
+            .thumbnail
+                width 300px
+                height 168.75px
+                margin-left 20px
+                border-radius 4px
+                @media only screen and (max-width: 767px)
+                    width 180px
+                    height 112.5px
+                    margin-right 14px
+            .detail
+                flex 1
+                display flex
+                flex-direction column
+                justify-content space-between
+                .info
+                    font-size 14px
+                    color $prompt-color
+                    @media only screen and (max-width: 767px)
+                        font-size 12px
+                .title
+                    font-weight 700
+                    line-height 1.4
+                    margin-bottom 6px
+                    overflow hidden
+                    text-overflow ellipsis
+                    display -webkit-box
+                    -webkit-line-clamp 2
+                    -webkit-box-orient vertical
+                    @media only screen and (max-width: 767px)
+                        font-size 16px
+                        margin-bottom 4px
                 .shortcut
                     overflow hidden
                     text-overflow ellipsis
                     display -webkit-box
-                    -webkit-line-clamp 1
+                    -webkit-line-clamp 2
                     -webkit-box-orient vertical
+                    @media only screen and (max-width: 767px)
+                        -webkit-line-clamp 2
+                        font-size 14px
+
     .courses
         margin -24px
         // .col:hover
