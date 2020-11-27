@@ -15,51 +15,62 @@
                         class="video"
                         :options="videoOptions"
                     />
-                    <Divider id="content" :gap="60" />
-                    <!-- <Viewer
+                    <div v-if="lesson.content">
+                        <Divider id="content" :gap="80" />
+                        <h3 class="label">内容</h3>
+                        <!-- <Viewer
                         class="content"
                         :initial-value="lesson.content"
                         :options="editorOptions"
                     /> -->
-                    <XViwer
-                        v-if="lesson.content"
-                        class="content"
-                        :initial-value="lesson.content"
-                    />
-                    <Divider id="exercise" :gap="60" />
+                        <XViwer
+                            class="content"
+                            :initial-value="lesson.content"
+                        />
+                    </div>
+                    <div v-if="lesson.exercise">
+                        <Divider
+                            v-if="lesson.exercise"
+                            id="exercise"
+                            :gap="80"
+                        />
+                        <h3 class="label">练习</h3>
 
-                    <!-- <Viewer
+                        <!-- <Viewer
                         class="exercise"
                         :initial-value="lesson.exercise"
                         :options="editorOptions"
                     /> -->
-                    <XViwer
-                        v-if="lesson.exercise"
-                        class="content"
-                        :initial-value="lesson.exercise"
-                    />
-                    <Divider id="explain" :gap="60" />
-                    <!-- <Viewer
+                        <XViwer
+                            class="content"
+                            :initial-value="lesson.exercise"
+                        />
+                    </div>
+                    <div v-if="lesson.explain">
+                        <Divider id="explain" :gap="80" />
+                        <h3 class="label">解析</h3>
+                        <!-- <Viewer
                         class="explain"
                         :initial-value="lesson.explain"
                         :options="editorOptions"
                     /> -->
-                    <div v-if="lesson.explain" class="block">
-                        <XViwer
-                            class="content"
-                            :class="{ blur: blur }"
-                            :initial-value="lesson.explain"
-                        />
-                        <div v-if="blur" class="box">
-                            <div class="button" @click="blur = false">
-                                点击查看
+                        <div class="block">
+                            <XViwer
+                                class="content"
+                                :class="{ blur: blur }"
+                                :initial-value="lesson.explain"
+                            />
+                            <div v-if="blur" class="box">
+                                <div class="button" @click="blur = false">
+                                    点击查看
+                                </div>
                             </div>
                         </div>
                     </div>
                     <Divider
                         id="lessons"
                         class="image hidden-md-and-up"
-                        :gap="60"
+                        :gap="80"
                     />
                 </el-col>
                 <el-col class="lessons" :md="6" :span="24">
@@ -231,17 +242,22 @@ export default {
     //     .is-active.tab-item::before
     //             width 80%
 
+.label
+    margin-bottom 20px
+    color $first-color
+
 .lessons
     .image
         height 160px
         width 100%
         border-radius 4px
-    .image:hover
+        margin-bottom 20px
         cursor pointer
-    .label
-        margin-bottom 10px
     .title
         display block
         padding 4px 10px
         margin 0 -10px
+    @media only screen and (min-width: 992px)
+        .label
+            margin-bottom 10px
 </style>
