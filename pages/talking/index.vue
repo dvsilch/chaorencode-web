@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="main-box">
         <div class="talkings">
             <nuxt-link
                 v-for="item in result"
@@ -120,7 +120,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.container
+.main-box
     max-width 960px
     margin 0 auto
     padding 0 25px
