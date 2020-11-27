@@ -68,22 +68,25 @@
                 </el-col>
                 <el-col class="lessons" :md="6" :span="24">
                     <nuxt-link
+                        class="course-box"
                         :to="{
                             name: 'course-id',
                             params: { id: lesson.course_id },
                         }"
                     >
-                        <el-image
-                            class="image hidden-sm-and-down"
-                            :src="
-                                $common.formatImgUrl({
-                                    url: lesson.course_image_url,
-                                    width: 290,
-                                    height: 160,
-                                })
-                            "
-                            fit="cover"
-                        ></el-image>
+                        <Aspect :x="16" :y="9">
+                            <el-image
+                                class="image hidden-sm-and-down"
+                                :src="
+                                    $common.formatImgUrl({
+                                        url: lesson.course_image_url,
+                                        width: 290,
+                                        height: 160,
+                                    })
+                                "
+                                fit="cover"
+                            ></el-image>
+                        </Aspect>
                     </nuxt-link>
                     <h3 id="lessons" class="label">课程目录</h3>
                     <nuxt-link
@@ -241,11 +244,10 @@ export default {
     color $first-color
 
 .lessons
-    .image
-        height 160px
-        width 100%
-        border-radius 4px
+    .course-box
         margin-bottom 20px
+    .image
+        border-radius 4px
         cursor pointer
     .title
         display block

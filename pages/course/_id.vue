@@ -6,31 +6,37 @@
                     <h1>{{ course.name }}</h1>
                 </el-col>
                 <el-col :span="10">
-                    <el-image
-                        class="image"
-                        :src="
-                            $common.formatImgUrl({
-                                url: course.image_url,
-                                width: 520,
-                                height: 310,
-                            })
-                        "
-                        fit="cover"
-                /></el-col>
+                    <Aspect class="header" :x="16" :y="9">
+                        <el-image
+                            class="image"
+                            :src="
+                                $common.formatImgUrl({
+                                    url: course.image_url,
+                                    width: 520,
+                                    height: 310,
+                                })
+                            "
+                            fit="cover"
+                        />
+                    </Aspect>
+                </el-col>
             </el-row>
             <el-row class="hidden-md-and-up">
                 <el-col>
-                    <el-image
-                        class="image"
-                        :src="
-                            $common.formatImgUrl({
-                                url: course.image_url,
-                                width: 925,
-                                height: 450,
-                            })
-                        "
-                        fit="cover"
-                /></el-col>
+                    <Aspect class="header" :x="16" :y="9">
+                        <el-image
+                            class="image"
+                            :src="
+                                $common.formatImgUrl({
+                                    url: course.image_url,
+                                    width: 925,
+                                    height: 450,
+                                })
+                            "
+                            fit="cover"
+                        />
+                    </Aspect>
+                </el-col>
                 <el-col>
                     <h1>{{ course.name }}</h1>
                 </el-col>
@@ -113,10 +119,12 @@ export default {
 .container
     padding-top 40px
     .header
-        padding-bottom 100px
-        .hidden-md-and-up
-            .image
-                margin-bottom 20px
+        padding-bottom 40px
+        .image
+            border-radius 6px
+        // .hidden-md-and-up
+        //     .image
+        //         margin-bottom 20px
     .section
         padding-top 20px
     .course
@@ -124,9 +132,6 @@ export default {
             padding-right 15px
         .label
             font-size 30px
-        .image
-            height 300px
-            width 100%
     .right
         .lessons
             // margin -10px

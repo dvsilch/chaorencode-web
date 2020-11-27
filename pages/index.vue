@@ -2,7 +2,8 @@
     <div class="container maxwidth">
         <el-row type="flex">
             <div class="carousels">
-                <div class="aspect-carousels">
+                <!-- <div class="aspect-carousels"> -->
+                <Aspect class="header" :x="16" :y="9">
                     <el-carousel
                         class="block"
                         height="100%"
@@ -32,7 +33,8 @@
                             </a>
                         </el-carousel-item>
                     </el-carousel>
-                </div>
+                </Aspect>
+                <!-- </div> -->
             </div>
             <div class="talkings hidden-xs-only">
                 <h4 class="label">推荐阅读</h4>
@@ -251,17 +253,21 @@ export default {
             width 452px
         @media only screen and (max-width: 767px)
             width 100%
-        .aspect-carousels
-            position relative
-            padding-bottom 56.25%
-            .block
-                position absolute
-                width 100%
-                height 100%
-                .carousel
-                    height 100%
-                    width 100%
-                    border-radius 6px
+        .carousel
+            height 100%
+            width 100%
+            border-radius 6px
+        // .aspect-carousels
+        //     position relative
+        //     padding-bottom 56.25%
+        //     .block
+        //         position absolute
+        //         width 100%
+        //         height 100%
+        //         .carousel
+        //             height 100%
+        //             width 100%
+        //             border-radius 6px
     .talkings
         flex 1
         word-break break-all

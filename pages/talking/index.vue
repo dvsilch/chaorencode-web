@@ -128,7 +128,7 @@ export default {
     @media only screen and (max-width: 767px)
         padding-top 40px
     .talkings
-        margin -15px
+        margin -25px
         .loading, .nomore
             display block
             font-size 36px
@@ -141,7 +141,7 @@ export default {
             font-size 36px
         .item
             // margin-bottom 30px
-            padding 15px
+            padding 25px
             .thumbnail
                 width 300px
                 height 168.75px

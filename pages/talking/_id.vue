@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="aspect">
+        <!-- <div class="aspect">
             <el-image
                 v-if="talking.thumbnail_url"
                 class="image"
@@ -13,7 +13,21 @@
                     })
                 "
             />
-        </div>
+        </div> -->
+        <Aspect class="header" :x="16" :y="9">
+            <el-image
+                v-if="talking.thumbnail_url"
+                class="image"
+                fit="cover"
+                :src="
+                    $common.formatImgUrl({
+                        url: talking.thumbnail_url,
+                        width: 690,
+                        height: 390,
+                    })
+                "
+            />
+        </Aspect>
         <h2 class="title">{{ talking.title }}</h2>
         <XViwer class="content" :initial-value="talking.content" />
     </div>
@@ -51,14 +65,9 @@ export default {
     margin 0 auto
     padding 0 25px
     padding-top 20px
-    .aspect
-        position relative
-        padding-bottom 56.25%
+    .header
         margin-bottom 20px
         .image
-            position absolute
-            width 100%
-            height 100%
             border-radius 6px
 
     .title

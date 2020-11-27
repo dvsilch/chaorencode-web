@@ -4,7 +4,7 @@
             v-for="anchor in anchors"
             :key="anchor.id"
             :href="'#' + anchor.id"
-            class="scrollactive-item tab-item"
+            class="scrollactive-item tab-item hover"
             >{{ anchor.name }}</a
         >
     </scrollactive>
@@ -28,13 +28,14 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .nav-tab
-    padding 10px 0
+    padding 5px 0
     position sticky
     top 0
     background $background
     display flex
     z-index 999
     .tab-item
+        padding 4px 10px
         position relative
         font-size 22px
         line-height 1.4
@@ -51,5 +52,5 @@ export default {
         left 0
         right 0
     .is-active.tab-item::before
-        width 70%
+        width 50%
 </style>
