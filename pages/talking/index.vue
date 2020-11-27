@@ -123,7 +123,7 @@ export default {
 .main-box
     max-width 960px
     margin 0 auto
-    padding 0 25px
+    padding 0 35px
     padding-top 100px
     @media only screen and (max-width: 767px)
         padding-top 40px

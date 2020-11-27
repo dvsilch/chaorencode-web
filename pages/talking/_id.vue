@@ -63,8 +63,6 @@ export default {
 .container
     max-width 690px
     margin 0 auto
-    padding 0 25px
-    padding-top 20px
     .header
         margin-bottom 20px
         .image

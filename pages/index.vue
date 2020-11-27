@@ -238,7 +238,6 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-    padding-top 40px
     h2
         margin-bottom 40px
         @media only screen and (max-width: 991px)
