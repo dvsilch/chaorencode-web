@@ -15,6 +15,12 @@ export default {
                 name: 'description',
                 content: '学编程，来超人，超人编程是质量最高的编程学习网站。',
             },
+            {
+                hid: 'keywords',
+                name: 'keywords',
+                content:
+                    '编程,学习,python,c#,java,教育,代码,程序,少儿编程,职业编程,大学生编程',
+            },
         ],
         link: [
             {
