@@ -9,15 +9,16 @@
             <el-row :gutter="34">
                 <!-- :class="videoState === 'play' ? 'video-play' : ''" -->
                 <el-col class="lesson" :md="18" :span="24">
-                    <VideoPlayer
-                        v-if="lesson.video_url"
-                        id="video"
-                        class="video"
-                        :options="videoOptions"
-                    />
-                    <div v-if="lesson.content">
-                        <Divider id="content" :gap="80" />
-                        <h3 class="label">内容</h3>
+                    <template v-if="lesson.video_url">
+                        <VideoPlayer
+                            id="video"
+                            class="video"
+                            :options="videoOptions"
+                        />
+                        <Divider :gap="80" />
+                    </template>
+                    <template v-if="lesson.content">
+                        <h3 id="content" class="label">内容</h3>
                         <!-- <Viewer
                         class="content"
                         :initial-value="lesson.content"
@@ -27,14 +28,10 @@
                             class="content"
                             :initial-value="lesson.content"
                         />
-                    </div>
-                    <div v-if="lesson.exercise">
-                        <Divider
-                            v-if="lesson.exercise"
-                            id="exercise"
-                            :gap="80"
-                        />
-                        <h3 class="label">练习</h3>
+                        <Divider :gap="80" />
+                    </template>
+                    <template v-if="lesson.exercise">
+                        <h3 id="exercise" class="label">练习</h3>
 
                         <!-- <Viewer
                         class="exercise"
@@ -45,10 +42,10 @@
                             class="content"
                             :initial-value="lesson.exercise"
                         />
-                    </div>
-                    <div v-if="lesson.explain">
-                        <Divider id="explain" :gap="80" />
-                        <h3 class="label">解析</h3>
+                        <Divider :gap="80" />
+                    </template>
+                    <template v-if="lesson.explain">
+                        <h3 id="explain" class="label">解析</h3>
                         <!-- <Viewer
                         class="explain"
                         :initial-value="lesson.explain"
@@ -66,12 +63,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <Divider
-                        id="lessons"
-                        class="image hidden-md-and-up"
-                        :gap="80"
-                    />
+                        <Divider class="image hidden-md-and-up" :gap="80" />
+                    </template>
                 </el-col>
                 <el-col class="lessons" :md="6" :span="24">
                     <nuxt-link
@@ -92,11 +85,12 @@
                             fit="cover"
                         ></el-image>
                     </nuxt-link>
-                    <h3 class="label">课程目录</h3>
+                    <h3 id="lessons" class="label">课程目录</h3>
                     <nuxt-link
                         v-for="lesson in lessons"
                         :key="lesson.id"
                         class="hover title"
+                        :class="{ ing: $route.params.id == lesson.id }"
                         :to="{ name: 'lesson-id', params: { id: lesson.id } }"
                     >
                         {{ lesson.title }}
@@ -257,6 +251,8 @@ export default {
         display block
         padding 4px 10px
         margin 0 -10px
+    .ing
+        background-color $hover-color
     @media only screen and (min-width: 992px)
         .label
             margin-bottom 10px
