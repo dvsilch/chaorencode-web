@@ -253,7 +253,7 @@ export default {
             width 100%
         .aspect-carousels
             position relative
-            padding-bottom 56.2%
+            padding-bottom 56.25%
             .block
                 position absolute
                 width 100%

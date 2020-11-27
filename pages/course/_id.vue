@@ -51,6 +51,7 @@
                     /> -->
                     <XViwer class="content" :initial-value="course.intro" />
                     <!-- <div id="viewer"></div> -->
+                    <Divider class="hidden-sm-and-up" :gap="80" />
                 </el-col>
                 <el-col class="right" :span="6" :xs="24">
                     <div class="lessons">
@@ -119,16 +120,22 @@ export default {
     .section
         padding-top 20px
     .course
+        @media only screen and (min-width: 768px)
+            padding-right 15px
         .label
             font-size 30px
         .image
             height 300px
             width 100%
     .right
-        padding-left 10px
         .lessons
+            // margin -10px
             .label
-                margin-bottom 10px
+                margin-bottom 20px
+                color $first-color
+            @media only screen and (min-width: 992px)
+                .label
+                    margin-bottom 10px
             .title
                 display block
                 padding 4px 10px

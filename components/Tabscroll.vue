@@ -38,7 +38,7 @@ export default {
         position relative
         font-size 22px
         line-height 1.4
-        margin-right 10px
+        margin-right 20px
     .tab-item::before
         transition all 600ms ease
         content ''

@@ -1,22 +1,21 @@
 <template>
     <div class="container">
-        <el-image
-            v-if="talking.thumbnail_url"
-            class="image"
-            fit="cover"
-            :src="
-                $common.formatImgUrl({
-                    url: talking.thumbnail_url,
-                    width: 690,
-                    height: 390,
-                })
-            "
-        />
+        <div class="aspect">
+            <el-image
+                v-if="talking.thumbnail_url"
+                class="image"
+                fit="cover"
+                :src="
+                    $common.formatImgUrl({
+                        url: talking.thumbnail_url,
+                        width: 690,
+                        height: 390,
+                    })
+                "
+            />
+        </div>
         <h2 class="title">{{ talking.title }}</h2>
-        <XViwer
-            class="content"
-            :initial-value="$common.formatContent(talking.content)"
-        />
+        <XViwer class="content" :initial-value="talking.content" />
     </div>
 </template>
 
@@ -52,12 +51,16 @@ export default {
     margin 0 auto
     padding 0 25px
     padding-top 20px
-    .image
-        width 100%
-        height 388px
+    .aspect
+        position relative
+        padding-bottom 56.25%
         margin-bottom 20px
-        @media only screen and (max-width: 767px)
-            height 338px
+        .image
+            position absolute
+            width 100%
+            height 100%
+            border-radius 6px
+
     .title
         font-weight 700
         margin-bottom 10px
