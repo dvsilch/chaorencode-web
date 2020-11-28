@@ -201,7 +201,7 @@
 export default {
     async asyncData({ app }) {
         const page = 1
-        const limit = 10
+        const limit = 3
         let talkingResult = app.$guy.get('/talkings', { data: { page, limit } })
         let carouselsResult = app.$guy.get('/carousels')
         let coursesResult = app.$guy.get('/courses')
@@ -213,9 +213,9 @@ export default {
         let talkings = []
         if (talkingResult.status === 200) {
             talkings = talkingResult.data.result
-            talkings = talkings.concat(talkings)
-            talkings = talkings.concat(talkings)
-            talkings = talkings.slice(0, 3)
+            // talkings = talkings.concat(talkings)
+            // talkings = talkings.concat(talkings)
+            // talkings = talkings.slice(0, 3)
         }
 
         let carousels = []
