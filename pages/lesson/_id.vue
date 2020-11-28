@@ -74,7 +74,7 @@
                             params: { id: lesson.course_id },
                         }"
                     >
-                        <Aspect :x="16" :y="9">
+                        <Aspect id="lessons" :x="16" :y="9">
                             <el-image
                                 class="image"
                                 :src="
@@ -88,7 +88,7 @@
                             ></el-image>
                         </Aspect>
                     </nuxt-link>
-                    <h3 id="lessons" class="label">课程目录</h3>
+                    <h3 class="label">课程目录</h3>
                     <nuxt-link
                         v-for="lesson in lessons"
                         :key="lesson.id"
