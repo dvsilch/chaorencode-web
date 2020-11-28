@@ -70,5 +70,4 @@ export default {
 
     .title
         font-weight 700
-        margin-bottom 10px
 </style>
