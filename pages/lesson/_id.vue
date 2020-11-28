@@ -183,7 +183,6 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-    padding-top 40px
     .header
         .title
             margin-bottom 30px
