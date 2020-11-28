@@ -183,9 +183,6 @@ export default {
 
 <style lang="stylus" scoped>
 .container
-    .header
-        .title
-            margin-bottom 30px
     .tab
         box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
     .section
