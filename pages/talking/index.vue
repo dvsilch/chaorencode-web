@@ -148,6 +148,10 @@ export default {
                 margin-left 20px
                 border-radius 4px
                 @media only screen and (max-width: 767px)
+                    width 200px
+                    height 112.5px
+                    margin-left 10px
+                @media only screen and (max-width: 500px)
                     width 140px
                     height 78.75px
                     margin-left 10px
@@ -171,8 +175,11 @@ export default {
                     -webkit-line-clamp 2
                     -webkit-box-orient vertical
                     @media only screen and (max-width: 767px)
-                        font-size 16px
+                        font-size 18px
                         margin-bottom 4px
+                    @media only screen and (max-width: 500px)
+                        font-size 16px
+                        margin-bottom 2px
                 .shortcut
                     overflow hidden
                     text-overflow ellipsis
@@ -180,6 +187,8 @@ export default {
                     -webkit-line-clamp 2
                     -webkit-box-orient vertical
                     @media only screen and (max-width: 767px)
-                        font-size 14px
                         -webkit-line-clamp 1
+                        font-size 14px
+                    @media only screen and (max-width: 500px)
+                        display none
 </style>
