@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div divider>
         <div
             class="divider hidden-sm-and-down"
             :style="`margin: ${gap}px auto`"

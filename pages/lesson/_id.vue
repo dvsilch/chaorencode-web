@@ -8,7 +8,7 @@
         <section class="section">
             <el-row :gutter="34">
                 <!-- :class="videoState === 'play' ? 'video-play' : ''" -->
-                <el-col class="lesson" :md="18" :span="24">
+                <el-col class="lesson" :sm="18" :span="24">
                     <template v-if="lesson.video_url">
                         <VideoPlayer
                             id="video"
@@ -66,7 +66,7 @@
                         <Divider class="image hidden-md-and-up" :gap="80" />
                     </template>
                 </el-col>
-                <el-col class="lessons" :md="6" :span="24">
+                <el-col class="lessons" :sm="6" :span="24">
                     <nuxt-link
                         class="course-box"
                         :to="{
@@ -76,12 +76,12 @@
                     >
                         <Aspect :x="16" :y="9">
                             <el-image
-                                class="image hidden-sm-and-down"
+                                class="image"
                                 :src="
                                     $common.formatImgUrl({
                                         url: lesson.course_image_url,
-                                        width: 290,
-                                        height: 160,
+                                        width: 630,
+                                        height: 360,
                                     })
                                 "
                                 fit="cover"
@@ -218,6 +218,10 @@ export default {
     .title
         font-size 26px
         margin-bottom 30px
+
+    @media only screen and (min-width: 768px)
+        [divider]:last-child
+            display none
 
     // .nav-tab
     //     position sticky
