@@ -43,7 +43,7 @@ export default {
         @media only screen and (max-width: 500px)
             padding 3px 8px
             font-size 18px
-            margin-right 15px
+            margin-right 14px
     .tab-item::before
         transition all 600ms ease
         content ''
