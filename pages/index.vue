@@ -52,13 +52,13 @@
                             {{ item.shortcut }}
                         </p> -->
                             <div class="info">
-                                <span class="right5">发布于</span>
+                                <span class="right5">发布</span>
                                 <span class="right15">{{
                                     $common.beautifulTime(
                                         item.publish_time_timestamp,
                                     )
                                 }}</span>
-                                <span class="right5">阅读需</span>
+                                <span class="right5">阅读</span>
                                 <span>
                                     {{ Math.floor(item.length / 300) }}分钟
                                 </span>
