@@ -126,7 +126,7 @@ export default {
                 anchors.push({ id: 'exercise', name: '练习' })
             }
             if (lesson.explain) {
-                anchors.push({ id: 'explain', name: '答案' })
+                anchors.push({ id: 'explain', name: '解析' })
             }
         }
 
