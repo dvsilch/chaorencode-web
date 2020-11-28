@@ -29,6 +29,14 @@
             />
         </Aspect>
         <h2 class="title">{{ talking.title }}</h2>
+        <div class="info">
+            <span class="right5">发布</span>
+            <span class="right15">{{
+                $common.beautifulTime(talking.publish_time_timestamp)
+            }}</span>
+            <span class="right5">阅读</span>
+            <span> {{ Math.floor(talking.content.length / 300) }}分钟 </span>
+        </div>
         <XViwer class="content" :initial-value="talking.content" />
     </div>
 </template>
@@ -70,4 +78,9 @@ export default {
 
     .title
         font-weight 700
+    .info
+        text-align right
+        font-size 14px
+        color $prompt-color
+        margin-bottom 30px
 </style>
