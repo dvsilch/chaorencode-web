@@ -124,26 +124,27 @@
                     :md="6"
                 >
                     <nuxt-link
-                        class="aspect"
                         :to="{ name: 'course-id', params: { id: course.id } }"
                     >
-                        <div class="course">
-                            <el-image
-                                class="image"
-                                :src="
-                                    $common.formatImgUrl({
-                                        url: course.image_url,
-                                        width: 278,
-                                        height: 156,
-                                    })
-                                "
-                                fit="cover"
-                            />
-                            <div class="info">
-                                <h3 class="title">{{ course.name }}</h3>
-                                <p class="lang">python</p>
+                        <Aspect :x="1" :y="1">
+                            <div class="course">
+                                <el-image
+                                    class="image"
+                                    :src="
+                                        $common.formatImgUrl({
+                                            url: course.image_url,
+                                            width: 278,
+                                            height: 156,
+                                        })
+                                    "
+                                    fit="cover"
+                                />
+                                <div class="info">
+                                    <h3 class="title">{{ course.name }}</h3>
+                                    <p class="lang">python</p>
+                                </div>
                             </div>
-                        </div>
+                        </Aspect>
                     </nuxt-link>
                 </el-col>
             </el-row>
@@ -368,57 +369,42 @@ export default {
         .col
             padding 24px
         @media only screen and (max-width: 991px)
-            margin -12px
+            margin -16px
             .col
-                padding 12px
-        @media only screen and (max-width: 767px)
-            margin -6px
-            .col
-                padding 6px
-        .aspect
-            position relative
-            padding-bottom 100%
-
-            .course
-                position absolute
-                height 100%
+                padding 16px
+        .course
+            border-radius 4px
+            background rgb(249, 245, 241)
+            .image
                 width 100%
-                left 0
-                top 0
-                border-radius 4px
-                background rgb(249, 245, 241)
-                .image
-                    width 100%
-                    height 56.25%
-                    border-top-left-radius 4px
-                    border-top-right-radius 4px
+                height 56.25%
+                border-top-left-radius 4px
+                border-top-right-radius 4px
 
-                .info
-                    padding 12px
-                    padding-top 0
-                    .title
-                        font-size 20px
-                        overflow hidden
-                        text-overflow ellipsis
-                        display -webkit-box
-                        -webkit-line-clamp 2
-                        -webkit-box-orient vertical
-
+            .info
+                padding 12px
+                padding-top 0
+                display flex
+                flex-direction column
+                justify-content space-between
+                height 43.75%
+                .title
+                    font-size 20px
+                    overflow hidden
+                    text-overflow ellipsis
+                    display -webkit-box
+                    -webkit-line-clamp 2
+                    -webkit-box-orient vertical
+                    @media only screen and (max-width: 620px)
+                        font-size 16px
                 .lang
-                    left 12px
-                    bottom 12px
-                    position absolute
-                    display block
                     color $weak-color
                     font-size 16px
                     @media only screen and (max-width: 991px)
                         font-size 14px
-                        left 8px
-                        bottom 8px
                     @media only screen and (max-width: 767px)
                         font-size 12px
-                        left 6px
-                        bottom 6px
+
     .course:hover
         background $hover-color
 
