@@ -47,10 +47,8 @@ export default {
     //         }
     //     },
     // },
-    beforeMount() {
-        this.server = false
-    },
     mounted() {
+        this.server = false
         this.initViwer()
     },
     methods: {
