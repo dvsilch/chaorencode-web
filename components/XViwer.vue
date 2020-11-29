@@ -1,11 +1,14 @@
 <template>
     <!-- <div id="editor" height="500px" preview-style="tab" class="bottom15" /> -->
-    <client-only>
-        <viewer
-            :initial-value="$common.formatContent(initialValue)"
-            :options="editorOptions"
-        />
-    </client-only>
+    <div>
+        <div v-if="server" class="loading">{{ initialValue }}</div>
+        <client-only>
+            <viewer
+                :initial-value="$common.formatContent(initialValue)"
+                :options="editorOptions"
+            />
+        </client-only>
+    </div>
 </template>
 
 <script>
@@ -32,6 +35,7 @@ export default {
     },
     data() {
         return {
+            server: true,
             editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
         }
     },
@@ -43,6 +47,9 @@ export default {
     //         }
     //     },
     // },
+    beforeMount() {
+        this.server = false
+    },
     mounted() {
         this.initViwer()
     },
@@ -56,4 +63,16 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.loading
+    position relative
+.loading:before
+    position absolute
+    content ''
+    background-color white
+    z-index 999
+    left 0
+    top 0
+    right 0
+    bottom 0
+</style>
