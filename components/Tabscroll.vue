@@ -34,6 +34,9 @@ export default {
     background $background
     display flex
     z-index 999
+    margin-left -10px
+    @media only screen and (max-width: 500px)
+        margin-left -8px
     .tab-item
         padding 4px 10px
         position relative
