@@ -18,7 +18,7 @@
                         <Divider :gap="80" />
                     </template>
                     <template v-if="lesson.content">
-                        <h3 id="content" class="label">内容</h3>
+                        <h3 id="content" class="label">课文</h3>
                         <!-- <Viewer
                         class="content"
                         :initial-value="lesson.content"
@@ -120,7 +120,7 @@ export default {
                 anchors.push({ id: 'video', name: '视频' })
             }
             if (lesson.content) {
-                anchors.push({ id: 'content', name: '内容' })
+                anchors.push({ id: 'content', name: '课文' })
             }
             if (lesson.exercise) {
                 anchors.push({ id: 'exercise', name: '练习' })
