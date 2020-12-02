@@ -156,6 +156,7 @@ export default {
             font-size 36px
         .item
             // margin-bottom 30px
+            border-radius 6px
             padding 25px
             @media only screen and (max-width: 767px)
                 padding 15px
