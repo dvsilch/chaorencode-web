@@ -62,6 +62,19 @@ export default {
     head() {
         return {
             title: this.talking.title + ' - 超人编程',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    property: 'og:description',
+                    content: this.talking.shortcut + '...',
+                },
+                {
+                    hid: 'image',
+                    property: 'og:image',
+                    content: this.talking.thumbnail_url,
+                },
+            ],
         }
     },
 }

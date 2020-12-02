@@ -110,6 +110,19 @@ export default {
     head() {
         return {
             title: this.course.name + ' - 超人编程',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    property: 'og:description',
+                    content: this.course.shortcut + '...',
+                },
+                {
+                    hid: 'image',
+                    property: 'og:image',
+                    content: this.course.image_url,
+                },
+            ],
         }
     },
 }

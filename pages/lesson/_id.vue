@@ -158,6 +158,19 @@ export default {
     head() {
         return {
             title: this.lesson.title + ' - 超人编程',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    property: 'og:description',
+                    content: this.lesson.shortcut + '...',
+                },
+                {
+                    hid: 'image',
+                    property: 'og:image',
+                    content: this.lesson.thumbnail_url,
+                },
+            ],
         }
     },
     mounted() {
