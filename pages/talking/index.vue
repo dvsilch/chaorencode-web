@@ -75,6 +75,19 @@ export default {
             loding: false,
         }
     },
+    head() {
+        return {
+            title: '言语 - 超人编程',
+            meta: [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    property: 'og:description',
+                    content: '有趣的技术热点，编程知识，欢快的理论。',
+                },
+            ],
+        }
+    },
     computed: {
         nomore() {
             return this.amount === this.result.length
