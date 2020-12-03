@@ -31,7 +31,7 @@
                         <Divider :gap="80" />
                     </template>
                     <template v-if="lesson.exercise">
-                        <h3 id="exercise" class="label">练习</h3>
+                        <h3 id="exercise" class="label">实战</h3>
 
                         <!-- <Viewer
                         class="exercise"
@@ -123,7 +123,7 @@ export default {
                 anchors.push({ id: 'content', name: '课文' })
             }
             if (lesson.exercise) {
-                anchors.push({ id: 'exercise', name: '练习' })
+                anchors.push({ id: 'exercise', name: '实战' })
             }
             if (lesson.explain) {
                 anchors.push({ id: 'explain', name: '解析' })

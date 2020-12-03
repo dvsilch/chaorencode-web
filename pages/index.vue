@@ -104,9 +104,9 @@
                 </el-col>
                 <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/test.svg" fit="contain" />
-                    <h3 class="title">练习与解答</h3>
+                    <h3 class="title">实战与解析</h3>
                     <p class="detail">
-                        有学必有练，有练必有答。通过课后的练习巩固我们的知识点，用实战代替记忆。
+                        有学必有练，有练必有答。通过课后的实战巩固我们的知识点，用实战代替记忆。
                     </p>
                 </el-col>
             </el-row>
