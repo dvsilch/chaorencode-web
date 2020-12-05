@@ -1,9 +1,10 @@
 <template>
     <div class="container maxwidth">
+        <BackTop />
         <header class="header">
             <el-row class="hidden-sm-and-down">
                 <el-col :span="14">
-                    <h1>{{ course.name }}</h1>
+                    <h1 class="title">{{ course.name }}</h1>
                 </el-col>
                 <el-col :span="10">
                     <Aspect class="header" :x="16" :y="9">
@@ -38,14 +39,22 @@
                     </Aspect>
                 </el-col>
                 <el-col>
-                    <h1>{{ course.name }}</h1>
+                    <h1 class="title">{{ course.name }}</h1>
                 </el-col>
             </el-row>
         </header>
-        <Divider />
+        <Divider class="hidden-xs-only" />
+        <Tabscroll
+            class="tab hidden-sm-and-up"
+            :anchors="[
+                { id: 'introduction', name: '介绍' },
+                { id: 'lessons', name: '目录' },
+            ]"
+        />
         <section class="section">
             <el-row>
                 <el-col
+                    id="introduction"
                     class="course"
                     :span="18"
                     :xs="24"
@@ -61,7 +70,7 @@
                 </el-col>
                 <el-col class="right" :span="6" :xs="24">
                     <div class="lessons">
-                        <h3 class="label">课程目录</h3>
+                        <h3 id="lessons" class="label">课程目录</h3>
                         <nuxt-link
                             v-for="lesson in lessons"
                             :key="lesson.id"
@@ -133,6 +142,10 @@ export default {
     padding-top 40px
     .header
         padding-bottom 40px
+        @media only screen and (max-width: 767px)
+            padding-bottom 10px
+        .title
+            margin 10px 0
         .image
             border-radius 6px
         // .hidden-md-and-up

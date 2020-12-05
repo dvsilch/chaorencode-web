@@ -1,5 +1,6 @@
 <template>
     <div class="container maxwidth">
+        <BackTop />
         <header class="header">
             <h1 class="title">{{ lesson.title }}</h1>
         </header>

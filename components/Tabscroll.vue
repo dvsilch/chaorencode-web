@@ -35,6 +35,7 @@ export default {
     display flex
     z-index 999
     margin-left -10px
+    box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
     @media only screen and (max-width: 500px)
         margin-left -8px
     .tab-item

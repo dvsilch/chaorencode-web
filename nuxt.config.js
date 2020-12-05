@@ -49,6 +49,10 @@ export default {
         '@/plugins/common',
         '@/plugins/manager',
         '@/plugins/local-storage',
+        {
+            src: '@/plugins/iconfont.js',
+            mode: 'client',
+        },
         // {
         //     src: '@/plugins/viewer',
         //     mode: 'client',
@@ -80,7 +84,7 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
-        extractCSS: true,
+        extractCSS: { ignoreOrder: true },
         transpile: [/^element-ui/],
     },
     env: {
