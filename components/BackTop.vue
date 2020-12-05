@@ -42,7 +42,9 @@ export default {
 <style lang="stylus" scoped>
 .backtop
     position absolute
-    right 40px
+    right 25px
+    @media only screen and (max-width 767px)
+        right 20px
     width 40px
     height 40px
     .button
