@@ -41,7 +41,7 @@ export default {
             // }, 10)
 
             const timeTop = setInterval(function () {
-                let step = 0 - window.pageYOffset / 7
+                let step = 0 - window.pageYOffset / 10
                 step = step > 0 ? Math.ceil(step) : Math.floor(step)
 
                 if (window.pageYOffset === 0) {
