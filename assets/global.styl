@@ -1,8 +1,123 @@
 *
     box-sizing border-box
-    background-color rgb(246, 246, 246)
 
 html, body, #__nuxt, #__layout
-    height 100%
+    font-family Noto Sans SC, -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif
     margin 0
     padding 0
+    background #fffefc
+    color rgba(0, 0, 0, .75)
+
+a
+    display block
+    color inherit
+    text-decoration none
+    outline 0 none !important
+
+img
+    border-radius 4px
+
+p, span, h1, h2, h3, h4
+    margin 0
+
+h1
+    font-size 2em
+    margin-bottom 30px
+
+    @media only screen and (max-width 767px)
+        font-size 1.6em
+        margin-bottom 15px
+
+h2
+    font-size 1.5em
+    margin-bottom 20px
+
+    @media only screen and (max-width 767px)
+        font-size 1.3em
+        margin-bottom 10px
+
+h3
+    font-size 1.2em
+    margin-bottom 12px
+
+    @media only screen and (max-width 767px)
+        font-size 1.1em
+        margin-bottom 6px
+
+h1, h2, h3, h4
+    line-height 1.4
+
+.container
+    position relative
+    padding 0 25px
+    padding-top 40px
+
+    @media only screen and (max-width 767px)
+        padding-top 20px
+
+.maxwidth
+    max-width 1300px
+    margin 0 auto
+
+.right15
+    margin-right 15px
+
+.right10
+    margin-right 10px
+
+.right5
+    margin-right 5px
+
+.el-collapse-item__header
+    background-color inherit
+
+.el-collapse-item__wrap
+    background-color inherit
+
+.tui-editor-contents
+    font-size 15px !important
+    font-family Noto Sans SC, -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕', 'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif !important
+
+    .lang-output
+        color $second-color !important
+
+    p, ul
+        margin 1.4em 0 !important
+
+    h1, h2, h3
+        margin-top 2.4em !important
+        margin-bottom 1.2em !important
+        border-bottom none !important
+
+    a
+        display inline-block !important
+        color inherit !important
+
+    img
+        display block !important
+        margin 1.4em auto !important
+        // box-shadow 0px 4px 10px 0px $weak-color
+
+    [class|=lang]
+        border-radius 4px
+
+    *:first-child
+        margin-top 0 !important
+
+.hover
+    transition background 40ms ease-in 0s
+    border-radius 4px
+
+.hover:hover
+    cursor pointer
+    background-color $hover-color
+
+.title
+    font-weight 500
+
+.icon
+    width 1em
+    height 1em
+    vertical-align -.15em
+    fill currentColor
+    overflow hidden

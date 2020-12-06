@@ -11,25 +11,39 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/vue-fontawesome": "^2.0.0",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
-    "core-js": "^3.6.5",
-    "element-ui": "^2.13.2",
-    "nuxt": "^2.14.6"
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
+    "@toast-ui/vue-editor": "^2.5.0",
+    "cookie-universal-nuxt": "^2.1.4",
+    "core-js": "^3.7.0",
+    "element-ui": "^2.14.1",
+    "js-md5": "^0.7.3",
+    "nuxt": "^2.14.7",
+    "v-aspect-ratio": "^2.0.1",
+    "vue-aspect-ratio": "^0.1.1",
+    "vue-scrollactive": "^0.9.3",
+    "vuex-persistedstate": "^4.0.0-beta.1"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.14.6",
+    "@nuxt/types": "^2.14.7",
     "@nuxt/typescript-build": "^2.0.3",
-    "@nuxtjs/eslint-config": "^3.1.0",
-    "@nuxtjs/eslint-config-typescript": "^3.0.0",
-    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/eslint-config": "^5.0.0",
+    "@nuxtjs/eslint-config-typescript": "^5.0.0",
+    "@nuxtjs/eslint-module": "^3.0.1",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "nuxt-stylus-resources-loader": "^2.0.0",
     "prettier": "^2.1.2",
     "stylus": "^0.54.8",
-    "stylus-loader": "^4.2.0"
+    "stylus-loader": "^3.0.2",
+    "video.js": "^7.10.2"
   }
 }
