@@ -44,6 +44,8 @@ class Common {
 
         if (this.context.$manager.supportWebp) {
             result += '/format/webp'
+        } else if (url.substring(-4) === 'webp'){
+            result += '/format/png'
         }
         return result
     }
