@@ -66,6 +66,15 @@
                         </div>
                         <Divider class="image hidden-md-and-up" :gap="80" />
                     </template>
+                    <template v-if="comments.length > 0">
+                        <h3 id="comments" class="label">评论</h3>
+                        <div v-for="item in comments" :key="item.id">
+                            {{ item.content }}
+                            {{ $common.beautifulTime(item.publish_time) }}
+                            {{ item.username }}
+                            {{ item.ip }}
+                        </div>
+                    </template>
                 </el-col>
                 <el-col class="lessons" :sm="6" :span="24">
                     <nuxt-link
@@ -101,6 +110,8 @@
                     </nuxt-link>
                 </el-col>
             </el-row>
+            <XEditor v-model="comment.content" :height="200" />
+            <el-button @click="postComment()">posttest</el-button>
         </section>
     </div>
 </template>
@@ -109,10 +120,15 @@
 export default {
     async asyncData({ app, route }) {
         let lessonResult = app.$guy.get(`/course/lessons/${route.params.id}`)
+        let commentsResult = app.$guy.get(
+            `/lessons/${route.params.id}/comments`,
+        )
 
+        commentsResult = await commentsResult
         lessonResult = await lessonResult
 
         let lesson
+        let comments
         const anchors = []
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
@@ -130,11 +146,20 @@ export default {
                 anchors.push({ id: 'explain', name: '解析' })
             }
         }
+        if (commentsResult.status === 200) {
+            comments = commentsResult.data.result
+            // console.log(comments)
+            if (comments.length > 0) {
+                anchors.push({ id: 'comments', name: '评论' })
+            }
+        }
 
         let lessonsResult = app.$guy.get(`/courses/${lesson.course_id}/lessons`)
+
         lessonsResult = await lessonsResult
 
         let lessons = []
+
         if (lessonsResult.status === 200) {
             lessons = lessonsResult.data.result
         }
@@ -148,12 +173,17 @@ export default {
             anchors,
             anchorsWithLessons,
             videoState: 'pause',
+            comments,
         }
     },
     data() {
         return {
             videoOptions: null,
             blur: true,
+            comment: {
+                content: '123',
+                username: '',
+            },
         }
     },
     head() {
@@ -191,6 +221,26 @@ export default {
         //     this.videoState = event.type
         //     console.log(this.videoState)
         // },
+        async getComment() {
+            const commentsResult = await this.$guy.get(
+                `/lessons/${this.$route.params.id}/comments`,
+            )
+
+            if (commentsResult.status === 200) {
+                this.comments = commentsResult.data.result
+                // console.log(this.comments)
+            }
+        },
+        async postComment() {
+            const postCommentResult = await this.$guy.post(
+                `/lessons/${this.$route.params.id}/comments`,
+                { data: this.comment },
+            )
+
+            if (postCommentResult.status === 200) {
+                this.getComment()
+            }
+        },
     },
 }
 </script>
@@ -198,25 +248,30 @@ export default {
 <style lang="stylus" scoped>
 .container
     .tab
-        box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
+        box-shadow rgba(0, 0, 0, .1) 0px 1px 0px
+
     .section
         padding-top 20px
 
-    @media only screen and (max-width: 991px)
+    @media only screen and (max-width 991px)
         .vjs-playing
             position sticky
             top 50px
             z-index 999
+
     .block
         position relative
+
         .blur
             filter blur(10px)
+
         .box
             position absolute
             top 40%
             left 0
             right 0
             text-align center
+
             .button
                 display inline-block
                 cursor pointer
@@ -224,34 +279,15 @@ export default {
                 color white
                 border-radius 3px
                 padding 5px 10px
+
 .lesson
     .title
         font-size 26px
         margin-bottom 30px
 
-    @media only screen and (min-width: 768px)
+    @media only screen and (min-width 768px)
         [divider]:last-child
             display none
-
-    // .nav-tab
-    //     position sticky
-    //     top 0
-    //     background $background
-    //     .tab-item
-    //         position relative
-    //         font-size 22px
-    //         line-height 1.4
-    //     .tab-item::before
-    //         transition all 400ms ease
-    //         content ''
-    //         position absolute
-    //         height 3px
-    //         width 0
-    //         background $first-color
-    //         bottom -2px
-    //         left 0
-    //     .is-active.tab-item::before
-    //             width 80%
 
 .label
     margin-bottom 20px
@@ -260,16 +296,20 @@ export default {
 .lessons
     .course-box
         margin-bottom 20px
+
     .image
         border-radius 4px
         cursor pointer
+
     .title
         display block
         padding 4px 10px
         margin 0 -10px
+
     .ing
         background-color $hover-color
-    @media only screen and (min-width: 992px)
+
+    @media only screen and (min-width 992px)
         .label
             margin-bottom 10px
 </style>
