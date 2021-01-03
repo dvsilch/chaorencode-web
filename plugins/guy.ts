@@ -18,6 +18,10 @@ class Guy {
         return this.request('post', url, data, sign)
     }
 
+    // delete(url: string, { data = {}, sign = false } = {}) {
+    //     return this.request('delete', url, data, sign)
+    // }
+
     getWithSign(url: string, { data = {}, strict = true } = {}) {
         return this.request('get', url, data, true, strict)
     }

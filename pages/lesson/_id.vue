@@ -64,15 +64,53 @@
                                 </div>
                             </div>
                         </div>
-                        <Divider class="image hidden-md-and-up" :gap="80" />
+                        <!-- <Divider class="image hidden-md-and-up" :gap="80" /> -->
+                        <Divider :gap="80" />
                     </template>
                     <template v-if="comments.length > 0">
                         <h3 id="comments" class="label">评论</h3>
-                        <div v-for="item in comments" :key="item.id">
-                            {{ item.content }}
-                            {{ $common.beautifulTime(item.publish_time) }}
+                        <el-input
+                            v-model="comment.content"
+                            type="textarea"
+                            :rows="4"
+                            placeholder="分享你的评论……"
+                        />
+                        <!-- <XEditor v-model="comment.content" :height="200" /> -->
+                        <div class="comment-input">
+                            <el-input
+                                v-model="comment.username"
+                                placeholder="请输入用户名..."
+                                class="input"
+                            />
+                            <div class="button" @click="postComment()">
+                                发布
+                            </div>
+                        </div>
+                        <div class="whole-comments">
+                            <div
+                                v-for="item in comments"
+                                :key="item.id"
+                                class="single-comment"
+                            >
+                                <!-- {{ item.content }}
+                            回复于{{ $common.beautifulTime(item.publish_time) }}
                             {{ item.username }}
-                            {{ item.ip }}
+                            {{ item.ip }} -->
+                                <div class="comment-username">
+                                    {{ item.username }} {{ item.ip }}
+                                </div>
+                                <div class="comment-publish-time">
+                                    回复于{{
+                                        $common.beautifulTime(item.publish_time)
+                                    }}
+                                </div>
+                                <p class="comment-content">
+                                    {{ item.content }}
+                                </p>
+                                <!-- <el-button @click="putComment(item.id)">
+                                删除该条评论
+                            </el-button> -->
+                            </div>
                         </div>
                     </template>
                 </el-col>
@@ -95,28 +133,26 @@
                                     })
                                 "
                                 fit="cover"
-                            ></el-image>
+                            />
                         </Aspect>
                     </nuxt-link>
                     <h3 class="label">课程目录</h3>
                     <nuxt-link
-                        v-for="lesson in lessons"
-                        :key="lesson.id"
+                        v-for="les in lessons"
+                        :key="les.id"
                         class="hover title"
-                        :class="{ ing: $route.params.id == lesson.id }"
-                        :to="{ name: 'lesson-id', params: { id: lesson.id } }"
+                        :class="{ ing: $route.params.id == les.id }"
+                        :to="{ name: 'lesson-id', params: { id: les.id } }"
                     >
-                        {{ lesson.title }}
+                        {{ les.title }}
                     </nuxt-link>
                 </el-col>
             </el-row>
-            <XEditor v-model="comment.content" :height="200" />
-            <el-button @click="postComment()">posttest</el-button>
         </section>
     </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
     async asyncData({ app, route }) {
         let lessonResult = app.$guy.get(`/course/lessons/${route.params.id}`)
@@ -127,12 +163,14 @@ export default {
         commentsResult = await commentsResult
         lessonResult = await lessonResult
 
-        let lesson
-        let comments
+        let lesson = { title: '', video_url: '' }
+        let comments = []
+        let lessonsResult
         const anchors = []
+        let lessons = []
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
-            // console.log(lesson.video_url)
+            // console.log(lesson.course_id)
             if (lesson.video_url) {
                 anchors.push({ id: 'video', name: '视频' })
             }
@@ -145,6 +183,12 @@ export default {
             if (lesson.explain) {
                 anchors.push({ id: 'explain', name: '解析' })
             }
+            lessonsResult = app.$guy.get(`/courses/${lesson.course_id}/lessons`)
+            lessonsResult = await lessonsResult
+
+            if (lessonsResult.status === 200) {
+                lessons = lessonsResult.data.result
+            }
         }
         if (commentsResult.status === 200) {
             comments = commentsResult.data.result
@@ -152,16 +196,6 @@ export default {
             if (comments.length > 0) {
                 anchors.push({ id: 'comments', name: '评论' })
             }
-        }
-
-        let lessonsResult = app.$guy.get(`/courses/${lesson.course_id}/lessons`)
-
-        lessonsResult = await lessonsResult
-
-        let lessons = []
-
-        if (lessonsResult.status === 200) {
-            lessons = lessonsResult.data.result
         }
 
         const anchorsWithLessons = anchors.concat([
@@ -181,7 +215,7 @@ export default {
             videoOptions: null,
             blur: true,
             comment: {
-                content: '123',
+                content: '',
                 username: '',
             },
         }
@@ -232,12 +266,31 @@ export default {
             }
         },
         async postComment() {
+            // console.log(this.comments.content)
+            if (!this.comment.content) {
+                this.$alert('请输入内容')
+                return
+            }
+
             const postCommentResult = await this.$guy.post(
                 `/lessons/${this.$route.params.id}/comments`,
                 { data: this.comment },
             )
 
             if (postCommentResult.status === 200) {
+                this.$alert('发布成功')
+                this.getComment()
+                this.comment.content = ''
+            }
+        },
+        async putComment(commentId) {
+            const putCommentResult = await this.$guy.put(
+                `/lessons/${this.$route.params.id}/comments`,
+                { data: { comment_id: commentId } },
+            )
+
+            if (putCommentResult.status === 200) {
+                this.$alert('删除成功')
                 this.getComment()
             }
         },
@@ -288,6 +341,52 @@ export default {
     @media only screen and (min-width 768px)
         [divider]:last-child
             display none
+
+    .button
+        display inline-block
+        cursor pointer
+        background $first-color
+        color white
+        border-radius 3px
+        padding 5px 10px
+
+    .whole-comments
+        // padding 20px
+        .single-comment
+            padding 40px 20px 20px
+
+            .comment-username
+                font-size 18px
+
+            .comment-publish-time
+                padding-top 5px
+                font-size 12px
+                color grey
+
+            .comment-content
+                padding 20px
+                // text-indent 2em
+
+        .single-comment:not(:last-child)
+            border-bottom 1px solid rgb(229, 228, 226)
+
+    .comment-input
+        display flex
+        justify-content flex-end
+        padding-top 10px
+
+        .input
+            width 200px
+            margin-right 10px
+
+        .button
+            // display inline-block
+            // cursor pointer
+            background $first-color
+            color white
+            border-radius 3px
+            // line-height 40px
+            // padding 5px 10px
 
 .label
     margin-bottom 20px
