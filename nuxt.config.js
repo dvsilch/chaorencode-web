@@ -89,7 +89,7 @@ export default {
     },
     env: {
         baseUrl:
-            process.env.NODE_ENV !== 'production'
+            process.env.NODE_ENV === 'production'
                 ? 'https://chaorencode.com/api/app'
                 : 'http://127.0.0.1:9000/api/app',
         // 'https://chaorencode.com/api/app',
