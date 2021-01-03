@@ -37,7 +37,7 @@
                 <!-- </div> -->
             </div>
             <div class="talkings hidden-xs-only">
-                <h4 class="label">推荐阅读</h4>
+                <h4 class="label">阅读更多，聪明更多</h4>
                 <nuxt-link
                     v-for="(item, index) in talkings"
                     :key="item.id"
@@ -80,78 +80,9 @@
                 </nuxt-link>
             </div>
         </el-row>
-        <Divider :gap="80" />
-        <div class="block">
-            <h2>学编程，从这里开始</h2>
-            <el-row class="intros" type="flex" justify="space-around">
-                <el-col :md="4" :span="24" class="intro">
-                    <el-image class="icon" src="/icon/book.svg" fit="contain" />
-                    <p class="title">教科书式的教程</p>
-                    <p class="detail">
-                        参考教科书的结构书写的教程，保证了全面又循序渐进。
-                    </p>
-                </el-col>
-                <el-col :md="4" :span="24" class="intro">
-                    <el-image
-                        class="icon"
-                        src="/icon/video.svg"
-                        fit="contain"
-                    />
-                    <p class="title">视频讲解</p>
-                    <p class="detail">
-                        回归课堂之上，让老师帮我们提炼重点，讲解疑难点。
-                    </p>
-                </el-col>
-                <el-col :md="4" :span="24" class="intro">
-                    <el-image class="icon" src="/icon/test.svg" fit="contain" />
-                    <h3 class="title">实战与解析</h3>
-                    <p class="detail">
-                        有学必有练，有练必有答。通过课后的实战巩固我们的知识点，用实战代替记忆。
-                    </p>
-                </el-col>
-            </el-row>
-        </div>
-        <Divider :gap="60" />
-        <div class="block">
-            <h2>开启你的编程学习之旅</h2>
-            <el-row class="courses">
-                <el-col
-                    v-for="course in courses"
-                    :key="course.id"
-                    class="col hover"
-                    :span="12"
-                    :sm="8"
-                    :md="6"
-                >
-                    <nuxt-link
-                        :to="{ name: 'course-id', params: { id: course.id } }"
-                    >
-                        <Aspect :x="1" :y="1">
-                            <div class="course">
-                                <el-image
-                                    class="image"
-                                    :src="
-                                        $common.formatImgUrl({
-                                            url: course.image_url,
-                                            width: 278,
-                                            height: 156,
-                                        })
-                                    "
-                                    fit="cover"
-                                />
-                                <div class="info">
-                                    <h3 class="title">{{ course.name }}</h3>
-                                    <p class="lang">python</p>
-                                </div>
-                            </div>
-                        </Aspect>
-                    </nuxt-link>
-                </el-col>
-            </el-row>
-        </div>
         <Divider class="hidden-sm-and-up" :gap="60" />
         <div class="hidden-sm-and-up">
-            <h2>推荐阅读</h2>
+            <h2>阅读更多，聪明更多</h2>
             <div class="talkings-bottom">
                 <nuxt-link
                     v-for="item in talkings"
@@ -193,6 +124,75 @@
                     </el-row>
                 </nuxt-link>
             </div>
+        </div>
+        <Divider :gap="60" />
+        <div class="block">
+            <h2>开启你的编程学习之旅</h2>
+            <el-row class="courses">
+                <el-col
+                    v-for="course in courses"
+                    :key="course.id"
+                    class="col hover"
+                    :span="12"
+                    :sm="8"
+                    :md="6"
+                >
+                    <nuxt-link
+                        :to="{ name: 'course-id', params: { id: course.id } }"
+                    >
+                        <Aspect :x="1" :y="1">
+                            <div class="course">
+                                <el-image
+                                    class="image"
+                                    :src="
+                                        $common.formatImgUrl({
+                                            url: course.image_url,
+                                            width: 278,
+                                            height: 156,
+                                        })
+                                    "
+                                    fit="cover"
+                                />
+                                <div class="info">
+                                    <h3 class="title">{{ course.name }}</h3>
+                                    <p class="lang">python</p>
+                                </div>
+                            </div>
+                        </Aspect>
+                    </nuxt-link>
+                </el-col>
+            </el-row>
+        </div>
+        <Divider :gap="60" />
+        <div class="block">
+            <h2>学编程，从这里开始</h2>
+            <el-row class="intros" type="flex" justify="space-around">
+                <el-col :md="4" :span="24" class="intro">
+                    <el-image class="icon" src="/icon/book.svg" fit="contain" />
+                    <p class="title">教科书式的教程</p>
+                    <p class="detail">
+                        参考教科书的结构书写的教程，保证了全面又循序渐进。
+                    </p>
+                </el-col>
+                <el-col :md="4" :span="24" class="intro">
+                    <el-image
+                        class="icon"
+                        src="/icon/video.svg"
+                        fit="contain"
+                    />
+                    <p class="title">视频讲解</p>
+                    <p class="detail">
+                        回归课堂之上，让老师帮我们提炼重点，讲解疑难点。
+                    </p>
+                </el-col>
+                <el-col :md="4" :span="24" class="intro">
+                    <el-image class="icon" src="/icon/test.svg" fit="contain" />
+                    <h3 class="title">实战与解析</h3>
+                    <p class="detail">
+                        有学必有练，有练必有答。通过课后的实战巩固我们的知识点，用实战代替记忆。
+                    </p>
+                </el-col>
+            </el-row>
         </div>
     </div>
 </template>
@@ -398,7 +398,7 @@ export default {
 
         .course
             border-radius 4px
-            background rgb(249, 245, 241)
+            background rgb(249, 245, 241) !important
 
             .image
                 width 100%
