@@ -79,7 +79,7 @@
                         <div class="comment-input">
                             <el-input
                                 v-model="comment.username"
-                                placeholder="请输入用户名..."
+                                placeholder="请输入用户名……"
                                 class="input"
                             />
                             <div class="button" @click="postComment()">
