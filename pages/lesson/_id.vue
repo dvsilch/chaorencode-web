@@ -67,7 +67,7 @@
                         <!-- <Divider class="image hidden-md-and-up" :gap="80" /> -->
                         <Divider :gap="80" />
                     </template>
-                    <template v-if="comments.length > 0">
+                    <template v-if="comments">
                         <h3 id="comments" class="label">评论</h3>
                         <el-input
                             v-model="comment.content"
@@ -79,7 +79,7 @@
                         <div class="comment-input">
                             <el-input
                                 v-model="comment.username"
-                                placeholder="请输入用户名..."
+                                placeholder="请输入用户名……"
                                 class="input"
                             />
                             <div class="button" @click="postComment()">
