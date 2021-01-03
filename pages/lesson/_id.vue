@@ -88,7 +88,7 @@
                         </div>
                         <div class="whole-comments">
                             <div
-                                v-for="item in comments"
+                                v-for="(item, index) in comments"
                                 :key="item.id"
                                 class="single-comment"
                             >
@@ -96,14 +96,19 @@
                             回复于{{ $common.beautifulTime(item.publish_time) }}
                             {{ item.username }}
                             {{ item.ip }} -->
-                                <div class="comment-username">
-                                    {{ item.username }} {{ item.ip }}
-                                </div>
-                                <div class="comment-publish-time">
+                                <el-row type="flex" justify="space-between">
+                                    <p class="comment-username">
+                                        {{ item.username }}
+                                    </p>
+                                    <p class="comment-index">
+                                        {{ index + 1 }}楼
+                                    </p>
+                                </el-row>
+                                <p class="comment-publish-time">
                                     回复于{{
                                         $common.beautifulTime(item.publish_time)
                                     }}
-                                </div>
+                                </p>
                                 <p class="comment-content">
                                     {{ item.content }}
                                 </p>
@@ -112,6 +117,10 @@
                             </el-button> -->
                             </div>
                         </div>
+                        <p v-if="comments.length === 0" class="no-comments">
+                            暂无评论
+                        </p>
+                        <Divider :gap="80" />
                     </template>
                 </el-col>
                 <el-col class="lessons" :sm="6" :span="24">
@@ -193,9 +202,7 @@ export default {
         if (commentsResult.status === 200) {
             comments = commentsResult.data.result
             // console.log(comments)
-            if (comments.length > 0) {
-                anchors.push({ id: 'comments', name: '评论' })
-            }
+            anchors.push({ id: 'comments', name: '评论' })
         }
 
         const anchorsWithLessons = anchors.concat([
@@ -272,6 +279,11 @@ export default {
                 return
             }
 
+            if (!this.comment.username) {
+                this.$alert('请输入用户名')
+                return
+            }
+
             const postCommentResult = await this.$guy.post(
                 `/lessons/${this.$route.params.id}/comments`,
                 { data: this.comment },
@@ -281,17 +293,6 @@ export default {
                 this.$alert('发布成功')
                 this.getComment()
                 this.comment.content = ''
-            }
-        },
-        async putComment(commentId) {
-            const putCommentResult = await this.$guy.put(
-                `/lessons/${this.$route.params.id}/comments`,
-                { data: { comment_id: commentId } },
-            )
-
-            if (putCommentResult.status === 200) {
-                this.$alert('删除成功')
-                this.getComment()
             }
         },
     },
@@ -351,17 +352,23 @@ export default {
         padding 5px 10px
 
     .whole-comments
-        // padding 20px
+        padding 20px 0
+
         .single-comment
-            padding 40px 20px 20px
+            // padding 40px 20px 20px
+            padding 20px 0
 
             .comment-username
-                font-size 18px
+                font-size 14px
+
+            .comment-index
+                font-size 12px
+                color rgb(190, 190, 190)
 
             .comment-publish-time
                 padding-top 5px
                 font-size 12px
-                color grey
+                color rgb(190, 190, 190)
 
             .comment-content
                 padding 20px
@@ -370,23 +377,29 @@ export default {
         .single-comment:not(:last-child)
             border-bottom 1px solid rgb(229, 228, 226)
 
+    .no-comments
+        padding 40px 0
+        text-align center
+        color rgb(190, 190, 190)
+        font-size 20px
+
     .comment-input
         display flex
         justify-content flex-end
-        padding-top 10px
+        padding-top 20px
 
         .input
             width 200px
             margin-right 10px
 
         .button
-            // display inline-block
-            // cursor pointer
+            display inline-block
+            cursor pointer
             background $first-color
             color white
             border-radius 3px
+            padding 5px 10px
             // line-height 40px
-            // padding 5px 10px
 
 .label
     margin-bottom 20px
