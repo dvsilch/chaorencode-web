@@ -9,7 +9,7 @@
         <section class="section">
             <el-row :gutter="34">
                 <!-- :class="videoState === 'play' ? 'video-play' : ''" -->
-                <el-col class="lesson" :sm="18" :span="24">
+                <el-col class="lesson" :md="18" :span="24">
                     <template v-if="lesson.video_url">
                         <VideoPlayer
                             id="video"
@@ -67,63 +67,54 @@
                         <!-- <Divider class="image hidden-md-and-up" :gap="80" /> -->
                         <Divider :gap="80" />
                     </template>
-                    <template v-if="comments">
-                        <h3 id="comments" class="label">评论</h3>
-                        <el-input
-                            v-model="comment.content"
-                            type="textarea"
-                            :rows="4"
-                            placeholder="分享你的评论……"
-                        />
-                        <!-- <XEditor v-model="comment.content" :height="200" /> -->
-                        <div class="comment-input">
-                            <el-input
-                                v-model="comment.username"
-                                placeholder="请输入用户名……"
-                                class="input"
-                            />
-                            <div class="button" @click="postComment()">
-                                发布
-                            </div>
-                        </div>
-                        <div class="whole-comments">
-                            <div
-                                v-for="(item, index) in comments"
-                                :key="item.id"
-                                class="single-comment"
-                            >
-                                <!-- {{ item.content }}
-                            回复于{{ $common.beautifulTime(item.publish_time) }}
-                            {{ item.username }}
-                            {{ item.ip }} -->
-                                <el-row type="flex" justify="space-between">
-                                    <p class="comment-username">
-                                        {{ item.username }}
-                                    </p>
-                                    <p class="comment-index">
-                                        {{ index + 1 }}楼
-                                    </p>
-                                </el-row>
-                                <p class="comment-publish-time">
-                                    回复于{{
-                                        $common.beautifulTime(item.publish_time)
-                                    }}
-                                </p>
-                                <p class="comment-content">
-                                    {{ item.content }}
-                                </p>
-                                <!-- <el-button @click="putComment(item.id)">
-                                删除该条评论
-                            </el-button> -->
-                            </div>
-                        </div>
-                        <p v-if="comments.length === 0" class="no-comments">
-                            暂无评论
-                        </p>
-                        <Divider :gap="80" />
-                    </template>
+                    <div class="lessons hidden-md-and-up">
+                        <nuxt-link
+                            class="course-box"
+                            :to="{
+                                name: 'course-id',
+                                params: { id: lesson.course_id },
+                            }"
+                        >
+                            <Aspect id="lessons" :x="16" :y="9">
+                                <el-image
+                                    class="image"
+                                    :src="
+                                        $common.formatImgUrl({
+                                            url: lesson.course_image_url,
+                                            width: 630,
+                                            height: 360,
+                                        })
+                                    "
+                                    fit="cover"
+                                />
+                            </Aspect>
+                        </nuxt-link>
+                        <h3 class="label">课程目录</h3>
+                        <nuxt-link
+                            v-for="les in lessons"
+                            :key="les.id"
+                            class="hover title"
+                            :class="{ ing: $route.params.id == les.id }"
+                            :to="{
+                                name: 'lesson-id',
+                                params: { id: les.id },
+                            }"
+                        >
+                            {{ les.title }}
+                        </nuxt-link>
+                    </div>
+                    <Divider class="hidden-md-and-up" :gap="80" />
+                    <!-- <Divider :gap="80" class="hidden-md-and-up" /> -->
+                    <h3 id="comments" class="label">评论</h3>
+                    <Comment
+                        ref="clear"
+                        :comments="comments"
+                        :amount="commentsAmount"
+                        @post-comment="postComment($event)"
+                        @handle-page-change="handlePageChange($event)"
+                    />
                 </el-col>
-                <el-col class="lessons" :sm="6" :span="24">
+                <el-col class="lessons hidden-sm-and-down" :sm="6">
                     <nuxt-link
                         class="course-box"
                         :to="{
@@ -174,6 +165,7 @@ export default {
 
         let lesson = { title: '', video_url: '' }
         let comments = []
+        let commentsAmount
         let lessonsResult
         const anchors = []
         let lessons = []
@@ -199,15 +191,19 @@ export default {
                 lessons = lessonsResult.data.result
             }
         }
-        if (commentsResult.status === 200) {
-            comments = commentsResult.data.result
-            // console.log(comments)
-            anchors.push({ id: 'comments', name: '评论' })
-        }
 
         const anchorsWithLessons = anchors.concat([
             { id: 'lessons', name: '目录' },
+            { id: 'comments', name: '评论' },
         ])
+
+        if (commentsResult.status === 200) {
+            comments = commentsResult.data.result
+            commentsAmount = commentsResult.data.amount
+            // console.log(commentsAmount)
+            // console.log(comments)
+            anchors.push({ id: 'comments', name: '评论' })
+        }
         return {
             lesson,
             lessons,
@@ -215,16 +211,15 @@ export default {
             anchorsWithLessons,
             videoState: 'pause',
             comments,
+            commentsAmount,
         }
     },
     data() {
         return {
             videoOptions: null,
             blur: true,
-            comment: {
-                content: '',
-                username: '',
-            },
+            page: 1,
+            limit: 10,
         }
     },
     head() {
@@ -265,35 +260,44 @@ export default {
         async getComment() {
             const commentsResult = await this.$guy.get(
                 `/lessons/${this.$route.params.id}/comments`,
+                { data: { page: this.page, limit: this.limit } },
             )
 
             if (commentsResult.status === 200) {
                 this.comments = commentsResult.data.result
-                // console.log(this.comments)
+                this.commentsAmount = commentsResult.data.amount
+                // console.log(this.commentsAmount)
             }
         },
-        async postComment() {
-            // console.log(this.comments.content)
-            if (!this.comment.content) {
+        async postComment(comment) {
+            // console.log(comment)
+            if (!comment.content) {
                 this.$alert('请输入内容')
                 return
             }
 
-            if (!this.comment.username) {
+            if (!comment.username) {
                 this.$alert('请输入用户名')
                 return
             }
 
-            const postCommentResult = await this.$guy.post(
+            const {
+                code,
+            } = await this.$guy.post(
                 `/lessons/${this.$route.params.id}/comments`,
-                { data: this.comment },
+                { data: comment },
             )
 
-            if (postCommentResult.status === 200) {
+            if (code === 200) {
                 this.$alert('发布成功')
                 this.getComment()
-                this.comment.content = ''
+                this.$refs.clear.clearComment()
             }
+        },
+        handlePageChange(page) {
+            // console.log(page)
+            this.page = page
+            this.getComment()
         },
     },
 }
@@ -339,10 +343,9 @@ export default {
         font-size 26px
         margin-bottom 30px
 
-    @media only screen and (min-width 768px)
-        [divider]:last-child
-            display none
-
+    // @media only screen and (min-width 768px)
+    // [divider]:last-child
+    // display none
     .button
         display inline-block
         cursor pointer
@@ -351,61 +354,37 @@ export default {
         border-radius 3px
         padding 5px 10px
 
-    .whole-comments
-        padding 20px 0
+    .lessons
+        position static
 
-        .single-comment
-            // padding 40px 20px 20px
-            padding 20px 0
+        .course-box
+            margin-bottom 20px
 
-            .comment-username
-                font-size 14px
-
-            .comment-index
-                font-size 12px
-                color rgb(190, 190, 190)
-
-            .comment-publish-time
-                padding-top 5px
-                font-size 12px
-                color rgb(190, 190, 190)
-
-            .comment-content
-                padding 20px
-                // text-indent 2em
-
-        .single-comment:not(:last-child)
-            border-bottom 1px solid rgb(229, 228, 226)
-
-    .no-comments
-        padding 40px 0
-        text-align center
-        color rgb(190, 190, 190)
-        font-size 20px
-
-    .comment-input
-        display flex
-        justify-content flex-end
-        padding-top 20px
-
-        .input
-            width 200px
-            margin-right 10px
-
-        .button
-            display inline-block
+        .image
+            border-radius 4px
             cursor pointer
-            background $first-color
-            color white
-            border-radius 3px
-            padding 5px 10px
-            // line-height 40px
+
+        .title
+            display block
+            padding 4px 10px
+            margin 0 -10px
+            font-size 16px
+
+        .ing
+            background-color $hover-color
+
+        @media only screen and (min-width 992px)
+            .label
+                margin-bottom 10px
 
 .label
     margin-bottom 20px
     color $first-color
 
 .lessons
+    position sticky
+    top 68.8px
+
     .course-box
         margin-bottom 20px
 
@@ -424,4 +403,56 @@ export default {
     @media only screen and (min-width 992px)
         .label
             margin-bottom 10px
+
+.whole-comments
+    padding 20px 0
+
+    .single-comment
+        // padding 40px 20px 20px
+        padding 20px 0
+
+        .comment-username
+            font-size 14px
+
+        .comment-index
+            font-size 12px
+            color rgb(190, 190, 190)
+
+        .comment-publish-time
+            padding-top 5px
+            font-size 12px
+            color rgb(190, 190, 190)
+
+        .comment-content
+            padding 20px
+            // text-indent 2em
+
+    .single-comment:not(:last-child)
+        border-bottom 1px solid rgb(229, 228, 226)
+
+.no-comments
+    padding 40px 0
+    text-align center
+    color rgb(190, 190, 190)
+    font-size 20px
+
+// .comment-input
+.comment-info
+    display flex
+    justify-content flex-end
+    padding-top 20px
+
+    .input
+        width 200px
+        margin-right 10px
+
+    .button
+        display inline-block
+        cursor pointer
+        background $first-color
+        color white
+        border-radius 3px
+        padding 5px 10px
+        // height 38px
+        line-height 28px
 </style>

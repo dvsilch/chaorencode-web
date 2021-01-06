@@ -140,37 +140,42 @@ export default {
 <style lang="stylus" scoped>
 .container
     padding-top 40px
+
     .header
         padding-bottom 40px
-        @media only screen and (max-width: 767px)
+
+        @media only screen and (max-width 767px)
             padding-bottom 10px
+
         .title
             margin 10px 0
+
         .image
             border-radius 6px
-        // .hidden-md-and-up
-        //     .image
-        //         margin-bottom 20px
+
     .section
         padding-top 20px
+
     .course
-        @media only screen and (min-width: 768px)
+        @media only screen and (min-width 768px)
             padding-right 15px
+
         .label
             font-size 30px
+
     .right
         .lessons
             // margin -10px
             .label
                 margin-bottom 20px
                 color $first-color
-            @media only screen and (min-width: 992px)
+
+            @media only screen and (min-width 992px)
                 .label
                     margin-bottom 10px
+
             .title
                 display block
                 padding 4px 10px
                 margin 0 -10px
-// .lessons:hover
-//     color $first-color
 </style>
