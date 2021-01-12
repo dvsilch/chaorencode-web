@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden-sm-and-down">
+    <div>
         <el-input
             v-model="comment.content"
             type="textarea"
@@ -17,11 +17,36 @@
                 maxlength="10"
                 show-word-limit
             />
-            <div class="button" @click="$emit('post-comment', comment)">
+            <div
+                class="button"
+                @click="$emit('post-comment', { comment, isLazyLoad })"
+            >
                 发布
             </div>
         </div>
-        <div class="whole-comments">
+        <div class="whole-comments hidden-sm-and-down">
+            <div
+                v-for="(item, index) in comments"
+                :key="item.id"
+                class="single-comment"
+            >
+                <el-row type="flex" justify="space-between">
+                    <p class="comment-username">
+                        {{ item.username }}
+                    </p>
+                    <p class="comment-index">
+                        {{ 10 * (page - 1) + index + 1 }}楼
+                    </p>
+                </el-row>
+                <p class="comment-publish-time">
+                    回复于{{ $common.beautifulTime(item.publish_time) }}
+                </p>
+                <p class="comment-content">
+                    {{ item.content }}
+                </p>
+            </div>
+        </div>
+        <div class="whole-comments hidden-md-and-up">
             <div
                 v-for="(item, index) in comments"
                 :key="item.id"
@@ -39,22 +64,21 @@
                 <p class="comment-content">
                     {{ item.content }}
                 </p>
-                <!-- <el-button @click="putComment(item.id)">
-                                删除该条评论
-                            </el-button> -->
             </div>
         </div>
         <p v-if="amount === 0" class="no-comments">暂无评论</p>
-        <!-- <el-pagination
-            v-else
-            class="pagin"
-            background
-            :page-size="10"
-            :pager-count="5"
-            layout="total, prev, pager, next, jumper"
-            :total="amount"
-            @current-change="handlePageChange"
-        /> -->
+        <div v-else class="pagin hidden-sm-and-down">
+            <el-pagination
+                class="inner"
+                background
+                :page-size="10"
+                :pager-count="5"
+                layout="total, prev, pager, next, jumper"
+                :total="amount"
+                :current-page.sync="page"
+                @current-change="handlePageChange"
+            />
+        </div>
     </div>
 </template>
 
@@ -76,22 +100,85 @@ export default {
                 content: '',
                 username: '',
             },
+            page: 1,
+            limit: 10,
+            isLazyLoad: false,
+        }
+    },
+    mounted() {
+        const _this = this
+        const clientWidth = document.documentElement.clientWidth // 获取客户端宽度
+        _this.isLazyLoad = clientWidth < 992
+
+        if (_this.isLazyLoad) {
+            window.onscroll = function () {
+                // 变量scrollTop是滚动条滚动时，距离顶部的距离
+                const scrollTop =
+                    document.documentElement.scrollTop ||
+                    document.body.scrollTop
+
+                // 变量windowHeight是可视区的高度
+                const windowHeight =
+                    document.documentElement.clientHeight ||
+                    document.body.clientHeight
+
+                // 变量scrollHeight是滚动条的总高度
+                const scrollHeight =
+                    document.documentElement.scrollHeight ||
+                    document.body.scrollHeight
+
+                // 滚动条到底部的条件，200为footer的高度
+                if (scrollTop + windowHeight === scrollHeight) {
+                    // 到了这个就可以进行业务逻辑加载后台数据了
+                    _this.page++
+                    _this.$emit('handle-page-change', {
+                        page: _this.page,
+                        limit: _this.limit,
+                        isLazyLoad: _this.isLazyLoad,
+                    })
+                }
+            }
         }
     },
     methods: {
-        clearComment() {
+        refresh(currentPage) {
             this.comment.content = ''
             this.comment.username = ''
+            this.page = currentPage
+            this.handlePageChange(currentPage)
         },
         handlePageChange(page) {
             // console.log(page)
-            this.$emit('handle-page-change', page)
+            this.$emit('handle-page-change', {
+                page,
+                limit: this.limit,
+                isLazyLoad: this.isLazyLoad,
+            })
         },
     },
 }
 </script>
 
 <style lang="stylus" scoped>
+.comment-info
+    display flex
+    justify-content flex-end
+    padding-top 20px
+
+    .input
+        width 200px
+        margin-right 10px
+
+    .button
+        display inline-block
+        cursor pointer
+        background $first-color
+        color white
+        border-radius 3px
+        padding 5px 10px
+        // height 38px
+        line-height 28px
+
 .whole-comments
     padding 20px 0
 
@@ -118,29 +205,21 @@ export default {
     .single-comment:not(:last-child)
         border-bottom 1px solid rgb(229, 228, 226)
 
+.loading
+    height 50px
+
 .no-comments
     padding 40px 0
     text-align center
     color rgb(190, 190, 190)
     font-size 20px
 
-// .comment-input
-.comment-info
-    display flex
-    justify-content flex-end
-    padding-top 20px
+.pagin
+    float left /* 自适应内容宽度 */
+    position relative
+    left 50%
 
-    .input
-        width 200px
-        margin-right 10px
-
-    .button
-        display inline-block
-        cursor pointer
-        background $first-color
-        color white
-        border-radius 3px
-        padding 5px 10px
-        // height 38px
-        line-height 28px
+    .inner
+        position relative
+        left -50%
 </style>

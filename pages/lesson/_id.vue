@@ -111,7 +111,7 @@
                         :comments="comments"
                         :amount="commentsAmount"
                         @post-comment="postComment($event)"
-                        @handle-page-change="handlePageChange($event)"
+                        @handle-page-change="getComment($event)"
                     />
                 </el-col>
                 <el-col class="lessons hidden-sm-and-down" :sm="6">
@@ -218,8 +218,6 @@ export default {
         return {
             videoOptions: null,
             blur: true,
-            page: 1,
-            limit: 10,
         }
     },
     head() {
@@ -257,26 +255,33 @@ export default {
         //     this.videoState = event.type
         //     console.log(this.videoState)
         // },
-        async getComment() {
-            const commentsResult = await this.$guy.get(
-                `/lessons/${this.$route.params.id}/comments`,
-                { data: { page: this.page, limit: this.limit } },
-            )
+        async getComment(params) {
+            if (params.page <= Math.ceil(this.commentsAmount / 10)) {
+                const commentsResult = await this.$guy.get(
+                    `/lessons/${this.$route.params.id}/comments`,
+                    { data: { page: params.page, limit: params.limit } },
+                )
 
-            if (commentsResult.status === 200) {
-                this.comments = commentsResult.data.result
-                this.commentsAmount = commentsResult.data.amount
-                // console.log(this.commentsAmount)
+                if (commentsResult.status === 200) {
+                    if (params.isLazyLoad) {
+                        this.comments.push(...commentsResult.data.result)
+                    } else {
+                        this.comments = commentsResult.data.result
+                    }
+                    this.commentsAmount = commentsResult.data.amount
+                }
+            } else {
+                this.$alert('没有更多')
             }
         },
-        async postComment(comment) {
+        async postComment(params) {
             // console.log(comment)
-            if (!comment.content) {
+            if (!params.comment.content) {
                 this.$alert('请输入内容')
                 return
             }
 
-            if (!comment.username) {
+            if (!params.comment.username) {
                 this.$alert('请输入用户名')
                 return
             }
@@ -285,19 +290,19 @@ export default {
                 code,
             } = await this.$guy.post(
                 `/lessons/${this.$route.params.id}/comments`,
-                { data: comment },
+                { data: params.comment },
             )
 
             if (code === 200) {
                 this.$alert('发布成功')
-                this.getComment()
-                this.$refs.clear.clearComment()
+                if (params.isLazyLoad) {
+                    console.log('isLazy')
+                } else {
+                    this.$refs.clear.refresh(
+                        Math.ceil((this.commentsAmount + 1) / 10), // 发送评论后自动跳转至最后一页
+                    )
+                }
             }
-        },
-        handlePageChange(page) {
-            // console.log(page)
-            this.page = page
-            this.getComment()
         },
     },
 }
