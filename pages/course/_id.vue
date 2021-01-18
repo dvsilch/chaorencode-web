@@ -2,9 +2,10 @@
     <div class="container maxwidth">
         <BackTop />
         <header class="header">
-            <el-row class="hidden-sm-and-down">
-                <el-col :span="14">
+            <el-row class="block hidden-sm-and-down">
+                <el-col class="ops" :span="14">
                     <h1 class="title">{{ course.name }}</h1>
+                    <Button @click="startLearning">开始学习</Button>
                 </el-col>
                 <el-col :span="10">
                     <Aspect class="header" :x="16" :y="9">
@@ -134,6 +135,14 @@ export default {
             ],
         }
     },
+    methods: {
+        startLearning() {
+            this.$message({
+                message: '功能仍在实现，祝你学习顺利~',
+                type: 'success',
+            })
+        },
+    },
 }
 </script>
 
@@ -146,6 +155,15 @@ export default {
 
         @media only screen and (max-width 767px)
             padding-bottom 10px
+
+        .block
+            display flex
+            align-content stretch
+            .ops
+                display flex
+                flex-direction column
+                justify-content space-between
+                align-items flex-start
 
         .title
             margin 10px 0
