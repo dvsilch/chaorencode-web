@@ -18,7 +18,7 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
-    "@toast-ui/vue-editor": "^2.5.0",
+    "@toast-ui/vue-editor": "^2.5.1",
     "animejs": "^3.2.1",
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.7.0",

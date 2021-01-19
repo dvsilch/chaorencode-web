@@ -90,9 +90,7 @@ export default {
 
 <style lang="stylus">
 $purple = #65336e
-$background = #fffefc
 $red = #f15c7e
-$purple = #65336e
 $yellow = #ffdb8a
 $ghostwhite = #eafee9
 
