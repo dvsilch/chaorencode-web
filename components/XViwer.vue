@@ -36,7 +36,14 @@ export default {
     data() {
         return {
             server: true,
-            editorOptions: { plugins: [[codeSyntaxHighlight, { hljs }]] },
+            editorOptions: {
+                plugins: [[codeSyntaxHighlight, { hljs }]],
+                linkAttribute: {
+                    target: '_blank',
+                    contenteditable: 'false',
+                    rel: 'nofollow noopener noreferrer',
+                },
+            },
         }
     },
     // watch: {

@@ -37,6 +37,11 @@ export default {
         return {
             content: '',
             editorOptions: {
+                linkAttribute: {
+                    target: '_blank',
+                    contenteditable: 'false',
+                    rel: 'nofollow noopener noreferrer',
+                },
                 hooks: {
                     async addImageBlobHook(file, callback) {
                         const { status, data } = await that.$guy.postWithSign(
