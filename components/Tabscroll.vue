@@ -1,5 +1,5 @@
 <template>
-    <scrollactive :offset="50" class="nav-tab">
+    <scrollactive :offset="80" class="nav-tab">
         <a
             v-for="anchor in anchors"
             :key="anchor.id"
@@ -35,19 +35,26 @@ export default {
     display flex
     z-index 999
     margin-left -10px
-    box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
-    @media only screen and (max-width: 500px)
+    box-shadow rgba(0, 0, 0, .1) 0px 1px 0px
+    overflow-x scroll
+    white-space nowrap
+    padding 15px 0
+
+    @media only screen and (max-width 500px)
         margin-left -8px
+
     .tab-item
         padding 4px 10px
         position relative
         font-size 22px
         line-height 1.4
         margin-right 20px
-        @media only screen and (max-width: 500px)
+
+        @media only screen and (max-width 500px)
             padding 3px 8px
             font-size 18px
             margin-right 14px
+
     .tab-item::before
         transition all 600ms ease
         content ''
@@ -59,6 +66,7 @@ export default {
         margin 0 auto
         left 0
         right 0
+
     .is-active.tab-item::before
         width 50%
 </style>
