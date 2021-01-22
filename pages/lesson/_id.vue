@@ -239,6 +239,7 @@ export default {
         }
     },
     mounted() {
+        console.log(this.lesson.content)
         this.videoOptions = {
             autoplay: false,
             controls: true,

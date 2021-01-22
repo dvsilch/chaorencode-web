@@ -64,6 +64,7 @@ export default {
 <style lang="stylus" scoped>
 .loading
     position relative
+
 .loading:before
     position absolute
     content ''
