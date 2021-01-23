@@ -36,9 +36,12 @@ export default {
     z-index 999
     margin-left -10px
     box-shadow rgba(0, 0, 0, .1) 0px 1px 0px
-    overflow-x scroll
-    white-space nowrap
-    padding 15px 0
+
+    // 超出范围时显示滚动条
+    @media only screen and (max-width 767px)
+        overflow-x auto
+        white-space nowrap
+        padding 15px 0
 
     @media only screen and (max-width 500px)
         margin-left -8px
