@@ -239,6 +239,7 @@ export default {
         }
     },
     mounted() {
+        // console.log(this.lesson.content)
         this.videoOptions = {
             autoplay: false,
             controls: true,
@@ -296,7 +297,7 @@ export default {
             if (code === 200) {
                 this.$alert('发布成功')
                 if (params.isLazyLoad) {
-                    console.log('isLazy')
+                    // console.log('isLazy')
                 } else {
                     this.$refs.clear.refresh(
                         Math.ceil((this.commentsAmount + 1) / 10), // 发送评论后自动跳转至最后一页
