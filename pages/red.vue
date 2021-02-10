@@ -2,7 +2,7 @@
     <div class="box maxwidth">
         <el-image class="gzh" src="/gzh.jpg" fit="contain" />
         <span>关注公众号并回复：</span>
-        <span>红包{{ $route.query.helped }}</span>
+        <span>红包{{ $route.query.behelp }}</span>
     </div>
 </template>
 
