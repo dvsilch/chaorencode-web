@@ -59,7 +59,13 @@ class Guy {
 
         if (sign && this.context.store.state.loginState.logined === false) {
             if (strict) {
-                this.context.redirect('/login')
+                // this.context.redirect('/login')
+
+                // 向当前页面发送登录请求
+                window.parent.postMessage(
+                    'setLogin',
+                    `${parent.window.location.href}`,
+                )
                 return new Promise((resolve) => {
                     resolve({ response: null, code: 470 })
                 })
