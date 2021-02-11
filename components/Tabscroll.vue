@@ -37,6 +37,13 @@ export default {
     margin-left -10px
     box-shadow rgba(0, 0, 0, .1) 0px 1px 0px
 
+    &::-webkit-scrollbar
+        background-color hsla(0, 0%, 79.6%, .13) !important
+        height 6px !important
+
+    &::-webkit-scrollbar-thumb
+        background-color rgba(0, 0, 0, .1)
+
     // 超出范围时显示滚动条
     @media only screen and (max-width 767px)
         overflow-x auto

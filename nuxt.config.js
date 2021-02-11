@@ -24,6 +24,12 @@ export default {
                     '学编程,学python来超人,编程学习,在线编程,python,在线python,c#,java,教育,代码,程序,少儿编程,职业编程,大学生编程',
             },
         ],
+        script: [
+            {
+                src:
+                    'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+            },
+        ],
         link: [
             {
                 rel: 'shortcut icon',
