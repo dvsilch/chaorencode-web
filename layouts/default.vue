@@ -12,11 +12,42 @@
                         <p>超人编程</p>
                     </el-row>
                 </nuxt-link>
-                <el-row>
+                <el-row type="flex" align="middle">
+                    <nuxt-link to="/userinfo" class="botton hover">
+                        <el-row type="flex" align="middle">
+                            <el-image
+                                v-if="$store.state.loginState.logined"
+                                class="logo right5"
+                                :src="$store.state.loginState.avatarUrl"
+                                fit="contain"
+                            />
+                            <p v-if="$store.state.loginState.logined">
+                                {{ $store.state.loginState.username }}
+                            </p>
+                        </el-row>
+                    </nuxt-link>
+                    <p
+                        v-if="!$store.state.loginState.logined"
+                        class="botton hover"
+                        @click="wechatLogin()"
+                    >
+                        登录
+                    </p>
+                    <p v-else class="botton hover" @click="wechatLogout()">
+                        退出登录
+                    </p>
                     <nuxt-link :to="{ name: 'talking' }">
                         <p class="botton hover">言语</p>
                     </nuxt-link>
                 </el-row>
+                <el-dialog
+                    id="dialog"
+                    :visible.sync="$store.state.isLoginDialogShow"
+                    width="30%"
+                    center
+                >
+                    <div id="login" />
+                </el-dialog>
             </nav>
             <Nuxt />
         </div>
@@ -33,26 +64,121 @@
     </div>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            APPID: 'wx1d233f097b746a03',
+            // REDIRECT_URI: 'http%3A%2F%2Fdvsilch.free.idcfengye.com%2Floading',
+            REDIRECT_URI: 'https%3A%2F%2Fchaorencode.com',
+            WECHAT_URI: 'https://open.weixin.qq.com/connect/qrconnect',
+        }
+    },
+    mounted() {
+        // 监听两个事件：
+        // 登录前打开对话框扫码
+        // 扫码成功后关闭对话框
+        window.addEventListener('message', (event) => {
+            const code = event.data
+            if (code === 'setLogin') {
+                this.wechatLogin()
+            } else if (!this.$store.state.loginState.logined) {
+                // 如果已登录则刷新页面时不会重复请求
+                this.login(code)
+            }
+        })
+    },
+    methods: {
+        setVisible() {
+            this.$store.state.isLoginDialogShow = !this.$store.state
+                .isLoginDialogShow
+        },
+        wechatLogin() {
+            this.setVisible()
+            setTimeout(
+                () =>
+                    // eslint-disable-next-line
+                    new WxLogin({
+                        self_redirect: true,
+                        id: 'login',
+                        appid: this.APPID,
+                        scope: 'snsapi_login',
+                        redirect_uri: this.REDIRECT_URI,
+                        state: '',
+                        style: '',
+                        href: '',
+                    }),
+                0,
+            )
+        },
+        wechatLogout() {
+            this.$confirm('是否退出登录？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+            })
+                .then(() => {
+                    this.$store.commit('logout')
+                    this.$message({
+                        type: 'success',
+                        message: '退出登录成功',
+                    })
+                })
+                .catch(() => {})
+        },
+        async login(code) {
+            const res = await this.$guy.post(`/wechat/code`, {
+                data: {
+                    code,
+                },
+            })
+            if (res.status === 200) {
+                this.setVisible()
+                // console.log(res.data)
+                this.$store.commit('login', {
+                    key: res.data.key,
+                    userId: res.data.user_id,
+                    username: res.data.username,
+                    avatarUrl: res.data.avatar_url,
+                    permission: res.data.permission,
+                })
+            }
+        },
+    },
+}
+</script>
+
 <style lang="stylus" scoped>
+#login
+    width 300px
+    margin auto
+
 .main
     min-height 100vh
     display flex
     flex-direction column
     justify-content space-between
+
     .nav
         display flex
         justify-content space-between
         align-items center
-        box-shadow rgba(0, 0, 0, 0.1) 0px 1px 0px
+        box-shadow rgba(0, 0, 0, .1) 0px 1px 0px
         height 60px
         padding 0 20px
         // margin-bottom 20px
         font-weight 500
+
         .logo
             height 40px
             width 40px
+
         .botton
             padding 4px 10px
+
+        .user-avatar
+            width 20px
+
 .footer
     display flex
     flex-direction column
@@ -60,6 +186,7 @@
     width fit-content
     margin 0 auto
     min-height 200px
+
     .beian
         font-size 14px
         color $prompt-color

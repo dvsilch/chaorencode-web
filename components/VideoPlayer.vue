@@ -44,12 +44,12 @@ export default {
                 }
 
                 if (val != null) {
-                    console.log(val)
+                    // console.log(val)
                     this.player = videojs(
                         this.$refs.videoPlayer,
                         val,
                         function onPlayerReady() {
-                            console.log('onPlayerReady', this)
+                            // console.log('onPlayerReady', this)
                         },
                     )
                 }
@@ -57,15 +57,15 @@ export default {
             immediate: true,
         },
     },
-    methods: {
-        // change(event) {
-        //     this.$emit('change', event)
-        // },
-    },
     beforeDestroy() {
         if (this.player) {
             this.player.dispose()
         }
+    },
+    methods: {
+        // change(event) {
+        //     this.$emit('change', event)
+        // },
     },
 }
 </script>

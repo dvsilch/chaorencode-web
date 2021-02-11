@@ -277,25 +277,23 @@ export default {
         },
         async postComment(params) {
             // console.log(comment)
-            if (!params.comment.content) {
+            if (!params.comment) {
                 this.$alert('请输入内容')
-                return
-            }
-
-            if (!params.comment.username) {
-                this.$alert('请输入用户名')
                 return
             }
 
             const {
                 code,
-            } = await this.$guy.post(
+            } = await this.$guy.postWithSign(
                 `/lessons/${this.$route.params.id}/comments`,
-                { data: params.comment },
+                { data: { comment: params.comment } },
             )
 
             if (code === 200) {
-                this.$alert('发布成功')
+                this.$message({
+                    type: 'success',
+                    message: '发布成功',
+                })
                 if (params.isLazyLoad) {
                     // console.log('isLazy')
                 } else {

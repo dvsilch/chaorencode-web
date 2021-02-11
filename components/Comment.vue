@@ -1,28 +1,28 @@
 <template>
     <div>
-        <el-input
-            v-model="comment.content"
-            type="textarea"
-            :rows="4"
-            placeholder="分享你的评论……"
-            maxlength="200"
-            show-word-limit
-            class="comment-input"
-        />
-        <div class="comment-info">
+        <el-row type="flex">
+            <el-image
+                v-if="$store.state.loginState.logined"
+                :src="$store.state.loginState.avatarUrl"
+                class="avatar"
+            />
             <el-input
-                v-model="comment.username"
-                placeholder="请输入用户名……"
-                class="input"
-                maxlength="10"
+                v-model="comment"
+                type="textarea"
+                :rows="4"
+                placeholder="分享你的评论……"
+                maxlength="200"
                 show-word-limit
             />
+        </el-row>
+        <div class="comment-info">
             <div
                 class="button"
                 @click="$emit('post-comment', { comment, isLazyLoad })"
             >
                 发布
             </div>
+            <div class="button" @click="clearComment()">清空</div>
         </div>
         <div class="whole-comments hidden-sm-and-down">
             <div
@@ -96,10 +96,7 @@ export default {
     },
     data() {
         return {
-            comment: {
-                content: '',
-                username: '',
-            },
+            comment: '',
             page: 1,
             limit: 10,
             isLazyLoad: false,
@@ -142,8 +139,7 @@ export default {
     },
     methods: {
         refresh(currentPage) {
-            this.comment.content = ''
-            this.comment.username = ''
+            this.clearComment()
             this.page = currentPage
             this.handlePageChange(currentPage)
         },
@@ -155,11 +151,20 @@ export default {
                 isLazyLoad: this.isLazyLoad,
             })
         },
+        clearComment() {
+            this.comment = ''
+        },
     },
 }
 </script>
 
 <style lang="stylus" scoped>
+.avatar
+    border-radius 50%
+    width 50px
+    height 50px
+    margin-right 10px
+
 .comment-info
     display flex
     justify-content flex-end
@@ -178,6 +183,9 @@ export default {
         padding 5px 10px
         // height 38px
         line-height 28px
+
+    *:not(:last-child)
+        margin-right 10px
 
 .whole-comments
     padding 20px 0
