@@ -26,7 +26,8 @@ export default {
             document.execCommand('copy')
             document.body.removeChild(el)
 
-            window.location.href = 'http://weixin.qq.com/r/SC6EnJ3E38Cgrdn-93ta'
+            window.location.href =
+                'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU3ODIyMjc1MA==#wechat_redirect'
         },
     },
 }
