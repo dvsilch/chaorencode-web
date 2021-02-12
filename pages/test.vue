@@ -2,7 +2,8 @@
     <div class="box maxwidth">
         <a
             href="https://open.weixin.qq.com/sns/explorer_broker?appid=wx62ba64796e13f092&redirect_uri=https%3A%2F%2Faccount.xiaomi.com%2Fpass%2Fsns%2Flogin%2Fload&response_type=code&scope=snsapi_userinfo&state=STATE_685333#wechat_redirect"
-        ></a>
+            >afwfewfewf</a
+        >
     </div>
 </template>
 
