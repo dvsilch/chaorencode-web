@@ -1,7 +1,7 @@
 <template>
     <div class="box maxwidth">
         <a
-            href="https://open.weixin.qq.com/sns/explorer_broker?appid=wxb5ed6b20f04a4884&redirect_uri=https%3a%2f%2fchaorencode.com%2f&response_type=code&scope=snsapi_userinfo&state=STATE_685333#wechat_redirect"
+            href="https://open.weixin.qq.com/sns/explorer_broker?appid=wx1d233f097b746a03&redirect_uri=https%3a%2f%2fchaorencode.com%2f&response_type=code&scope=snsapi_userinfo&state=STATE_685333#wechat_redirect"
             >afwfewfewf</a
         >
         <!-- wx1d233f097b746a03 -->
