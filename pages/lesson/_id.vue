@@ -372,7 +372,7 @@ export default {
             display block
             padding 4px 10px
             margin 0 -10px
-            font-size 16px
+            font-size 14px
 
         .ing
             background-color $hover-color
@@ -382,7 +382,7 @@ export default {
                 margin-bottom 10px
 
 .label
-    margin-bottom 20px
+    margin-bottom 2px
     color $first-color
 
 .lessons
@@ -400,13 +400,14 @@ export default {
         display block
         padding 4px 10px
         margin 0 -10px
+        font-size 14px
 
     .ing
         background-color $hover-color
 
-    @media only screen and (min-width 992px)
-        .label
-            margin-bottom 10px
+    // @media only screen and (min-width 992px)
+    //     .label
+    //         margin-bottom 2px
 
 .whole-comments
     padding 20px 0

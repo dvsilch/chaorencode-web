@@ -185,15 +185,16 @@ export default {
         .lessons
             // margin -10px
             .label
-                margin-bottom 20px
+                margin-bottom 2px
                 color $first-color
 
-            @media only screen and (min-width 992px)
-                .label
-                    margin-bottom 10px
+            // @media only screen and (min-width 992px)
+            //     .label
+            //         margin-bottom 10px
 
             .title
                 display block
                 padding 4px 10px
                 margin 0 -10px
+                font-size 14px
 </style>
