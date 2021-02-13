@@ -5,6 +5,7 @@
             <span>关注公众号超人编程并回复：</span>
             <span class="red">助力{{ $route.query.behelp }}</span>
         </div>
+        <p class="prompt">切记要回复才能助力成功</p>
         <el-button type="primary" @click="open">一键复制并打开公众号</el-button>
     </div>
 </template>
@@ -46,7 +47,11 @@ export default {
         border 14px solid #d5dfe8
         margin-bottom 10px
     .info
-        margin-bottom 10px
         .red
             color red
+            font-weight 700
+    .prompt
+        color blue
+        font-size 14px
+        margin-bottom 20px
 </style>
