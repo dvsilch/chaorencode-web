@@ -2,10 +2,10 @@
     <div class="box maxwidth">
         <el-image class="gzh" src="/logo.png" fit="contain" />
         <div class="info">
-            <span>关注公众号超人编程并回复：</span>
+            <span>关注公众号超人编程并发消息：</span>
             <span class="red">助力{{ $route.query.behelp }}</span>
         </div>
-        <p class="prompt">切记要回复才能助力成功</p>
+        <p class="prompt">切记要发消息才能助力成功</p>
         <el-button type="primary" @click="open">一键复制并打开公众号</el-button>
     </div>
 </template>
