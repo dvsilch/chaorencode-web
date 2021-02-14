@@ -18,7 +18,7 @@
         <div class="comment-info">
             <div
                 class="button"
-                @click="$emit('post-comment', { comment, isLazyLoad })"
+                @click="$emit('post-comment', { comment, isPhone })"
             >
                 发布
             </div>
@@ -99,15 +99,15 @@ export default {
             comment: '',
             page: 1,
             limit: 10,
-            isLazyLoad: false,
+            isPhone: false,
         }
     },
     mounted() {
         const _this = this
         const clientWidth = document.documentElement.clientWidth // 获取客户端宽度
-        _this.isLazyLoad = clientWidth < 992
+        _this.isPhone = clientWidth < 992
 
-        if (_this.isLazyLoad) {
+        if (_this.isPhone) {
             window.onscroll = function () {
                 // 变量scrollTop是滚动条滚动时，距离顶部的距离
                 const scrollTop =
@@ -131,7 +131,7 @@ export default {
                     _this.$emit('handle-page-change', {
                         page: _this.page,
                         limit: _this.limit,
-                        isLazyLoad: _this.isLazyLoad,
+                        isPhone: _this.isPhone,
                     })
                 }
             }
@@ -148,7 +148,7 @@ export default {
             this.$emit('handle-page-change', {
                 page,
                 limit: this.limit,
-                isLazyLoad: this.isLazyLoad,
+                isPhone: this.isPhone,
             })
         },
         clearComment() {

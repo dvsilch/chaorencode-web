@@ -157,7 +157,7 @@
                                 />
                                 <div class="info">
                                     <h3 class="title">{{ course.name }}</h3>
-                                    <p class="lang">python</p>
+                                    <p class="lang">{{ course.language }}</p>
                                 </div>
                             </div>
                         </Aspect>

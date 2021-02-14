@@ -13,19 +13,30 @@
                     </el-row>
                 </nuxt-link>
                 <el-row type="flex" align="middle">
-                    <nuxt-link to="/userinfo" class="botton hover">
+                    <nuxt-link :to="{ name: 'talking' }">
+                        <p class="botton hover">言语</p>
+                    </nuxt-link>
+                    <el-divider direction="vertical" />
+                    <nuxt-link
+                        v-if="$store.state.loginState.logined"
+                        to="/userinfo"
+                        class="botton hover"
+                    >
                         <el-row type="flex" align="middle">
                             <el-image
-                                v-if="$store.state.loginState.logined"
                                 class="logo right5"
                                 :src="$store.state.loginState.avatarUrl"
                                 fit="contain"
                             />
-                            <p v-if="$store.state.loginState.logined">
+                            <p>
                                 {{ $store.state.loginState.username }}
                             </p>
                         </el-row>
                     </nuxt-link>
+                    <!-- <el-divider
+                        v-if="$store.state.loginState.logined"
+                        direction="vertical"
+                    /> -->
                     <p
                         v-if="!$store.state.loginState.logined"
                         class="botton hover"
@@ -36,9 +47,6 @@
                     <p v-else class="botton hover" @click="wechatLogout()">
                         退出登录
                     </p>
-                    <nuxt-link :to="{ name: 'talking' }">
-                        <p class="botton hover">言语</p>
-                    </nuxt-link>
                 </el-row>
                 <el-dialog
                     id="dialog"
@@ -69,12 +77,19 @@ export default {
     data() {
         return {
             APPID: 'wx1d233f097b746a03',
-            // REDIRECT_URI: 'http%3A%2F%2Fdvsilch.free.idcfengye.com%2Floading',
-            REDIRECT_URI: 'https%3A%2F%2Fchaorencode.com',
-            WECHAT_URI: 'https://open.weixin.qq.com/connect/qrconnect',
+            REDIRECT_URI:
+                process.env.NODE_ENV === 'production'
+                    ? 'https%3A%2F%2Fchaorencode.com%2Floading'
+                    : 'https%3A%2F%2Fchaorencode.com%2Fjump',
+            isPhone: false,
         }
     },
     mounted() {
+        // 判断是否为手机
+        if (document.documentElement.clientWidth < 992) {
+            this.isPhone = true
+        }
+
         // 监听两个事件：
         // 登录前打开对话框扫码
         // 扫码成功后关闭对话框
@@ -82,8 +97,8 @@ export default {
             const code = event.data
             if (code === 'setLogin') {
                 this.wechatLogin()
-            } else if (!this.$store.state.loginState.logined) {
-                // 如果已登录则刷新页面时不会重复请求
+            } else if (typeof code !== 'object' && code !== '') {
+                // vue/nuxt自带监听一个事件传回一个对象，所以当传回的是对象时不执行login()
                 this.login(code)
             }
         })
@@ -94,6 +109,14 @@ export default {
                 .isLoginDialogShow
         },
         wechatLogin() {
+            // 暂不支持手机端登录
+            if (this.isPhone) {
+                this.$message({
+                    type: 'error',
+                    message: '暂不支持手机登录',
+                })
+                return
+            }
             this.setVisible()
             setTimeout(
                 () =>
@@ -107,6 +130,7 @@ export default {
                         state: '',
                         style: '',
                         href: '',
+                        lang: 'zh-CN',
                     }),
                 0,
             )
