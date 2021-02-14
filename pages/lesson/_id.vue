@@ -264,7 +264,7 @@ export default {
                 )
 
                 if (commentsResult.status === 200) {
-                    if (params.isLazyLoad) {
+                    if (params.isPhone) {
                         this.comments.push(...commentsResult.data.result)
                     } else {
                         this.comments = commentsResult.data.result
@@ -276,9 +276,20 @@ export default {
             }
         },
         async postComment(params) {
-            // console.log(comment)
+            if (params.isPhone) {
+                // 暂不支持手机发送评论
+                this.$message({
+                    type: 'error',
+                    message: '请在电脑端浏览器进行操作',
+                })
+                return
+            }
+
             if (!params.comment) {
-                this.$alert('请输入内容')
+                this.$message({
+                    type: 'error',
+                    message: '请输入内容',
+                })
                 return
             }
 
@@ -294,7 +305,7 @@ export default {
                     type: 'success',
                     message: '发布成功',
                 })
-                if (params.isLazyLoad) {
+                if (params.isPhone) {
                     // console.log('isLazy')
                 } else {
                     this.$refs.clear.refresh(
