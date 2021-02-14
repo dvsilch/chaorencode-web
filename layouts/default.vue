@@ -79,7 +79,7 @@ export default {
             APPID: 'wx1d233f097b746a03',
             REDIRECT_URI:
                 process.env.NODE_ENV === 'production'
-                    ? 'https%3A%2F%2Fchaorencode.com'
+                    ? 'https%3A%2F%2Fchaorencode.com%2Floading'
                     : 'http%3A%2F%2Fdvsilch.free.idcfengye.com%2Floading',
             // WECHAT_URI: 'https://open.weixin.qq.com/connect/qrconnect',
             isPhone: false,
