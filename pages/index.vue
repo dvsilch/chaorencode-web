@@ -128,7 +128,7 @@
         </div>
         <Divider :gap="60" />
         <div class="block">
-            <h2>🎉开启你的编程学习之旅</h2>
+            <h2>🏄开启你的编程学习之旅</h2>
             <el-row class="courses">
                 <el-col
                     v-for="course in courses"
