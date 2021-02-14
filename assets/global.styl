@@ -91,9 +91,9 @@ h1, h2, h3, h4
     img
         display block !important
         margin 1.4em auto !important
-        // box-shadow 0px 4px 10px 0px $weak-color
-        border-radius 4px
 
+        // box-shadow 0px 4px 10px 0px $weak-color
+        // border-radius 4px
         @media only screen and (min-width 768px)
             max-width 80% !important
 
@@ -106,7 +106,7 @@ h1, h2, h3, h4
     *:first-child
         margin-top 0 !important
 
-    code
+    code:not([data-backticks])
         white-space pre !important
 
     pre
