@@ -80,8 +80,7 @@ export default {
             REDIRECT_URI:
                 process.env.NODE_ENV === 'production'
                     ? 'https%3A%2F%2Fchaorencode.com%2Floading'
-                    : 'http%3A%2F%2Fdvsilch.free.idcfengye.com%2Floading',
-            // WECHAT_URI: 'https://open.weixin.qq.com/connect/qrconnect',
+                    : 'https%3A%2F%2Fchaorencode.com%2Fjump',
             isPhone: false,
         }
     },
