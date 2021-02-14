@@ -128,7 +128,7 @@
         </div>
         <Divider :gap="60" />
         <div class="block">
-            <h2>开启你的编程学习之旅</h2>
+            <h2>🎉开启你的编程学习之旅</h2>
             <el-row class="courses">
                 <el-col
                     v-for="course in courses"
@@ -167,7 +167,7 @@
         </div>
         <Divider :gap="60" />
         <div class="block">
-            <h2>学编程，从这里开始</h2>
+            <h2>✨学编程，从这里开始</h2>
             <el-row class="intros" type="flex" justify="space-around">
                 <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/book.svg" fit="contain" />
