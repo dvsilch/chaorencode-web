@@ -358,6 +358,10 @@ export default {
         font-size 26px
         margin-bottom 30px
 
+    .label
+        margin-bottom 20px
+        color $first-color
+
     // @media only screen and (min-width 768px)
     // [divider]:last-child
     // display none
@@ -388,13 +392,9 @@ export default {
         .ing
             background-color $hover-color
 
-        @media only screen and (min-width 992px)
-            .label
-                margin-bottom 10px
-
-.label
-    margin-bottom 2px
-    color $first-color
+        // @media only screen and (min-width 992px)
+        //     .label
+        //         margin-bottom 10px
 
 .lessons
     position sticky
@@ -415,6 +415,10 @@ export default {
 
     .ing
         background-color $hover-color
+
+    .label
+        margin-bottom 2px
+        color $first-color
 
     // @media only screen and (min-width 992px)
     //     .label
