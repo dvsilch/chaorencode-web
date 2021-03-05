@@ -37,7 +37,7 @@
                 <!-- </div> -->
             </div>
             <div class="talkings hidden-xs-only">
-                <h4 class="label">阅读更多，聪明更多</h4>
+                <h4 class="label">📖阅读多多，聪明多多</h4>
                 <nuxt-link
                     v-for="(item, index) in talkings"
                     :key="item.id"
@@ -83,7 +83,7 @@
         </el-row>
         <Divider class="hidden-sm-and-up" :gap="60" />
         <div class="hidden-sm-and-up">
-            <h2>阅读更多，聪明更多</h2>
+            <h2>📖阅读多多，聪明多多</h2>
             <div class="talkings-bottom">
                 <div v-for="item in talkings" :key="item.id" class="item hover">
                     <nuxt-link
@@ -128,7 +128,7 @@
         </div>
         <Divider :gap="60" />
         <div class="block">
-            <h2>开启你的编程学习之旅</h2>
+            <h2>🏄开启你的编程学习之旅</h2>
             <el-row class="courses">
                 <el-col
                     v-for="course in courses"
@@ -167,7 +167,7 @@
         </div>
         <Divider :gap="60" />
         <div class="block">
-            <h2>学编程，从这里开始</h2>
+            <h2>✨学编程，从这里开始</h2>
             <el-row class="intros" type="flex" justify="space-around">
                 <el-col :md="4" :span="24" class="intro">
                     <el-image class="icon" src="/icon/book.svg" fit="contain" />

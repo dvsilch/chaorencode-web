@@ -15,7 +15,7 @@ export default {
                 hid: 'description',
                 name: 'description',
                 property: 'og:description',
-                content: '学编程，来超人，超人编程是质量最高的编程学习网站。',
+                content: '学编程，来超人，超人编程是质量最高的编程自学网站。',
             },
             {
                 hid: 'keywords',
