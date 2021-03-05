@@ -13,39 +13,43 @@
                     </el-row>
                 </nuxt-link>
                 <el-row type="flex" align="middle">
+                    <nuxt-link to="/community">
+                        <p class="botton hover">社区</p>
+                    </nuxt-link>
+                    <el-divider direction="vertical" />
                     <nuxt-link :to="{ name: 'talking' }">
                         <p class="botton hover">言语</p>
                     </nuxt-link>
-                    <el-divider direction="vertical" />
-                    <nuxt-link
-                        v-if="$store.state.loginState.logined"
-                        to="/userinfo"
-                        class="botton hover"
+                    <el-divider v-if="!isPhone" direction="vertical" />
+                    <el-popover
+                        v-if="!isPhone && $store.state.loginState.logined"
+                        placement="bottom"
+                        width="10"
+                        trigger="hover"
                     >
-                        <el-row type="flex" align="middle">
-                            <el-image
-                                class="logo right5"
-                                :src="$store.state.loginState.avatarUrl"
-                                fit="contain"
-                            />
-                            <p>
-                                {{ $store.state.loginState.username }}
+                        <el-row align="middle">
+                            <nuxt-link class="setting hover" to="/userinfo">
+                                <i class="el-icon-user right5" />
+                                我的主页
+                            </nuxt-link>
+                            <p class="setting hover" @click="wechatLogout()">
+                                <i class="el-icon-switch-button right5" />
+                                退出登录
                             </p>
                         </el-row>
-                    </nuxt-link>
-                    <!-- <el-divider
-                        v-if="$store.state.loginState.logined"
-                        direction="vertical"
-                    /> -->
+                        <el-image
+                            slot="reference"
+                            class="avatar hover"
+                            :src="$store.state.loginState.avatarUrl"
+                            fit="contain"
+                        />
+                    </el-popover>
                     <p
-                        v-if="!$store.state.loginState.logined"
+                        v-if="!$store.state.loginState.logined && !isPhone"
                         class="botton hover"
                         @click="wechatLogin()"
                     >
                         登录
-                    </p>
-                    <p v-else class="botton hover" @click="wechatLogout()">
-                        退出登录
                     </p>
                 </el-row>
                 <el-dialog
@@ -200,8 +204,15 @@ export default {
         .botton
             padding 4px 10px
 
-        .user-avatar
-            width 20px
+        .avatar
+            border-radius 50%
+            width 50px
+            height 50px
+            padding 5px
+
+.setting
+    padding 10px 0
+    text-align center
 
 .footer
     display flex

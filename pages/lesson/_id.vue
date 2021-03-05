@@ -416,10 +416,6 @@ export default {
     .ing
         background-color $hover-color
 
-    // @media only screen and (min-width 992px)
-    //     .label
-    //         margin-bottom 2px
-
 .whole-comments
     padding 20px 0
 

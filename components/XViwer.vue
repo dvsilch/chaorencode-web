@@ -46,14 +46,11 @@ export default {
             },
         }
     },
-    // watch: {
-    //     value(val) {
-    //         if (val !== this.content) {
-    //             this.$refs.editor.invoke('setMarkdown', this.value)
-    //             this.content = val
-    //         }
-    //     },
-    // },
+    watch: {
+        value(val) {
+            this.$refs.editor.invoke('setMarkdown', val)
+        },
+    },
     mounted() {
         this.server = false
         this.initViwer()

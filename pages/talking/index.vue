@@ -61,6 +61,7 @@ export default {
             result = talkingResult.data.result
             amount = talkingResult.data.amount
             page += 1
+            // console.log(result)
         }
 
         return {
@@ -138,51 +139,66 @@ export default {
     margin 0 auto
     padding 0 35px
     padding-top 100px
-    @media only screen and (max-width: 767px)
+
+    @media only screen and (max-width 767px)
         padding-top 40px
+
     .talkings
         margin -25px
-        @media only screen and (max-width: 767px)
+
+        @media only screen and (max-width 767px)
             margin -15px
+
         .loading, .nomore
             display block
             font-size 36px
             text-align center
             margin 60px auto
             color $weak-color
+
         .nomore
             font-size 14px
+
         .loading
             font-size 36px
+
         .item
             // margin-bottom 30px
             border-radius 6px
             padding 25px
-            @media only screen and (max-width: 767px)
+
+            @media only screen and (max-width 767px)
                 padding 15px
+
             .thumbnail
                 width 300px
                 height 168.75px
                 margin-left 20px
                 border-radius 4px
-                @media only screen and (max-width: 767px)
+
+                @media only screen and (max-width 767px)
                     width 200px
                     height 112.5px
                     margin-left 10px
-                @media only screen and (max-width: 500px)
+
+                @media only screen and (max-width 500px)
                     width 140px
                     height 78.75px
                     margin-left 10px
+
             .detail
                 flex 1
                 display flex
                 flex-direction column
                 justify-content space-between
+
                 .info
                     font-size 14px
                     color $prompt-color
-                    @media only screen and (max-width: 767px)
+
+                    @media only screen and (max-width 767px)
                         font-size 12px
+
                 .title
                     font-weight 700
                     line-height 1.4
@@ -192,21 +208,26 @@ export default {
                     display -webkit-box
                     -webkit-line-clamp 2
                     -webkit-box-orient vertical
-                    @media only screen and (max-width: 767px)
+
+                    @media only screen and (max-width 767px)
                         font-size 18px
                         margin-bottom 4px
-                    @media only screen and (max-width: 500px)
+
+                    @media only screen and (max-width 500px)
                         font-size 16px
                         margin-bottom 2px
+
                 .shortcut
                     overflow hidden
                     text-overflow ellipsis
                     display -webkit-box
                     -webkit-line-clamp 2
                     -webkit-box-orient vertical
-                    @media only screen and (max-width: 767px)
+
+                    @media only screen and (max-width 767px)
                         -webkit-line-clamp 1
                         font-size 14px
-                    @media only screen and (max-width: 500px)
+
+                    @media only screen and (max-width 500px)
                         display none
 </style>

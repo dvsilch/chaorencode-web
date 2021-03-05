@@ -4,6 +4,7 @@
             <el-image
                 v-if="$store.state.loginState.logined"
                 :src="$store.state.loginState.avatarUrl"
+                fit="contain"
                 class="avatar"
             />
             <el-input
@@ -13,6 +14,7 @@
                 placeholder="分享你的评论……"
                 maxlength="200"
                 show-word-limit
+                style="flex: 1"
             />
         </el-row>
         <div class="comment-info">
