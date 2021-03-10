@@ -83,6 +83,10 @@
                         >
                             {{ lesson.title }}
                         </nuxt-link>
+                        <el-image
+                            v-if="course.group_qrcode_url"
+                            :src="course.group_qrcode_url"
+                        />
                     </div>
                 </el-col>
             </el-row>
@@ -159,6 +163,7 @@ export default {
         .block
             display flex
             align-content stretch
+
             .ops
                 display flex
                 flex-direction column
@@ -189,9 +194,8 @@ export default {
                 color $first-color
 
             // @media only screen and (min-width 992px)
-            //     .label
-            //         margin-bottom 10px
-
+            // .label
+            // margin-bottom 10px
             .title
                 display block
                 padding 4px 10px

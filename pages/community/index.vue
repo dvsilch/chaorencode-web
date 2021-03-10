@@ -44,22 +44,34 @@
                         </el-col>
                     </el-row>
                     <el-row type="flex" align="middle" class="post-part">
-                        <el-col :span="18"></el-col>
-                        <el-col :span="6">
-                            <el-row type="flex" align="middle">
-                                <el-image
-                                    :src="post.avatar_url"
-                                    fit="cover"
-                                    class="avatar"
-                                />
-                                <div class="info">
-                                    <span class="right15">
-                                        {{ post.publisher }}
-                                    </span>
-                                    <span>{{
-                                        $common.beautifulTime(post.publish_time)
-                                    }}</span>
-                                </div>
+                        <el-col :span="15"></el-col>
+                        <el-col :span="9">
+                            <el-row type="flex" align="middle" class="info">
+                                <el-col :span="18">
+                                    <el-row
+                                        type="flex"
+                                        align="middle"
+                                        justify="end"
+                                    >
+                                        <el-image
+                                            :src="post.avatar_url"
+                                            fit="cover"
+                                            class="avatar right15"
+                                        />
+                                        <p>
+                                            {{ post.publisher }}
+                                        </p>
+                                    </el-row>
+                                </el-col>
+                                <el-col class="detail" :span="6">
+                                    <p>
+                                        {{
+                                            $common.beautifulTime(
+                                                post.publish_time,
+                                            )
+                                        }}
+                                    </p>
+                                </el-col>
                             </el-row>
                         </el-col>
                     </el-row>
@@ -80,15 +92,17 @@
                 />
             </div>
         </div>
-        <el-select v-model="cate" clearable placeholder="分类">
-            <el-option
-                v-for="item in cateOptions"
-                :key="item.value"
-                :label="item.value"
-                :value="item.value"
-            />
-        </el-select>
-        <el-input v-model="title" placeholder="标题" class="bottom15" />
+        <el-row type="flex">
+            <el-select v-model="cate" clearable placeholder="分类">
+                <el-option
+                    v-for="item in cateOptions"
+                    :key="item.value"
+                    :label="item.value"
+                    :value="item.value"
+                />
+            </el-select>
+            <el-input v-model="title" placeholder="标题" class="bottom15" />
+        </el-row>
         <XEditor v-model="content" :height="500" class="bottom15" />
         <el-button @click="handleCreatePost()">发布</el-button>
     </div>
@@ -206,7 +220,7 @@ export default {
 
     .post-part
         &:not(:last-child)
-            padding-bottom 20px
+            padding-bottom 10px
 
         .title
             color $first-color
@@ -240,6 +254,9 @@ export default {
         .info
             font-size 14px
             color $weak-color
+
+            .detail
+                text-align right
 
 .block
     height 32px

@@ -56,6 +56,28 @@ export default {
                         // callback('werwerwerwerwerwer', 'image')
                     },
                 },
+                language: 'zh-CN',
+                hideModeSwitch: true,
+                toolbarItems: [
+                    'heading',
+                    'bold',
+                    'italic',
+                    'strike',
+                    'divider',
+                    'hr',
+                    'quote',
+                    'divider',
+                    'ul',
+                    'ol',
+                    'task',
+                    'divider',
+                    'table',
+                    'image',
+                    'link',
+                    'divider',
+                    'code',
+                    'codeblock',
+                ],
             },
         }
     },
@@ -79,6 +101,8 @@ export default {
             //     initialEditType: 'markdown',
             //     previewStyle: 'tab',
             // })
+
+            require('@toast-ui/editor/dist/i18n/zh-cn')
             const { Editor } = require('@toast-ui/vue-editor')
             Vue.component('Editor', Editor)
         },

@@ -14,9 +14,8 @@
                 </nuxt-link>
                 <el-row type="flex" align="middle">
                     <nuxt-link to="/community">
-                        <p class="botton hover">社区</p>
+                        <p class="botton hover">万事屋</p>
                     </nuxt-link>
-                    <el-divider direction="vertical" />
                     <nuxt-link :to="{ name: 'talking' }">
                         <p class="botton hover">言语</p>
                     </nuxt-link>
@@ -41,7 +40,6 @@
                             slot="reference"
                             class="avatar hover"
                             :src="$store.state.loginState.avatarUrl"
-                            fit="contain"
                         />
                     </el-popover>
                     <p
@@ -70,8 +68,9 @@
                 target="_blank"
                 rel="nofollow noopener noreferrer"
                 class="beian"
-                >京ICP备20010819号-5</a
             >
+                京ICP备20010819号-5
+            </a>
         </footer>
     </div>
 </template>
@@ -206,9 +205,9 @@ export default {
 
         .avatar
             border-radius 50%
-            width 50px
-            height 50px
-            padding 5px
+            width 58px
+            height 58px
+            padding 8px
 
 .setting
     padding 10px 0
@@ -225,4 +224,16 @@ export default {
     .beian
         font-size 14px
         color $prompt-color
+</style>
+
+<style lang="stylus">
+.avatar
+    .el-image__inner
+        border-radius 50%
+
+.el-popper
+    margin-top 0
+
+.el-popover
+    padding 0
 </style>
