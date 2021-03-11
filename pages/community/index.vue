@@ -1,7 +1,7 @@
 <template>
     <div class="container maxwidth">
         <el-row :gutter="60">
-            <el-col :span="16">
+            <el-col v-loading="geting" :span="16">
                 <nuxt-link
                     v-for="post in posts"
                     :key="post.id"
@@ -92,19 +92,7 @@
                 />
             </div>
         </div>
-        <el-row type="flex">
-            <el-select v-model="cate" clearable placeholder="分类">
-                <el-option
-                    v-for="item in cateOptions"
-                    :key="item.value"
-                    :label="item.value"
-                    :value="item.value"
-                />
-            </el-select>
-            <el-input v-model="title" placeholder="标题" class="bottom15" />
-        </el-row>
-        <XEditor v-model="content" :height="500" class="bottom15" />
-        <el-button @click="handleCreatePost()">发布</el-button>
+        <nuxt-link to="/community/create">发布新内容</nuxt-link>
     </div>
 </template>
 
@@ -131,17 +119,7 @@ export default {
     },
     data() {
         return {
-            title: '',
-            content: '',
-            cate: '',
-            cateOptions: [
-                {
-                    value: '提问',
-                },
-                {
-                    value: '文章',
-                },
-            ],
+            geting: false,
         }
     },
     // mounted() {
@@ -149,58 +127,17 @@ export default {
     // },
     methods: {
         async refreshData() {
-            const res = await this.$guy.get(`/community`)
+            this.geting = true
+            await this.originRefreshData()
+            this.geting = false
+        },
+        async originRefreshData() {
+            const res = await this.$guy.get(`/community`, {
+                data: { page: this.page, limit: this.limit },
+            })
             if (res.status === 200) {
                 this.posts = res.data.result
                 // console.log(this.posts)
-            }
-        },
-        async handleCreatePost() {
-            if (this.title === '') {
-                this.$message({
-                    type: 'error',
-                    message: '请输入标题',
-                })
-                return
-            }
-
-            if (this.content === '') {
-                this.$message({
-                    type: 'error',
-                    message: '请输入内容',
-                })
-                return
-            }
-
-            if (this.cate === '') {
-                this.$message({
-                    type: 'error',
-                    message: '请选择分类',
-                })
-                return
-            }
-
-            const res = await this.$guy.postWithSign(`/community`, {
-                data: {
-                    title: this.title,
-                    content: this.content,
-                    cate: this.cate,
-                },
-            })
-
-            if (res.status === 200) {
-                this.$message({
-                    type: 'success',
-                    message: '发送成功',
-                })
-                this.title = ''
-                this.content = ''
-                this.refreshData()
-            } else {
-                this.$message({
-                    type: 'error',
-                    message: '网络错误，请重试',
-                })
             }
         },
         handlePageChange(page: number): void {
