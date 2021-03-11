@@ -50,7 +50,7 @@
 export default {
     async asyncData({ app }) {
         let page = 1
-        const limit = 10
+        const limit = 5
         let amount = 0
         let talkingResult = app.$guy.get('/talkings', { data: { page, limit } })
 
@@ -125,7 +125,7 @@ export default {
             this.loding = false
 
             if (talkingResult.status === 200) {
-                this.result.push(talkingResult.data.result)
+                this.result.push(...talkingResult.data.result)
                 this.page += 1
             }
         },
