@@ -250,6 +250,7 @@ export default {
                 },
             ],
         }
+        console.log('mounted id: ' + this.$route.params.id)
     },
     methods: {
         // videoChange(event) {

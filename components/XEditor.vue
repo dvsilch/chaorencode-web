@@ -53,7 +53,6 @@ export default {
                         if (status === 200) {
                             callback(data.url, 'image')
                         }
-                        // callback('werwerwerwerwerwer', 'image')
                     },
                 },
                 language: 'zh-CN',
