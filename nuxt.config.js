@@ -3,7 +3,7 @@ const resolve = require('path').resolve
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
-        title: '超人编程 - 学编程，来超人',
+        title: '超人编程 - 学编程，来超人 - python教程',
         meta: [
             { charset: 'utf-8' },
             {
