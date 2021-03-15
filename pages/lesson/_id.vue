@@ -266,22 +266,22 @@ export default {
         //     console.log(this.videoState)
         // },
         async getComment(params) {
-            // if (params.page <= Math.ceil(this.commentsAmount / 10)) {
-            //     const commentsResult = await this.$guy.get(
-            //         `/lessons/${this.$route.params.id}/comments`,
-            //         { data: { page: params.page, limit: params.limit } },
-            //     )
-            //     if (commentsResult.status === 200) {
-            //         if (params.isPhone) {
-            //             this.comments.push(...commentsResult.data.result)
-            //         } else {
-            //             this.comments = commentsResult.data.result
-            //         }
-            //         this.commentsAmount = commentsResult.data.amount
-            //     }
-            // } else {
-            //     this.$alert('没有更多')
-            // }
+            if (params.page <= Math.ceil(this.commentsAmount / 10)) {
+                const commentsResult = await this.$guy.get(
+                    `/lessons/${this.$route.params.id}/comments`,
+                    { data: { page: params.page, limit: params.limit } },
+                )
+                if (commentsResult.status === 200) {
+                    if (params.isPhone) {
+                        this.comments.push(...commentsResult.data.result)
+                    } else {
+                        this.comments = commentsResult.data.result
+                    }
+                    this.commentsAmount = commentsResult.data.amount
+                }
+            } else {
+                this.$alert('没有更多')
+            }
         },
         async postComment(params) {
             if (params.isPhone) {

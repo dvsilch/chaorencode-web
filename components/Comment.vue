@@ -35,7 +35,7 @@
                     <div>
                         <el-row type="flex">
                             <el-col>
-                                <el-image :src="item.avatar_url" />
+                                <!-- <el-image :src="item.avatar_url" /> -->
                             </el-col>
                             <el-col>
                                 <p class="comment-username">
