@@ -3,7 +3,7 @@ const resolve = require('path').resolve
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
-        title: '超人编程 - 学编程，来超人',
+        title: '超人编程 - 学编程，来超人 - python教程',
         meta: [
             { charset: 'utf-8' },
             {
@@ -15,7 +15,8 @@ export default {
                 hid: 'description',
                 name: 'description',
                 property: 'og:description',
-                content: '学编程，来超人，超人编程是质量最高的编程自学网站。这里有着python基础教程，python进阶教程，数据分析，爬虫，后端服务，人工智能，大数据等等教程。',
+                content:
+                    '学编程，来超人，超人编程是质量最高的编程自学网站。这里有着 python教程，数据分析，爬虫，后端服务，人工智能，大数据等等教程。',
             },
             {
                 hid: 'keywords',
