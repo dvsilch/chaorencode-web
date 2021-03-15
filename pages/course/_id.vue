@@ -83,10 +83,15 @@
                         >
                             {{ lesson.title }}
                         </nuxt-link>
-                        <el-image
-                            v-if="course.group_qrcode_url"
-                            :src="course.group_qrcode_url"
-                        />
+                        <div v-if="course.group_qrcode_url">
+                            <el-image
+                                :src="course.group_qrcode_url"
+                                class="qrcode"
+                            />
+                            <p class="ad">
+                                学习遇到困难？微信扫码进入社群与小伙伴一起交流讨论。
+                            </p>
+                        </div>
                     </div>
                 </el-col>
             </el-row>
@@ -201,4 +206,12 @@ export default {
                 padding 4px 10px
                 margin 0 -10px
                 font-size 14px
+
+            .qrcode
+                margin 20px 0
+                max-width 180px
+
+            .ad
+                font-size 14px
+                color $prompt-color
 </style>

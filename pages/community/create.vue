@@ -35,6 +35,9 @@ export default {
                 {
                     value: '文章',
                 },
+                {
+                    value: '讨论',
+                },
             ],
         }
     },

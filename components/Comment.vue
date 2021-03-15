@@ -4,7 +4,6 @@
             <el-image
                 v-if="$store.state.loginState.logined"
                 :src="$store.state.loginState.avatarUrl"
-                fit="contain"
                 class="avatar"
             />
             <el-input
@@ -32,17 +31,30 @@
                 :key="item.id"
                 class="single-comment"
             >
-                <el-row type="flex" justify="space-between">
-                    <p class="comment-username">
-                        {{ item.username }}
-                    </p>
-                    <p class="comment-index">
-                        {{ 10 * (page - 1) + index + 1 }}楼
-                    </p>
+                <el-row type="flex">
+                    <div>
+                        <el-row type="flex">
+                            <el-col>
+                                <el-image :src="item.avatar_url" />
+                            </el-col>
+                            <el-col>
+                                <p class="comment-username">
+                                    {{ item.username }}
+                                </p>
+                                <p class="comment-publish-time">
+                                    回复于{{
+                                        $common.beautifulTime(item.publish_time)
+                                    }}
+                                </p>
+                            </el-col>
+                        </el-row>
+                    </div>
+                    <el-col>
+                        <p class="comment-index">
+                            {{ 10 * (page - 1) + index + 1 }}楼
+                        </p>
+                    </el-col>
                 </el-row>
-                <p class="comment-publish-time">
-                    回复于{{ $common.beautifulTime(item.publish_time) }}
-                </p>
                 <p class="comment-content">
                     {{ item.content }}
                 </p>
@@ -202,6 +214,7 @@ export default {
         .comment-index
             font-size 12px
             color rgb(190, 190, 190)
+            text-align right
 
         .comment-publish-time
             padding-top 5px

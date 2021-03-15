@@ -2,6 +2,10 @@
     <div class="container maxwidth">
         <el-row :gutter="60">
             <el-col v-loading="geting" :span="16">
+                <el-row type="flex">
+                    <el-col style="flex: 1"></el-col>
+                    <div class="button" @click="createPost()">发布新内容</div>
+                </el-row>
                 <nuxt-link
                     v-for="post in posts"
                     :key="post.id"
@@ -23,9 +27,9 @@
                             </p>
                         </el-col>
                         <el-col>
-                            <h2 class="title">
+                            <h3 class="title">
                                 {{ post.title }}
-                            </h2>
+                            </h3>
                         </el-col>
                     </el-row>
                     <el-row
@@ -92,7 +96,6 @@
                 />
             </div>
         </div>
-        <nuxt-link to="/community/create">发布新内容</nuxt-link>
     </div>
 </template>
 
@@ -126,12 +129,12 @@ export default {
     //     this.refreshData()
     // },
     methods: {
-        async refreshData() {
+        async refreshData(): Promise<void> {
             this.geting = true
             await this.originRefreshData()
             this.geting = false
         },
-        async originRefreshData() {
+        async originRefreshData(): Promise<void> {
             const res = await this.$guy.get(`/community`, {
                 data: { page: this.page, limit: this.limit },
             })
@@ -144,11 +147,28 @@ export default {
             this.page = page
             this.refreshData()
         },
+        createPost(): void {
+            if (this.$store.state.loginState.logined) {
+                this.$router.push({ name: 'community-create' })
+            } else {
+                this.$alert('请先登录')
+            }
+        },
     },
 }
 </script>
 
 <style lang="stylus" scoped>
+.button
+    display inline-block
+    cursor pointer
+    background $first-color
+    color white
+    border-radius 3px
+    padding 5px 10px
+    // height 38px
+    line-height 28px
+
 .post
     padding 20px
 
@@ -160,7 +180,7 @@ export default {
             padding-bottom 10px
 
         .title
-            color $first-color
+            color $primary-color
             font-weight 700
             margin-bottom 0
             overflow hidden

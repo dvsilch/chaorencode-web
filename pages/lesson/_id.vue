@@ -146,6 +146,15 @@
                     >
                         {{ les.title }}
                     </nuxt-link>
+                    <div v-if="lesson.group_qrcode_url">
+                        <!-- <el-image
+                            :src="lesson.group_qrcode_url"
+                            class="qrcode"
+                        /> -->
+                        <p class="ad">
+                            学习遇到困难？微信扫码进入社群与小伙伴一起交流讨论。
+                        </p>
+                    </div>
                 </el-col>
             </el-row>
         </section>
@@ -171,7 +180,7 @@ export default {
         let lessons = []
         if (lessonResult.status === 200) {
             lesson = lessonResult.data
-            // console.log(lesson.course_id)
+            // console.log(lesson.group_qrcode_url)
             if (lesson.video_url) {
                 anchors.push({ id: 'video', name: '视频' })
             }
@@ -239,7 +248,7 @@ export default {
         }
     },
     mounted() {
-        // console.log(this.lesson.content)
+        console.log(this.lesson.group_qrcode_url)
         this.videoOptions = {
             autoplay: false,
             controls: true,
@@ -250,7 +259,6 @@ export default {
                 },
             ],
         }
-        console.log('mounted id: ' + this.$route.params.id)
     },
     methods: {
         // videoChange(event) {
@@ -258,23 +266,22 @@ export default {
         //     console.log(this.videoState)
         // },
         async getComment(params) {
-            if (params.page <= Math.ceil(this.commentsAmount / 10)) {
-                const commentsResult = await this.$guy.get(
-                    `/lessons/${this.$route.params.id}/comments`,
-                    { data: { page: params.page, limit: params.limit } },
-                )
-
-                if (commentsResult.status === 200) {
-                    if (params.isPhone) {
-                        this.comments.push(...commentsResult.data.result)
-                    } else {
-                        this.comments = commentsResult.data.result
-                    }
-                    this.commentsAmount = commentsResult.data.amount
-                }
-            } else {
-                this.$alert('没有更多')
-            }
+            // if (params.page <= Math.ceil(this.commentsAmount / 10)) {
+            //     const commentsResult = await this.$guy.get(
+            //         `/lessons/${this.$route.params.id}/comments`,
+            //         { data: { page: params.page, limit: params.limit } },
+            //     )
+            //     if (commentsResult.status === 200) {
+            //         if (params.isPhone) {
+            //             this.comments.push(...commentsResult.data.result)
+            //         } else {
+            //             this.comments = commentsResult.data.result
+            //         }
+            //         this.commentsAmount = commentsResult.data.amount
+            //     }
+            // } else {
+            //     this.$alert('没有更多')
+            // }
         },
         async postComment(params) {
             if (params.isPhone) {
@@ -416,6 +423,14 @@ export default {
     .label
         margin-bottom 2px
         color $first-color
+
+    .qrcode
+        margin 20px 0
+        max-width 180px
+
+    .ad
+        font-size 14px
+        color $prompt-color
 
 .whole-comments
     padding 20px 0
