@@ -34,10 +34,8 @@
                 <el-row type="flex">
                     <div>
                         <el-row type="flex">
-                            <el-col>
-                                <!-- <el-image :src="item.avatar_url" /> -->
-                            </el-col>
-                            <el-col>
+                            <el-image :src="item.avatar_url" class="avatar" />
+                            <div>
                                 <p class="comment-username">
                                     {{ item.username }}
                                 </p>
@@ -46,7 +44,7 @@
                                         $common.beautifulTime(item.publish_time)
                                     }}
                                 </p>
-                            </el-col>
+                            </div>
                         </el-row>
                     </div>
                     <el-col>
@@ -210,6 +208,7 @@ export default {
 
         .comment-username
             font-size 14px
+            white-space nowrap
 
         .comment-index
             font-size 12px
@@ -220,6 +219,7 @@ export default {
             padding-top 5px
             font-size 12px
             color rgb(190, 190, 190)
+            white-space nowrap
 
         .comment-content
             padding 20px

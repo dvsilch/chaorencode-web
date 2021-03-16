@@ -147,10 +147,10 @@
                         {{ les.title }}
                     </nuxt-link>
                     <div v-if="lesson.group_qrcode_url">
-                        <!-- <el-image
+                        <el-image
                             :src="lesson.group_qrcode_url"
                             class="qrcode"
-                        /> -->
+                        />
                         <p class="ad">
                             学习遇到困难？微信扫码进入社群与小伙伴一起交流讨论。
                         </p>
@@ -248,7 +248,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.lesson.group_qrcode_url)
+        // console.log(this.lesson.group_qrcode_url)
         this.videoOptions = {
             autoplay: false,
             controls: true,
