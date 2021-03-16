@@ -6,49 +6,64 @@
                     <el-col style="flex: 1"></el-col>
                     <div class="button" @click="createPost()">发布新内容</div>
                 </el-row>
-                <nuxt-link
-                    v-for="post in posts"
-                    :key="post.id"
-                    :to="{
-                        name: 'community-post-id',
-                        params: { id: post.id },
-                    }"
-                    class="post hover"
-                >
-                    <el-row
-                        type="flex"
-                        align="middle"
-                        :gutter="20"
-                        class="post-part"
+                <div v-for="post in posts" :key="post.id" class="post">
+                    <nuxt-link
+                        :to="{
+                            name: 'community-post-id',
+                            params: { id: post.id },
+                        }"
+                        class="hover"
                     >
-                        <el-col :span="2">
-                            <p class="amount">
-                                {{ post.cate }}
-                            </p>
+                        <el-row
+                            type="flex"
+                            align="middle"
+                            :gutter="20"
+                            class="post-part"
+                        >
+                            <el-col :span="2">
+                                <p class="amount">
+                                    {{ post.cate }}
+                                </p>
+                            </el-col>
+                            <el-col>
+                                <h3 class="title">
+                                    {{ post.title }}
+                                </h3>
+                            </el-col>
+                        </el-row>
+                        <el-row
+                            type="flex"
+                            align="middle"
+                            :gutter="20"
+                            class="post-part"
+                        >
+                            <el-col :span="2">
+                                <p class="amount">
+                                    {{ post.thumb_count }} 点赞
+                                </p>
+                                <p class="amount">
+                                    {{ post.comment_count }} 评论
+                                </p>
+                                <p class="amount">{{ post.view_count }} 浏览</p>
+                            </el-col>
+                            <el-col class="shortcut">
+                                {{ post.shortcut }}
+                            </el-col>
+                        </el-row>
+                    </nuxt-link>
+                    <el-row type="flex" align="middle">
+                        <el-col :span="15">
+                            <div
+                                v-if="
+                                    $store.state.loginState.permission ==
+                                    'admin'
+                                "
+                                class="button"
+                                @click="deletePost(post.id)"
+                            >
+                                删除
+                            </div>
                         </el-col>
-                        <el-col>
-                            <h3 class="title">
-                                {{ post.title }}
-                            </h3>
-                        </el-col>
-                    </el-row>
-                    <el-row
-                        type="flex"
-                        align="middle"
-                        :gutter="20"
-                        class="post-part"
-                    >
-                        <el-col :span="2">
-                            <p class="amount">{{ post.thumb_count }} 点赞</p>
-                            <p class="amount">{{ post.comment_count }} 评论</p>
-                            <p class="amount">{{ post.view_count }} 浏览</p>
-                        </el-col>
-                        <el-col class="shortcut">
-                            {{ post.shortcut }}
-                        </el-col>
-                    </el-row>
-                    <el-row type="flex" align="middle" class="post-part">
-                        <el-col :span="15"></el-col>
                         <el-col :span="9">
                             <el-row type="flex" align="middle" class="info">
                                 <el-col :span="18">
@@ -79,7 +94,7 @@
                             </el-row>
                         </el-col>
                     </el-row>
-                </nuxt-link>
+                </div>
             </el-col>
             <el-col :span="8">每日热榜</el-col>
         </el-row>
@@ -154,6 +169,21 @@ export default {
                 this.$alert('请先登录')
             }
         },
+        async deletePost(id: number): Promise<void> {
+            const { code } = await this.$guy.deleteWithSign(`/community/${id}`)
+            if (code === 200) {
+                this.$message({
+                    type: 'success',
+                    message: '删除成功',
+                })
+                this.refreshData()
+            } else {
+                this.$message({
+                    type: 'error',
+                    message: '删除失败，请重试',
+                })
+            }
+        },
     },
 }
 </script>
@@ -176,8 +206,8 @@ export default {
         border-bottom 1px solid $divider-color
 
     .post-part
-        &:not(:last-child)
-            padding-bottom 10px
+        // &:not(:last-child)
+        padding-bottom 10px
 
         .title
             color $primary-color
@@ -202,18 +232,18 @@ export default {
             font-size 12px
             color $weak-color
 
-        .avatar
-            border-radius 50%
-            width 24px
-            height 24px
-            margin 0 5px
+    .avatar
+        border-radius 50%
+        width 24px
+        height 24px
+        margin 0 5px
 
-        .info
-            font-size 14px
-            color $weak-color
+    .info
+        font-size 14px
+        color $weak-color
 
-            .detail
-                text-align right
+        .detail
+            text-align right
 
 .block
     height 32px
