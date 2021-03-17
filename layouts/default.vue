@@ -77,6 +77,7 @@
 
 <script>
 export default {
+    middleware: 'auth',
     data() {
         return {
             APPID: 'wx1d233f097b746a03',

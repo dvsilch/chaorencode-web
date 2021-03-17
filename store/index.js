@@ -29,4 +29,10 @@ export const mutations = {
         state.loginState.permission = null
         state.loginState.logined = false
     },
+    refresh(state, { username, avatarUrl, permission }) {
+        // 刷新用户信息
+        state.loginState.username = username
+        state.loginState.avatarUrl = avatarUrl
+        state.loginState.permission = permission
+    },
 }

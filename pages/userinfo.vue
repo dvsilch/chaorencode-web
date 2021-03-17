@@ -75,16 +75,23 @@ export default {
             if (this.file != null) {
                 data.user_avatar = this.file
             }
-            const res = await this.$guy.putWithSign(
-                `/userinfo/${this.$store.state.loginState.userId}`,
-                {
-                    data,
-                },
-            )
+            const res = await this.$guy.putWithSign(`/userinfo`, {
+                data,
+            })
             if (res.status === 200) {
-                this.$message()
-                this.$store.state.loginState.avatarUrl = this.imgUrl
-                this.$store.state.loginState.username = this.username
+                this.$message({
+                    type: 'success',
+                    message: '修改成功',
+                })
+
+                const infoRes = await this.$guy.getWithSign(`/userinfo`)
+                if (infoRes.status === 200) {
+                    this.$store.commit('refresh', {
+                        username: infoRes.data.result.username,
+                        avatarUrl: infoRes.data.result.avatar_url,
+                        permission: infoRes.data.result.permission,
+                    })
+                }
             }
         },
         setMode() {
